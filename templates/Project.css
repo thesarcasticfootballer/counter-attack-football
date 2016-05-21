@@ -1,0 +1,361 @@
+
+body
+{
+background-image: url("/images/PAISLEY.jpg");
+    
+    
+    overflow:auto;
+    background-repeat: repeat;
+    cursor:url('http://upload.wikimedia.org/wikipedia/commons/d/de/POL_apple.jpg');
+    height: 100%;
+    width: 100%;
+}
+
+ul
+{
+list-style-type: none;
+margin: 0;
+padding: 0px;
+
+    
+    display:flex;
+    
+background-color: black;
+}
+
+
+li
+{
+float: left;
+font-family: Gill Sans MT, sans-serif;
+font-size: 18px;
+    
+display: block;
+  ;
+    text-align: center;
+    padding: 0px 0px;
+    text-decoration: none;
+}
+
+nav ul li ul li a
+{
+float: left;
+font-family: Gill Sans MT, sans-serif;
+font-size: 18px;
+    color: white;
+display: block;
+    color: black;
+    text-align: center;
+    padding: 0px 0px;
+    text-decoration: none;
+}
+ li:hover:not(.active) {
+    background-color: #009900;
+    text-decoration: none;
+    color: white;
+    
+}
+a:hover:not(.active) {
+    background-color: #009900;
+    text-decoration: none;
+    color: white;
+    
+}
+li:hover, li:active {
+    background-color: #009900;
+    text-decoration: none;
+    color: white;
+    
+}
+
+
+
+
+.active {
+    background-color: #006600;
+}
+
+h3
+{
+    
+  font-family: Comic Sans, Comic Sans MS, cursive;
+font-size: 20px;
+color: white;
+
+}
+
+a
+{
+    text-decoration: none;
+}
+
+
+
+.img-circle{
+    border-radius: 50%;
+}
+
+.squad
+{
+    position: absolute;
+    top: 2.5%;
+    left: 0%;
+    background: none;
+    height: 90%;
+    width: 20%;
+    
+    visibility: hidden;
+    
+    display: flex;
+    overflow: hidden;
+    align-content: center;
+  
+    
+    
+}
+
+#teams1
+{
+    border: 100px; 
+    width: 75%;
+    border-collapse: collapse;
+    padding: 15px;
+    color: black;
+    border-color: #006600;
+}
+
+
+
+
+td
+{
+    padding-right: 18px;
+    padding-left: 18px;
+    font-size: 15px;
+    text-align: center;
+    border-style: none;
+    border-radius: 35%;    
+}
+
+th {
+    background-color: #006600;
+    color: white;
+}
+.close
+{
+    position: relative;
+}
+
+#closebutton
+{
+  position: relative;
+    background-color:  #006000;
+    border: none; 
+    opacity: 100%;
+    visibility: hidden;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration:none;
+    
+    font-family: Calibri,serif;
+    font-style: oblique;
+    font-size: 15px;
+    font-weight: 550;
+    border-radius: 50%;
+}
+#closebutton:hover
+{
+    cursor: pointer;
+    background-color: green;
+}
+
+#barcelona tr:nth-child(even)
+{
+    background-color: #ff0000;
+    color:aliceblue;
+    
+}
+#barcelona tr:nth-child(odd) {
+    background-color: #7f7fff;
+    color:black;
+}
+#realmadrid tr:nth-child(even)
+{
+    background-color: #0000ff;
+    color: white;
+}
+#realmadrid tr:nth-child(odd) {
+    background-color: #ffff32;
+}
+#bayern tr:nth-child(even)
+{
+    background-color: #ff0000;
+    color: white;
+}
+#bayern tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+#liverpool tr:nth-child(even)
+{
+    background-color: #ff0000;
+    color: white;
+}
+#liverpool tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+#mancity tr:nth-child(even)
+{
+    background-color: #9999ff;
+    color: black;
+}
+#mancity tr:nth-child(odd) {
+    background-color: #ffff00;
+    
+}
+#chelsea tr:nth-child(even)
+{
+    background-color: #1919ff;
+    color: white;
+}
+#chelsea tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+#manutd tr:nth-child(even)
+{
+    background-color: #ff0000;
+    color: white;
+}
+#manutd tr:nth-child(odd) {
+    background-color: #ffff00;
+    
+}
+#arsenal tr:nth-child(even)
+{
+    background-color: #ff0000;
+    color: white;
+}
+#arsenal tr:nth-child(odd) {
+    background-color: #ffffff;
+    
+}
+#arsenal tr:hover
+{
+    background-color: darkgreen;
+    color: white;
+}
+#chelsea tr:hover
+{
+    background-color: darkgreen;
+    color: white;
+}
+#manutd tr:hover
+{
+    background-color: darkgreen;
+    color: white;
+}
+#mancity tr:hover
+{
+    background-color: darkgreen;
+    color: white;
+}
+#chelsea tr:hover
+{
+    background-color: darkgreen;
+    color: white;
+}
+#realmadrid tr:hover
+{
+    background-color: darkgreen;
+    color: white;
+}
+#barcelona tr:hover
+{
+    background-color: darkgreen;
+    color: white;
+}
+#liverpool tr:hover
+{
+    background-color: darkgreen;
+    color: white;
+}
+table
+{
+    overflow-x: hidden;
+    
+}
+#aboutid
+{
+    position: absolute;
+    display: block;
+    
+    font-family: Comic Sans, Comic Sans MS, cursive;
+    background-color: green;
+    top:10%;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    
+}
+#screen
+{
+    position: relative;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    height: 100%;
+    width: 100%;
+    padding-left: 0%;
+    align-content: stretch;
+    margin: 0 auto;
+}
+.row
+{
+  padding-bottom: 5%;
+   
+}
+.col-sm-2
+{
+    padding-left: 50%;
+
+}
+
+.article-headline
+{
+    font-size: 40px;
+    font-family:fantasy;
+    color: white;
+}
+.article-content
+{
+      font-size: 20px;
+    font-family:cursive;
+    color: white;
+}
+
+
+.dropdown {
+    position: relative;
+    display: block;
+}
+.navbar-header
+{
+background-color: black;
+    font-family: Gill Sans MT, sans-serif;
+font-size: 18px;
+    color: white;
+    text-align: center;
+    align-content: center;
+    padding-left: 10px;
+}
+.navbar-inverse
+{
+    background-color: black;
+}
+.dropdown-menu
+{
+    background-color: black;
+}
+
+
+
