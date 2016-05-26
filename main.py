@@ -43,8 +43,15 @@ class Handler(webapp2.RequestHandler):
 
 class MainHandler(Handler):
     def get(self):
-        adata = article.gql("order by created desc limit 6")
-        self.render("Project.html",adata = adata)
+        data =article.gql("order by created desc limit 1")
+        adata = article.gql("order by created desc limit 5 offset 1")
+        data2 = article.gql("order by created desc limit 1 offset 1")
+        data3 = article.gql("order by created desc limit 1 offset 2")
+        data4 = article.gql("order by created desc limit 1 offset 3")
+        data5 = article.gql("order by created desc limit 1 offset 4")
+        data6 = article.gql("order by created desc limit 1 offset 5")
+        
+        self.render("Project.html",adata = adata,data = data,data2 =data2,data3 = data3,data4 =data4,data5 = data5,data6 =data6)
     
         
 class article(db.Model):
