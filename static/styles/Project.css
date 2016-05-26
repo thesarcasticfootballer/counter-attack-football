@@ -1,0 +1,984 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+    @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+@import url('https://fonts.googleapis.com/css?family=Dosis');
+body
+{
+background-image: url("/images/PAISLEY.jpg");
+    
+    
+    overflow:auto;
+    
+    background-repeat: repeat;
+    cursor:url('http://upload.wikimedia.org/wikipedia/commons/d/de/POL_apple.jpg');
+    height: 100%;
+    width: 100%;
+}
+
+ul
+{
+list-style-type: none;
+margin: 0;
+padding: 0px;
+
+    
+    display:flex;
+background-color: #101010;
+    border-color: #101010;
+   
+}
+
+.abc
+{
+        border: 5px solid #ffa500;
+  
+}
+li
+{
+float: left;
+    font-family: 'Oswald',sans-serif;
+font-size: 14px;
+    font-weight: 550;
+   
+  color: white;
+    text-align: center;
+    padding: 0px 0px;
+    text-decoration:none;
+}
+
+
+ li:hover:not(.active) {
+    background-color: #ffa500;
+    text-decoration: none;
+    color: white;
+    
+}
+li:not(.active)
+{
+     color: white;
+}
+li:hover, li:active {
+    background-color: #ffa500;
+    text-decoration: none;
+    color: white;
+    
+}
+
+.hoverclass:hover
+{
+    
+    background-color: black;
+}
+
+.active {
+    background-color: #ee7600;
+}
+
+h3
+{
+    
+  font-family: Comic Sans, Comic Sans MS, cursive;
+font-size: 20px;
+color: white;
+
+}
+
+a
+{
+    text-decoration: none;
+}
+
+
+
+.img-circle{
+    border-radius: 50%;
+}
+
+
+
+.squad
+{
+    position: absolute;
+    top: 2.5%;
+    left: 0%;
+    background: none;
+    height: 90%;
+    width: 20%;
+    
+    visibility: hidden;
+    
+    display: flex;
+    overflow: hidden;
+    align-content: center;
+  
+    
+    
+}
+
+#teams1
+{
+    border: 100px; 
+    width: 75%;
+    border-collapse: collapse;
+    padding: 15px;
+    color: black;
+    border-color: #ffa500;
+}
+
+
+
+
+td
+{
+    padding-right: 18px;
+    padding-left: 18px;
+    font-size: 15px;
+    text-align: center;
+    border-style: none;
+    border-radius: 35%;    
+}
+
+th {
+    background-color: #ffa500;
+    color: white;
+}
+.closeX
+{
+    position: relative;
+}
+
+#closebutton
+{
+  position: relative;
+    background-color:  #ffb500;
+    border: none; 
+    opacity: 100%;
+    visibility: hidden;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration:none;
+    
+    font-family: Calibri,serif;
+    font-style: oblique;
+    font-size: 15px;
+    font-weight: 550;
+    border-radius: 100%;
+}
+#closebutton:hover
+{
+    cursor: pointer;
+    background-color:#ffa500;
+}
+
+#barcelona tr:nth-child(even)
+{
+    background-color: #ff0000;
+    color:aliceblue;
+    
+}
+#barcelona tr:nth-child(odd) {
+    background-color: #7f7fff;
+    color:black;
+}
+#realmadrid tr:nth-child(even)
+{
+    background-color: #0000ff;
+    color: white;
+}
+#realmadrid tr:nth-child(odd) {
+    background-color: #ffff32;
+}
+#bayern tr:nth-child(even)
+{
+    background-color: #ff0000;
+    color: white;
+}
+#bayern tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+#liverpool tr:nth-child(even)
+{
+    background-color: #ff0000;
+    color: white;
+}
+#liverpool tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+#mancity tr:nth-child(even)
+{
+    background-color: #9999ff;
+    color: black;
+}
+#mancity tr:nth-child(odd) {
+    background-color: #ffff00;
+    
+}
+#chelsea tr:nth-child(even)
+{
+    background-color: #1919ff;
+    color: white;
+}
+#chelsea tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+#manutd tr:nth-child(even)
+{
+    background-color: #ff0000;
+    color: white;
+}
+#manutd tr:nth-child(odd) {
+    background-color: #ffff00;
+    
+}
+#arsenal tr:nth-child(even)
+{
+    background-color: #ff0000;
+    color: white;
+}
+#arsenal tr:nth-child(odd) {
+    background-color: #ffffff;
+    
+}
+#arsenal tr:hover
+{
+    background-color: orange;
+    color: white;
+}
+#chelsea tr:hover
+{
+    background-color: orange;
+    color: white;
+}
+#manutd tr:hover
+{
+    background-color: orange;
+    color: white;
+}
+#mancity tr:hover
+{
+    background-color: orange;
+    color: white;
+}
+#chelsea tr:hover
+{
+    background-color: orange;
+    color: white;
+}
+#realmadrid tr:hover
+{
+    background-color: orange;
+    color: white;
+}
+#barcelona tr:hover
+{
+    background-color: orange;
+    color: white;
+}
+#liverpool tr:hover
+{
+    background-color: orange;
+    color: white;
+}
+table
+{
+    overflow-x: hidden;
+    
+}
+#aboutid
+{
+    position: absolute;
+    display: block;
+    
+    font-family: Comic Sans, Comic Sans MS, cursive;
+    background-color:#ffa500;
+    top:50%;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    
+}
+#screen
+{
+    position: relative;
+    padding-top: 5%;
+    padding-bottom: 10%;
+    height: 100%;
+    width: 100%;
+    padding-left: 0%;
+    align-content: stretch;
+    margin: 0 auto;
+}
+.row
+{
+  padding-bottom: 5%;
+   
+}
+.col-sm-2
+{
+    padding-left: 50%;
+
+}
+
+.frontpagetitle
+{
+     font-size: 30px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 700;
+    color:#ffa500;
+    background-color: black;
+    text-align: center;
+}
+.frontpagetitle a
+{
+     font-size: 30px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 700;
+    color:#ffa500;
+    background-color: black;
+    text-align: center;
+}
+.frontpagetitle a:hover
+{
+      font-size: 30px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 700;
+    color:#ffa500;
+}
+
+.article-headline a
+{
+    font-size: 30px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 700;
+    color:#ffa500;
+    text-decoration: none;
+}
+.caption a
+{
+ font-size: 20px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 200;
+    color:#ffa500;
+    text-decoration: none;   
+}
+.caption a:hover
+{
+ font-size: 20px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 200;
+    color:#ff5000;
+        text-decoration: none; 
+}
+.newscontent a
+{
+    font-size: 17px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 700;
+    color:#ffa500;
+}
+
+.newscontent a:hover
+{
+    font-size: 17px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 700;
+    color:#ffa500;
+}
+
+.youmayalsolike a
+{
+    font-size: 17px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 700;
+    color:#ffa500;
+}
+
+.youmayalsolike a:hover
+{
+    font-size: 17px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 700;
+    color:#ffa500;
+}
+.newscontent
+{
+    font-size: 17px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 500;
+    color: white;   
+}
+.article-headline 
+{
+    font-size: 25px;
+    text-align: center;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 700;
+    color:#ffa500;
+}
+.article-headlinemain a
+{
+    font-size: 20px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 700;
+    color:#ffa500;
+    background: black;
+}
+.article-sideheadline1 
+{
+    font-size: 40px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 700;
+    color:#ffa500;
+}
+.article-views
+{
+    text-align: center;
+    font-size: 100px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 700;
+    color:#ffa500;
+    border-radius: 50%;
+}
+.numberofviews
+{
+    text-align: center;
+    font-size: 130px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 700;
+    color:#ffa500;
+}
+.article-headline a:hover
+{
+    font-size: 30px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 700;
+    color:#ffa500;
+}
+.article-headlinemain a:hover
+{
+    font-size: 20px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 700;
+    color:#ffa500;
+    background: black;
+}
+
+
+#rownews
+{
+    height: 80%;
+}
+
+.newsbox1
+{
+    border: 3px solid #ffa500;
+    margin: 10px;
+    padding: 20px;
+    padding-bottom: 0px;
+    border-radius: 3%;
+    background-image: url("/images/newsbox.jpg");
+}
+.article-content
+{
+      font-size: 23px;
+    font-family:'Dosis' ;
+    color: white;
+}
+.NewsTemp
+{
+    border-top: 10px solid #ffa500;
+    margin: 10px;
+    padding: 20px;
+    border-radius:0%;
+    background-image: url("/images/newsbox.jpg");
+}
+.mostpop
+{
+      border-top: 8px solid #ffa500;
+    margin: 5px;
+    padding: 5px;
+    border-radius:0%;
+    background-image: url("/images/newsbox.jpg");
+}
+
+.article-created
+{
+     font-size: 15px;
+    font-family:'Oswald', sans-serif;
+    color: white;
+    
+}
+
+.article-author
+{
+       font-size: 15px;;
+    font-family:'Dosis' ;
+    color: white;
+    font-weight: 700;
+}
+.article-sideheadline
+{
+    font-size: 25px;
+    font-family: 'Fjalla One',sans-serif;
+    font-weight: 700;
+    color: #ffa500;
+}
+.article-posted
+{
+    font-size: 25px;
+    font-family: 'Fjalla One',sans-serif;
+    font-weight: 400;
+    color: #ffffff;
+}
+.imgview-circle
+{
+    border-radius: 50%;
+    height: 75%;
+}
+.navbar-header
+{
+background-color: black;
+    font-family: Gill Sansss MT, sans-serif;
+font-size: 18px;
+    color: white;
+    text-align: center;
+    align-content: center;
+    padding-left: 10px;
+}
+.hpmain
+{
+    border: 3px solid #ffa500;
+    border-radius:5%;
+}
+.abc
+{
+    background-color: #111111;
+    
+}
+
+li:hover {
+    background-color: #ffa500;
+    text-decoration: none;
+    color: white;
+    
+}
+
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 100%;
+  width: auto;
+}
+.dropdownm-menu
+{
+    background-color: #ffa500;
+    text-decoration: none;
+    color: white;
+}
+#titleheader
+{
+text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    font-size:150px;
+    font-family: 'Oswald', sans-serif;
+}
+#tagline
+{
+font-size: 60px;
+font-family: Tahoma, Verdana, Segoe, cursive;
+color: white;
+    font-style: italic;
+text-align:center;
+    font-weight: 800;
+width: 100%;
+}
+.selectdate
+{
+  
+    font-family: 'Montserrat',sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color:#ffa500;
+    
+    
+    
+}
+#datesearch
+{
+    font-size: 15px;
+    padding: 5px;
+    background-color: black;
+    border-color: black;
+    color: white;
+}
+#datesearch:hover
+{
+   font-size: 15px;
+    padding: 5px;
+    background-color:#ffa500;
+    border-color: black;
+    color: white;  
+}
+#datepicker
+{
+    background: white;;
+    font-size: 18px;
+    border-color: black;
+    color:#ffa500;
+}
+ #customBtn {
+      display: inline-block;
+      background: white;
+      color: #444;
+      width: 190px;
+      border-radius: 5px;
+      border: thin solid #888;
+      box-shadow: 1px 1px 1px grey;
+      white-space: nowrap;
+    }
+    #customBtn:hover {
+      cursor: pointer;
+    background: #ffa500;
+    }
+#customBtn
+{
+background: #101010;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    align-content: center;
+   
+   border-style: none;
+    border-radius: 0%;
+    border-bottom: 0px;
+    border-color: #101010;
+    box-shadow: none;
+    border: none;
+}
+#myButton1
+{
+background: #101010;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    padding: 14.5px;
+  border: none;
+    border-radius: 0%;
+    border-color: #101010;
+    
+}
+#myButton1:hover
+{
+    background: #ffa500;
+}
+
+span.buttonText
+{
+
+    font-family: 'Oswald',sans-serif;
+font-size: 14px;
+    font-weight: 550;
+   height: 40px;
+    
+  color: white;
+    text-align: center;
+    padding: 0px 0px;
+    text-decoration:none;
+    border: none;
+    box-shadow: none;
+}
+#signoutbox
+{
+    visibility:hidden;
+    color: white;
+}
+#namebox: hover
+{
+    background: #ffa500;
+}
+#namebox
+{
+ float: left;
+    font-family: 'Oswald',sans-serif;
+font-size: 14px;
+    font-weight: 550;
+   background: #101010;
+    padding-top: 10px;
+    margin-top: 0px;
+    
+    border: none;
+  color: white;
+    text-align: center;
+    padding: 0px 0px;
+    text-decoration:none;
+}
+.newstemp-picture
+{
+    text-align: center;
+}
+h2 span { 
+    font-size: 20px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 500;
+    color:#ffa500;
+   letter-spacing: -1px;  
+   background: rgb(0, 0, 0); /* fallback color */
+   background: rgba(0, 0, 0, 0.7);
+   padding:5px; 
+      border-bottom-right-radius: 0%;
+    border-bottom-left-radius: 0%;
+}
+h3 span { 
+    font-size: 23px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 400;
+    color:#ffa500;
+   letter-spacing: 0px;  
+   background: rgb(0,0,0); /* fallback color */
+   background: rgba(0,0,0,0.7);
+   padding:5px; 
+    border-bottom-right-radius: 0%;
+    border-bottom-left-radius: 0%;
+  
+}
+h5 span { 
+    font-size: 15px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 400;
+    color:#ffa500;
+   letter-spacing: 0px;  
+   background: rgb(0,0,0); /* fallback color */
+   background: rgba(0,0,0,0.7);
+   padding:5px; 
+    border-bottom-right-radius: 0%;
+    border-bottom-left-radius: 0%;
+  
+}
+h4 span { 
+    font-size: 23px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 400;
+    color:#ffa500;
+   letter-spacing: 0px;  
+   background: rgb(0,0,0); /* fallback color */
+   background: rgba(0,0,0,0.7);
+   padding:5px; 
+    border-bottom-right-radius: 9%;
+    border-bottom-left-radius: 9%;
+  
+}
+
+#hollowbox{ 
+   position: absolute; 
+   bottom: 0px; 
+   left: 7.5px; 
+   width: 97.8%; 
+}
+#hollowbox1{ 
+   position: absolute; 
+   bottom: 23px; 
+   left: 10px; 
+   width: 92.5%; 
+}
+#hollowbox2{ 
+   position: absolute; 
+   bottom: 0px; 
+   left: 7.5px; 
+   width: 97.8%; 
+
+}
+#hollowbox3{ 
+   position: absolute; 
+ 
+   width: 100%; 
+}
+#hollowboxfeatured{ 
+   position: absolute;
+   bottom: 20px;
+   width: 92.3%; 
+
+}
+#hollowboxlatest{ 
+   position: absolute;
+   bottom: 20px;
+   width: 94%; 
+
+}
+#hollowboxpopular{ 
+   position: absolute;
+   bottom: 10px;
+   width: 90%; 
+
+}
+.caret
+{
+    position: absolute;
+    top: 20px;
+}
+
+.hp
+{
+    border: 3px solid #ffa500;
+    border-radius: 5%;
+}
+viewbox
+{
+     position: absolute; 
+   top: 0px; 
+   right: 0px; 
+   
+
+}
+
+#myCarousel
+{
+    text-align: center;
+    
+    
+    align-content: center;
+    width: 100%;
+    background: none;
+    
+}
+
+
+
+.carousel-indicators
+{   
+
+   
+    top:110%;
+}
+.indicator
+{
+    left: 100px;
+}
+.carousel-slide
+{
+    align-items: center;
+    text-align: center;
+    align-content: center;
+}
+
+.news-category
+{
+    font-size: 30px;
+    text-align: center;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 700;
+    color:#000000;
+    background-color: #ffa500;
+    
+}
+.news-categorytop
+{
+    margin-top: 0px;
+    border: 1px solid #ffa500;
+}
+
+.dhtmlgoodies_slideshow{
+		width:720px;	/* Total width of slideshow */
+
+
+
+	}
+
+	.previewPane{
+		border:1px solid #000;
+		margin-right:10px;
+		text-align:center;
+		vertical-align:middle;
+		padding-top:30px;
+
+		position: relative;
+
+		/* CSS HACK */
+		height: 452px;	/* IE 5.x */
+		height/* */:/**/420px;	/* Other browsers */
+		height: /**/420px;
+
+		width:580px;
+		float:left;
+
+	}
+	.waitMessage{
+		display:none;
+		position:absolute;
+		left:200px;
+		top:180px;
+		background-color:#FFF;
+		border:3px double #000;
+		padding:4px;
+		color:#555;
+		font-size:0.9em;
+		font-family:arial;
+	}
+	.galleryContainer{	/* Big Div surrounding up image, list of images and down image */
+		float:left;	/* Floating */
+
+		/* CSS HACK */
+		height: 463px;	/* IE 5.x - 120 px + 2 px for borders and 2px for padding*/
+		height/* */:/**/447px;	/* Other browsers */
+		height: /**/447px;
+
+		/* CSS HACK */
+		width: 124px;	/* IE 5.x - 120 px + 2 px for borders and 2px for padding*/
+		width/* */:/**/120px;	/* Other browsers */
+		width: /**/120px;
+
+		border:1px solid #000;	/* Black border */
+		padding:1px;	/* A little space between the black border and the content inside */
+
+		position:relative;
+
+	}
+	.galleryContainer .arrow_down{	/* Arrow down image */
+		height:35px;
+		position:absolute;
+		bottom:0px;
+		z-index:100;
+	}
+	.galleryContainer .arrow_up{
+		height:35px;	/* Arrow up image */
+		position:absolute;
+		top:0px;
+		z-index:100;
+	}
+
+	.theImages{	/* DIV where the images are located */
+		top:35px;
+		position:absolute;
+		overflow:hidden;
+		height:385px;	/* Height of boxes for the images */
+	}
+	.theImages div{
+		position:relative;	/* Don't change this */
+		height:1500px;	/* Higher than total height of thumbnails */
+
+	}
+	.theImages img{
+		border:0px;	/* No border */
+		filter:alpha(opacity=50);	/* Transparency - IE */
+		opacity:0.5; /* Transparency - Firefox */
+		padding-top:1px;	/* Space between images */
+	}
+	.theImages .imgOver {
+		filter:alpha(opacity=100);	/* Transparency - IE */
+		opacity:1; /* Transparency - Firefox */		
+		
+	}
+	.previewPane .largeImageCaption{	/* CSS styling of image caption below large image */
+		font-style:italic;
+		text-align:center;
+		font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;	/* Font to use */
+		font-size:0.9em;
+	}
+	.theImages .imageCaption{
+		display:none;
+	}

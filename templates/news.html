@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>News</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" type="text/css" href="styles/Project.css" />
+        <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+ 
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+        <meta name="google-signin-client_id" content="636222690890-s7qdqru8kkk7v349r333i74q2a01btk5.apps.googleusercontent.com">
+         
+        <script>
+            function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail());
+ document.getElementById('signoutbox').style.visibility = "visible";
+                document.getElementById('namebox').style.visibility = "visible";  
+                 x = profile.getName(); 
+           y= x.toUpperCase();
+          document.getElementById('namebox').value = y;
+}
+            function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+
+      console.log('User signed out.');
+        document.getElementById('signoutbox').style.visibility = "hidden";
+                document.getElementById('namebox').style.visibility = "hidden";
+    });
+  }
+            
+        </script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+    </head>
+    <body >
+       
+         <div id="fb-root"></div>
+        
+          <nav class="navbar navbar-inverse ">
+  <div class="container-fluid abc" >
+   
+      <ul class="nav navbar-nav">
+        <li><a style = "color:white;" href="/">HOME</a></li>
+       <li><a style = "color:white;" href="/teams">TEAMS</a></li>
+        </li>
+        <li><a class ="active"  style = "color:white;" href="/news">NEWS</a></li>
+      <li><a style = "color:white;" href="/popular">POPULAR</a>
+      </li>
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+                  <li class="dropdown">
+          <a class="dropdown-toggle" style = "color:white;"  data-toggle="dropdown" href="#">REAL NEWS<span class="caret"></span> </a>
+          <ul class="dropdown-menu" style= "background-color: #111111;" >
+            <li><a style = "font-weight: 700;color: #ffa600;" href="/allnews">ALL NEWS</a></li>
+            <li><a style = "font-weight: 700;color: #ffa600;" href="/eplnews">PREMIER LEAGUE</a></li>
+            <li><a style = "font-weight: 700;color: #ffa600;" href="/uclnews">CHAMPIONS LEAGUE</a></li>
+              <li><a style = "font-weight: 700;color: #ffa600;" href="/Internationalnews">INTERNATIONAL</a></li>
+          </ul>
+        </li>
+        
+        <li><a  style = "color:white;"  href="/about"> ABOUT</a></li>
+         
+           <input id="namebox" type = "text" value="" readonly >     <li><a href="#" id="signoutbox" onclick="signOut();">SIGN OUT</a>
+        </li>
+      </ul>
+    </div>
+  
+    
+</nav>
+        
+           
+                  
+        <div class= "container">
+             <div class="g-signin2" data-onsuccess="onSignIn" ></div>
+            <div class = "row">
+        <div class="col-lg-12">
+            
+            <form name = "sort" method = "post">
+            <!--<input type = "text" name = "search" value ="{{search}}">-->
+                
+                <div class = "selectdate"><font color="white">Select Date </font><input id="datepicker" type = "date" name ="datebox" value = {{date1}}>   </form>
+                <font color ="white">Sort by</font>
+                <select name="sorting">
+                    <option value="created desc">New to Old</option>
+                    <option value="created asc">Old to New</option> 
+                </select>
+            
+                    <input id = "datesearch" type = "submit" value = "Search">
+                </div>
+                </div>
+            </div>
+            <div class = "frontpagetitle" ><marquee scrollamount="15">BREAKING NEWS: {% for article in data %}  <a href = "/news/{{article.key().id()}}">{{article.headline}} </a>| {% endfor %}</marquee></div>
+            <div class ="row">
+    <div class = "col-lg-12">
+     {% for article in adata %}
+
+<div class ="article">
+    <div class = "newsbox1">
+    <div class = "article-headline"></div><br><br>
+        <div class = "row" id = "rownews">
+            <div class = "col-lg-7">
+                 
+                <div class = "article-picture">
+                    <a href ="/news/{{article.key().id()}}"><img class= "hp1" src="{{article.picture}}" alt= "Image not Found" style = "width: 100%; height: 400; align: center;">
+                   
+                    <span id ="hollowbox">  <h2><span id ="hollowbox1">{{article.headline}} <br><br></span></h2></span>
+                   </a>
+                </div></div>
+           <div class = "col-lg-5 statbox">
+            <br>
+                <div class = "article-views"><img class ="imgview-circle" src="/images/readsymbol.jpg"<br></div>
+                <div class = "numberofviews">{{article.views}}</div>
+                
+            </div>
+        </div>
+    </div>
+    
+    {% endfor %}
+</div>
+            </div>
+                 
+        </div>
+    </div>
+
+ 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    </body>
+            
+    
+</html>
+  
+       
+       <!--THis is the code to get show the news after a particular date using gql query 
+                   dat = self.request.get("datebox")
+                   adata = article.gql(" where created > DATE(:1) order by created desc",dat)
+                     -->
