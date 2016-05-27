@@ -44,7 +44,7 @@ class Handler(webapp2.RequestHandler):
 class MainHandler(Handler):
     def get(self):
         data =article.gql("order by created desc limit 1")
-        adata = article.gql("order by created desc limit 5 offset 1")
+        adata = article.gql("order by created desc limit 6 ")
         data2 = article.gql("order by created desc limit 1 offset 1")
         data3 = article.gql("order by created desc limit 1 offset 2")
         data4 = article.gql("order by created desc limit 1 offset 3")

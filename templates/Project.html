@@ -16,7 +16,7 @@ and open the template in the editor.
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-      
+        
        
   <script>
   
@@ -43,6 +43,39 @@ and open the template in the editor.
     });
   }
   </script>
+        <link rel="stylesheet" type="text/css" href="/styles/slider-pro.min.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="/styles/examples.css" media="screen"/>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript" src="/styles/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="/styles/jquery.sliderPro.min.js"></script>
+        <script type="text/javascript">
+	$( document ).ready(function( $ ) {
+		$( '#example5' ).sliderPro({
+			width: 670,
+			height: 500,
+			orientation: 'vertical',
+			loop: false,
+			arrows: true,
+			buttons: false,
+			thumbnailsPosition: 'right',
+			thumbnailPointer: true,
+			thumbnailWidth: 290,
+			breakpoints: {
+				800: {
+					thumbnailsPosition: 'bottom',
+					thumbnailWidth: 270,
+					thumbnailHeight: 100
+				},
+				500: {
+					thumbnailsPosition: 'bottom',
+					thumbnailWidth: 120,
+					thumbnailHeight: 50
+				}
+			}
+		});
+	});
+</script>
     </head>
     <body >
         
@@ -88,30 +121,45 @@ and open the template in the editor.
             <div class="g-signin2" data-onsuccess="onSignIn"></div>
      <div class = "frontpagetitle" ><marquee scrollamount="15">LATEST HEADLINES</marquee></div>
 <br>
-            
-  <div class = "row">
+            <div class ="col-md-10">
+    <div id="example5" class="slider-pro">
+		<div class="sp-slides">
             {% for article in adata %}
-            <div class = "col-md-4">
-               <div class = "article-picture"><a href ="/news/{{article.key().id()}}"><img class= "hp" src="{{article.picture}}" alt= "Image not Found" style = "width: 100%; height: 400; align: center;">
-                    
-                   <span id ="hollowbox">  <h4><span id ="hollowbox1">{{article.headline}} </span></h3></span>
-                   </a>
-                   <br>
-            <br>
-                </div>
-                
+			<div class="sp-slide">
+                <a href ="/news/{{article.key().id()}}">
+				<img class="sp-image" 
+					data-src="{{article.picture}}"
+                     data-retina="{{article.picture}}" style = "width: 100%"/>
+                </a>
+                <div class="sp-caption">{{article.headline}}</div>
+
             </div>
-            
-         {% endfor %}
-            
+            {% endfor %}
+
+	      
+		</div>
+
+		<div class="sp-thumbnails">
+            {% for article in adata %}
+			<div class="sp-thumbnail">
+				<div class="sp-thumbnail-image-container">
+					<img class="sp-thumbnail-image" src="{{article.picture}}" style = "width:125%;"/>
+				</div>
+				<div class="sp-thumbnail-text">
+					<div class="sp-thumbnail-title">{{article.headline}}</div>
+                    <div class="sp-thumbnail-description"></div>
+					
+				</div>
+			</div>
+{% endfor %}
+			
+			</div>
+		</div>
     </div>
     </div>
     
-   
-</div>
-     
-  
-   
+            </div>
+    <br></br>
 
 <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
