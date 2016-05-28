@@ -79,6 +79,7 @@ and open the template in the editor.
 </script>
     </head>
     <body >
+      
         
    <script src="https://apis.google.com/js/platform.js" async defer>
         </script>
@@ -107,6 +108,7 @@ and open the template in the editor.
         </li>
        
         <li><a   style = "color:white;"  href="/about"> ABOUT</a></li>
+        <li>{% include 'modal.html' %}</li>
          <input id = "namebox" type = "text" value = "" readonly>        <li> <a href="#" id="signoutbox" onclick="signOut();">SIGN OUT</a>
           </li>
       </ul>
@@ -120,7 +122,7 @@ and open the template in the editor.
             
   <script></script>
             <!--div class="g-signin2" data-onsuccess="onSignIn"></div-->
-	{% include 'modal.html' %}
+	
      <div class = "frontpagetitle" ><marquee scrollamount="15">LATEST HEADLINES</marquee></div>
 <br>
             <div class ="col-md-10">
