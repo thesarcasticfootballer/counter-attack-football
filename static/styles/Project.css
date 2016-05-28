@@ -888,7 +888,8 @@ viewbox
     font-weight: 700;
     color:#000000;
     background-color: #ffa500;
-    
+    width: 100%;
+    margin: 0px;
 }
 .news-categorytop
 {
@@ -898,7 +899,9 @@ viewbox
 
 .topnewsbox
 {
-    background-color: black;
+    background-color: #111;
+    border-right: 5px solid #000000;
+    
 }
 .breakingnews,.breakingnews a,.breakingnews a:hover
 {
@@ -912,5 +915,6 @@ viewbox
     border: 3px solid #ffa500;
     background-color: #ffa500;
     text-decoration: none;
-    
+    padding-left: 0px;
+    padding-right: 0px;
 }
