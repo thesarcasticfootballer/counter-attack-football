@@ -85,13 +85,12 @@ and open the template in the editor.
      
 
 <br>
-        <div class = "article-headline">TOP FEATURED</div>
-        <div class= "row">
-        <div class = "col-md-2">
-        </div>
         
-<div class = "col-md-8">
-    
+        <div class= "row">
+       
+        
+<div class = "col-md-7">
+    <div class = "article-headline">TOP FEATURED</div>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
    
@@ -149,22 +148,17 @@ and open the template in the editor.
         
         
         
-          <!-- <div class = "col-lg-6">
-                {% for article in adata %}
-         
-                <div class = "article-picture"><a href ="/news/{{article.key().id()}}"><img class= "hp1" src="{{article.picture}}" alt= "Image not Found" style = "width: 100%; height: 400; align: center;">
-                   </a>
-                </div>
-                <div class = article-headline><a href ="/news/{{article.key().id()}}">{{article.headline}}</a></div>
-            
-  
-    
-    {% endfor %}
- </div>-->
+          
            
     </div>
-    <div class ="col-md-2">
-    
+    <div class ="col-md-5">
+        <div class = "article-headline">BREAKING NEWS</div>
+        {% for article in breaking %}
+        <div class ="breakingnews">
+        <a href ="/news/{{article.key().id()}}"> {{article.headline[:40]}} </div>
+        
+        {% endfor %}
+      
     </div>
     
     
@@ -191,11 +185,10 @@ and open the template in the editor.
             
             
             
-            <br><br>
-        
+    <br>
         <div class ="row">
             
-            <div class = "col-md-5">
+            <div class = "col-md-5 topnewsbox">
                 <div class = "news-category">LATEST NEWS</div>
                 <hr class = "news-categorytop">
              {% for article in latest %}
@@ -206,7 +199,7 @@ and open the template in the editor.
                <hr style= "border: 1px solid #515151;width: 95%;">
         {% endfor %}
             </div>
-            <div class = "col-md-4">
+            <div class = "col-md-4 topnewsbox">
                 <div class = "news-category">FEATURED</div>
                 <hr class = "news-categorytop">
              {% for article in allfeatured %}
@@ -225,7 +218,7 @@ and open the template in the editor.
                <hr style= "margin-top: 15px;border: 1px solid #515151;width: 95%;">
         {% endfor %}
             </div>
-            <div class = "col-md-3">
+            <div class = "col-md-3 topnewsbox">
                 <div class = "news-category">POPULAR</div>
                 <hr class = "news-categorytop">
              {% for article in popular %}

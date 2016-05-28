@@ -45,13 +45,8 @@ class MainHandler(Handler):
     def get(self):
         data =article.gql("order by created desc limit 1")
         adata = article.gql("order by created desc limit 6 ")
-        data2 = article.gql("order by created desc limit 1 offset 1")
-        data3 = article.gql("order by created desc limit 1 offset 2")
-        data4 = article.gql("order by created desc limit 1 offset 3")
-        data5 = article.gql("order by created desc limit 1 offset 4")
-        data6 = article.gql("order by created desc limit 1 offset 5")
         
-        self.render("Project.html",adata = adata,data = data,data2 =data2,data3 = data3,data4 =data4,data5 = data5,data6 =data6)
+        self.render("Project.html",adata = adata,data = data)
     
         
 class article(db.Model):
@@ -144,9 +139,10 @@ class PopularNewsHandler(Handler):
         data = article.gql(' where featured = 1 order by created desc limit 1 ')
         adata = article.gql('where featured = 1 order by created desc limit 5 offset 1')
         allfeatured = article.gql(' where featured = 1 order by created desc limit 6')
+        breaking = article.gql("order by created desc limit 10  ")
         popular = article.gql(' order by views desc limit 12')
         latest  = article.gql(' order by created desc limit 6')
-        self.render("mostread.html",adata = adata,data =data,allfeatured = allfeatured,popular = popular,latest = latest)
+        self.render("mostread.html",adata = adata,data =data,allfeatured = allfeatured,popular = popular,latest = latest,breaking = breaking)
 
 
 

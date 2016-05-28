@@ -871,6 +871,7 @@ viewbox
 .indicator
 {
     left: 100px;
+    visibility: hidden;
 }
 .carousel-slide
 {
@@ -895,3 +896,21 @@ viewbox
     border: 1px solid #ffa500;
 }
 
+.topnewsbox
+{
+    background-color: black;
+}
+.breakingnews,.breakingnews a,.breakingnews a:hover
+{
+    font-size: 20px;
+    margin-bottom: 7px;
+    padding: : 5px;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 500;
+    text-align: center;
+    color: black;
+    border: 3px solid #ffa500;
+    background-color: #ffa500;
+    text-decoration: none;
+    
+}
