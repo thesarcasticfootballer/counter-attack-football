@@ -48,38 +48,7 @@ and open the template in the editor.
        
          <div id="fb-root"></div>
         
-          <nav class="navbar navbar-inverse ">
-  <div class="container-fluid abc" >
-   
-      <ul class="nav navbar-nav">
-        <li><a style = "color:white;" href="/">HOME</a></li>
-       <li><a style = "color:white;" href="/teams">TEAMS</a></li>
-        </li>
-        <li><a class ="active"  style = "color:white;" href="/news">NEWS</a></li>
-      <li><a style = "color:white;" href="/popular">POPULAR</a>
-      </li>
-        
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-                  <li class="dropdown">
-          <a class="dropdown-toggle" style = "color:white;"  data-toggle="dropdown" href="#">REAL NEWS<span class="caret"></span> </a>
-          <ul class="dropdown-menu" style= "background-color: #111111;" >
-            <li><a style = "font-weight: 700;color: #ffa600;" href="/allnews">ALL NEWS</a></li>
-            <li><a style = "font-weight: 700;color: #ffa600;" href="/eplnews">PREMIER LEAGUE</a></li>
-            <li><a style = "font-weight: 700;color: #ffa600;" href="/uclnews">CHAMPIONS LEAGUE</a></li>
-              <li><a style = "font-weight: 700;color: #ffa600;" href="/Internationalnews">INTERNATIONAL</a></li>
-          </ul>
-        </li>
-        
-        <li><a  style = "color:white;"  href="/about"> ABOUT</a></li>
-         
-           <input id="namebox" type = "text" value="" readonly >     <li><a href="#" id="signoutbox" onclick="signOut();">SIGN OUT</a>
-        </li>
-      </ul>
-    </div>
-  
-    
-</nav>
+          {% include 'navbar.html' %}
         
            
                   
