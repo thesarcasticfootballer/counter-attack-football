@@ -21,7 +21,7 @@
           </ul>
         </li>
        
-        <li><a   style = "color:white;"  href="/about"> ABOUT</a></li>
+        <li><a   style = "color:white;"  href="/about" id="about"> ABOUT</a></li>
         <li>{% include 'modal.html' %}</li>
          <input id = "namebox" type = "text" value = "" readonly>        <li> <a href="#" id="signoutbox" onclick="signOut();">SIGN OUT</a>
           </li>
@@ -47,6 +47,8 @@ switch(uri[1])
   case 'uclnews': document.getElementById('realnews').className += 'active';
           break; 
   case 'Internationalnews': document.getElementById('realnews').className += 'active';
+          break;
+  case 'about': document.getElementById('about').className += 'active';
           break; 
   case '': document.getElementById('home').className += 'active';
           break ;
