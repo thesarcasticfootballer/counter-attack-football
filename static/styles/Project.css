@@ -24,16 +24,12 @@ padding: 0px;
 
     
     display:flex;
-background-color: #101010;
-    border-color: #101010;
+background-color: #ffa500;
+    border-color: #ffa500;
    
 }
 
-.abc
-{
-        border: 5px solid #ffa500;
-  
-}
+
 li
 {
 float: left;
@@ -41,7 +37,7 @@ float: left;
 font-size: 14px;
     font-weight: 550;
    
-  color: white;
+  color: black;
     text-align: center;
     padding: 0px 0px;
     text-decoration:none;
@@ -49,7 +45,7 @@ font-size: 14px;
 
 
  li:hover:not(.active) {
-    background-color: #ffa500;
+    background-color: #ee6600;
     text-decoration: none;
     color: white;
     
@@ -59,7 +55,7 @@ li:not(.active)
      color: white;
 }
 li:hover, li:active {
-    background-color: #ffa500;
+    background-color: #ee6600;
     text-decoration: none;
     color: white;
     
@@ -72,7 +68,7 @@ li:hover, li:active {
 }
 
 .active {
-    background-color: #ee7600;
+    background-color: #ee6600;
 }
 
 h3
@@ -540,7 +536,7 @@ table
 }
 .navbar-header
 {
-background-color: black;
+background-color: #ffa500;
     font-family: Gill Sansss MT, sans-serif;
 font-size: 18px;
     color: white;
@@ -555,7 +551,7 @@ font-size: 18px;
 }
 .abc
 {
-    background-color: #111111;
+    background-color: #ffa500;
     
 }
 
@@ -696,7 +692,8 @@ font-size: 14px;
 #signoutbox
 {
     visibility:hidden;
-    color: white;
+    color: black;
+    font-weight: 800;
 }
 #namebox: hover
 {
@@ -707,13 +704,13 @@ font-size: 14px;
  float: left;
     font-family: 'Oswald',sans-serif;
 font-size: 14px;
-    font-weight: 550;
-   background: #101010;
+    font-weight: 800;
+   background: #ffa500;
     padding-top: 10px;
     margin-top: 0px;
     
     border: none;
-  color: white;
+  color: black;
     text-align: center;
     padding: 0px 0px;
     text-decoration:none;
@@ -877,7 +874,7 @@ viewbox
 {
     align-items: center;
     text-align: center;
-    align-content: center;
+   
 }
 
 .news-category
