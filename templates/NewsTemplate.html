@@ -7,44 +7,14 @@ and open the template in the editor.
 <html>
     <head>
         <title>{{data.headline}}</title>
-        <meta charset="UTF-8">
-             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/styles/Project.css" />
-                <!-- Latest compiled and minified CSS -->
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <meta name="google-signin-client_id" content="636222690890-s7qdqru8kkk7v349r333i74q2a01btk5.apps.googleusercontent.com">
+
 <!--facebook meta tags-->
       <meta property="og:url"           content="{{url}}" />
       <meta property="og:type"          content="website" />
       <meta property="og:title"         content="<b>{{data.headline}}</b>" />
       <meta property="og:description"   content="{{data.sideheadline}}" />
       <meta property="og:image"         content="{{data.picture}}" />
-
-        <script>
-            function onSignIn(googleUser) {
-  var profile = googleUser.getBasicProfile();
-  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-  console.log('Name: ' + profile.getName());
-  console.log('Image URL: ' + profile.getImageUrl());
-  console.log('Email: ' + profile.getEmail());
- document.getElementById('signoutbox').style.visibility = "visible";
-                document.getElementById('namebox').style.visibility = "visible";  
-                 x = profile.getName(); 
-           y= x.toUpperCase();
-          document.getElementById('namebox').value = y;
-}
-            function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-
-      console.log('User signed out.');
-        document.getElementById('signoutbox').style.visibility = "hidden";
-                document.getElementById('namebox').style.visibility = "hidden";
-    });
-  }
-            
-        </script>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
+       {% include 'head.html' %}
     </head>
     <body >
     
