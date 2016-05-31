@@ -1,0 +1,36 @@
+<html>
+<head>
+	<script src='https://cdn.tinymce.com/4/tinymce.min.js'></script>
+	 <script>
+                tinymce.init({
+    selector: '#mytextarea',
+    theme: 'modern',
+    height: 600,
+    plugins: [
+      'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+      'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+      'save table contextmenu directionality emoticons template paste textcolor'
+    ],
+    toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
+  });
+                           
+        </script>
+</head>
+<body style = "background-color: black;">
+    <h2 style="color:green;"><center>NEWS ARTICLE FORM </center></h2>
+<form  name = "article" method = "post" style = "font-size:40px;color:green;" novalidate>
+HEADLINE: <input style = "font-size: 30px;" type = "text" name = "headline"></br>
+    CONTENT:<br>
+    <textarea style = "font-size:20px" rows= "10" cols = "50" id="mytextarea" name = "content" required></textarea></br>
+    SIDE HEADLINE:<input type = "text" name = "sideheadline"></br>
+    AUTHOR:
+    <input style = "font-size: 20px; "type = "text" name = "author"> </br>
+Picture Link <input type = "text" name = "picture"></br>
+Featured: Yes: <input type = "radio" name = "featured" value = "1">
+ No: <input type = "radio" name = "featured" value = "0">
+<br>
+
+<input type="submit">
+</form>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>ABOUT</title>
+        <meta charset="UTF-8">
+             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/styles/Project.css" />
+                <!-- Latest compiled and minified CSS -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <meta name="google-signin-client_id" content="636222690890-s7qdqru8kkk7v349r333i74q2a01btk5.apps.googleusercontent.com">
+      
+        <script>
+            function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail());
+ document.getElementById('signoutbox').style.visibility = "visible";
+                document.getElementById('namebox').style.visibility = "visible";  
+                 x = profile.getName(); 
+           y= x.toUpperCase();
+          document.getElementById('namebox').value = y;
+}
+            function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+
+      console.log('User signed out.');
+        document.getElementById('signoutbox').style.visibility = "hidden";
+                document.getElementById('namebox').style.visibility = "hidden";
+    });
+  }
+            
+        </script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+    </head>
+    <body >
+    
+           {% include 'navbar.html' %}
+        
+  
+
+
+
+ <div class="container">
+        <div class="col-lg-12">
+   
+         <div id="fb-root"></div>
+        <div id="buttons">
+            </div>
+            <div class="col-lg-12">
+        <!--<div id="tagline">
+            <br>The One Stop Shop For Football Fans </div>-->
+    </div>
+    </div>
+        
+        <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+     </body>
