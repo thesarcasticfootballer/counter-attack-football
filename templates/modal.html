@@ -67,6 +67,30 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
+
+function fb_login(){
+    FB.login(function(response) {
+
+        if (response.authResponse) {
+            console.log('Welcome!  Fetching your information.... ');
+            //console.log(response); // dump complete info
+            access_token = response.authResponse.accessToken; //get access token
+            user_id = response.authResponse.userID; //get FB UID
+
+            FB.api('/me', function(response) {
+                user_email = response.email; //get user email
+          // you can store this data into your database             
+            });
+
+        } else {
+            //user hit cancel button
+            console.log('User cancelled login or did not fully authorize.');
+
+        }
+    }, {
+        scope: 'publish_stream,email'
+    });
+}
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
   function testAPI() {
@@ -93,15 +117,22 @@
         <h4 class="modal-title" style="color:black;">Sign in using</h4>
       </div>
       <div class="modal-body">
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <!--div class="g-signin2" data-onsuccess="onSignIn"></div-->
       
+      
+        <div class="row"> 
+        <div  class="col-md-4 col-md-offset-4">
+          <script type="text/javascript">startApp();</script>
+          <a id="customBtn" style="background-color: #F90101;display: block; text-decoration: none; color:white; height: 34px"   href="#"><span style="line-height: 2em;vertical-align: middle;"><i class="fa fa-google" aria-hidden="true">&nbsp;&nbsp;</i>Sign in with Google</span></a>
+        </div>
+        <div class="col-md-4"><span id="g_result"></span></div>
+        </div>
       
         <div class="row">
         <div class="col-md-4 col-md-offset-4">
-          <a style="background-color: #F90101;display: block; text-decoration: none; color:white; height: 34px" href="#"><span style="line-height: 2em;vertical-align: middle;"><i class="fa fa-google" aria-hidden="true"></i>&nbsp;&nbsp;Sign in with Google</span></a>
+          <a style="background-color: #3b5998;display: block; text-decoration: none; color:white; height: 34px" onclick="fb_login()" href="#"><span style="line-height: 2em;vertical-align: middle;"><i class="fa fa-facebook" aria-hidden="true">&nbsp;&nbsp;</i>Sign in with Facebook</span></a>
         </div>
         </div>
-      
       
       <!--
   Below we include the Login Button social plugin. This button uses
@@ -109,8 +140,8 @@
   the FB.login() function when clicked.
 -->
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
+<!--fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button-->
 <div id="status" style="color:black">
 </div>
       <div class="modal-footer">
