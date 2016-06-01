@@ -1,0 +1,9 @@
+Go to the website counter-attack-football.appspot.com/article
+Fill in the FORM 
+Headline : All caps (Stritcly)
+Content : Minimum 200 words
+Author : Always the same name 
+Side Headline : Around 10-40 words
+Image: Upload in this format --->      /images/xyz.jpg 
+xyz is image name ,make sure it is a bit unique and image should be resized to 8:5 format If width is 600 ,height should be 400
+Make sure image is their in the folder and then deploy in app engine after submitting the form   
