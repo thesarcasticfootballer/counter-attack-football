@@ -38,6 +38,34 @@ and open the template in the editor.
   }
             
         </script>
+        <script>
+        
+        function dev()
+{
+document.getElementById("developers").style.visibility = "visible";
+document.getElementById("writers").style.visibility = "hidden";
+}
+
+function writers()
+{document.getElementById("developers").style.visibility = "hidden";
+document.getElementById("writers").style.visibility = "visible";
+}
+
+function rahul()
+{
+document.getElementById("i").src="/images/rahul.jpg";
+}
+
+function hari()
+{
+document.getElementById("i").src="/images/hari.jpg";
+}        
+
+function theja()
+{
+document.getElementById("i").src="/images/theja.jpg";
+}        
+            </script>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
     </head>
     <body >
@@ -52,12 +80,44 @@ and open the template in the editor.
         <div class="col-lg-12">
    
          <div id="fb-root"></div>
-        <div id="buttons">
-            </div>
-            <div class="col-lg-12">
-        <!--<div id="tagline">
-            <br>The One Stop Shop For Football Fans </div>-->
-    </div>
+       
+           
+       <br>
+
+<div class = "col-md-3"></div>
+<div class = "col-md-6">
+    <center>
+<button class="button1" onclick="dev()">Developers</button>
+
+<button class="button1" onclick="writers()">Writers</button></td>
+
+
+<br>
+<br>
+<div id ="developers">
+<button class="button1" onclick="rahul()">Rahul</button>
+
+<button class="button1" onclick="hari()">Hari</button>
+
+<button class="button1" onclick="theja()">Theja</button>
+
+     </div>
+<div id ="writers">
+<button class="button1" onclick="rahul()">Rahul</button>
+
+<button class="button1" onclick="hari()">Pish</button>
+
+
+     </div>
+
+
+<br>
+<br>
+<br>
+                <div class ="col-md-3"></div>
+<div class ="col-md-6 imgaboutpage">
+    <img id="i" src="/images/default.jpg" ></div></center>
+     </div></div>
     </div>
         
         <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>

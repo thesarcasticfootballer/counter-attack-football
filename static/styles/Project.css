@@ -927,3 +927,58 @@ viewbox
     font-size: 16px;
     border-radius: 50%;
 }
+
+.button1:hover {
+    background-color: black;
+    color: #ffa500;
+     font-size: 30px;
+    font-family: 'Fjalla One',sans-serif;
+    font-weight: 700;
+box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+.button1 {
+    background-color: #ffa500;
+    border: black;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    
+    font-family: 'Fjalla One',sans-serif;
+    font-weight: 700;
+   
+    text-decoration-color: black;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 50%;
+    border-width: 2px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+
+.imgaboutpage{
+
+   
+    
+}
+#i
+{
+    width: 100%;
+    border-radius: 50%;
+
+border-radius:50%;
+}
+
+#developers{
+ visibility:hidden;
+}
+
+#writers{
+ visibility:hidden;
+}
+.imgaboutpage:hover
+{
+     width: 50%;
+    border-radius: 50%;
+}
