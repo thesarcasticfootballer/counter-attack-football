@@ -26,11 +26,17 @@ from datetime import datetime
 import urllib2
 import time
 import json
-
+from google.appengine.api import memcache
 
 template_dir = os.path.join(os.path.dirname(__file__),'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
                                autoescape=True)
+
+
+CLIENT_ID = "636222690890-s7qdqru8kkk7v349r333i74q2a01btk5.apps.googleusercontent.com"
+FB_ID = "945733035525846|e4017e80ce68c389ebcc98ba625b9b46"
+FB_APP = 945733035525846
+
 
 class Handler(webapp2.RequestHandler):
     def write(self,*a,**kw):
@@ -145,6 +151,66 @@ class PopularNewsHandler(Handler):
         self.render("mostread.html",adata = adata,data =data,allfeatured = allfeatured,popular = popular,latest = latest,breaking = breaking)
 
 
+class GSigninHandler(Handler):
+    def get(self):
+        userid = self.request.cookies.get('name')
+        memcache.delete(userid)
+        self.response.out.write('server cache deleted')
+    def post(self):
+        token = self.request.get('idtoken')
+        gurl = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="
+        check = urllib2.urlopen(gurl+token)
+        if check.getcode() == 200:
+            user = json.loads(check.read())
+            try:
+                if user["aud"] != CLIENT_ID:
+                    raise "Invalid!!"
+                if user['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+                    raise "Invalid!!"
+                if user['exp'] < time.time():
+                    raise "Invalid!!"
+            except "Invalid!!":
+                self.response.out.write("not valid")
+            else:
+                self.response.set_cookie('name',user['sub'],path='/')
+                self.response.out.write(user['given_name'])
+                memcache.add(key = user['sub'], value = user, time=3600)
+
+
+class FBSigninHandler(Handler):
+    def post(self):
+        token = self.request.get("accesstoken")
+        fburl = "https://graph.facebook.com/debug_token?input_token="+token+"&access_token="
+        check = urllib2.urlopen(fburl+FB_ID)
+        if check.getcode() == 200:
+            user = json.loads(check.read())
+            try:
+                if user['expires_at'] < time.time():
+                    raise "Invalid!!"
+                if user['is_valid'] == False:
+                    raise "Invalid!!"
+                if user['app_id'] != FB_ID:
+                    raise "Invalid!!"
+            except "Invalid!!":
+                self.response.out.write("not valid")
+        else:
+            self.response.set_cookie('name',user['user_id'],path='/')
+            self.response.out.write("registered at server side")
+            memcache.add(key = user['user_id'], value = user, time=3600)
+
+
+
+
+
+
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),('/teams',TeamsHandler),('/about',AboutHandler),('/teamsheet',TeamsheetHandler),('/article',WriteFormHandler),('/news',NewsHandler),('/allnews',RSSHandler),('/uclnews',RSSuclHandler),('/Internationalnews',RSSIntHandler),('/eplnews',RSSplHandler),('/livescores',LiveScoreHandler),('/popular',PopularNewsHandler),(r'/news/(\d+)',ArticleHandler),('/fb',fbHandler)], debug=True)
+    ('/', MainHandler),('/teams',TeamsHandler),
+    ('/about',AboutHandler),('/teamsheet',TeamsheetHandler),
+    ('/article',WriteFormHandler),('/news',NewsHandler),
+    ('/allnews',RSSHandler),('/uclnews',RSSuclHandler),
+    ('/Internationalnews',RSSIntHandler),('/eplnews',RSSplHandler),
+    ('/livescores',LiveScoreHandler),('/popular',PopularNewsHandler),
+    (r'/news/(\d+)',ArticleHandler),('/fb',fbHandler),
+    ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler)]
+    , debug=True)
