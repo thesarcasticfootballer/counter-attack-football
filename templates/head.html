@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
  <!-- font awesome -->       
 <link rel="stylesheet" href="/styles/font-awesome.min.css"> 
+<script src="https://apis.google.com/js/platform.js">
+        </script>
   <script>
   var googleUser = {};
   var startApp = function() {
@@ -29,36 +31,52 @@
     console.log(element.id);
     auth2.attachClickHandler(element, {},
         function(googleUser) {
-          document.getElementById('g_result').innerText = "Signed in: " +
-              googleUser.getBasicProfile().getName();
+          onSignIn(googleUser);
         }, function(error) {
           alert(JSON.stringify(error, undefined, 2));
         });
   }
   
-     /* function onSignIn(googleUser) {
+      function onSignIn(googleUser) {
   var profile = googleUser.getBasicProfile();
   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
   console.log('Name: ' + profile.getName());
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail());
- document.getElementById('signoutbox').style.visibility = "visible";
-          document.getElementById('namebox').style.visibility = "visible";  
-            x = profile.getName(); 
-           y= x.toUpperCase();
-          document.getElementById('namebox').value = y;
+  var id_token = googleUser.getAuthResponse().id_token;
+  document.getElementById('close').click();
+  document.getElementById('modal').style.visibility = "hidden";
+  document.getElementById('signoutbox').style.visibility = "visible";
+  document.getElementById('namebox').style.visibility = "visible";  
+  var x = profile.getName(); 
+  var y= x.toUpperCase();
+  document.getElementById('namebox').value = y;
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', window.location.protocol+"//"+window.location.host+"/signin/google");
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = function(){
+    console.log("sent to server");
+    console.log('Received from server: ' + xhr.responseText);
+  };
+  xhr.send('idtoken=' + id_token);
 }
       function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
 
-      console.log('User signed out.');
-     
-        document.getElementById('signoutbox').style.visibility = "hidden";
-                document.getElementById('namebox').style.visibility = "hidden";
+     console.log('User signed out.');
+     document.getElementById('modal').style.visibility = "visible";
+     document.getElementById('signoutbox').style.visibility = "hidden";
+     document.getElementById('namebox').style.visibility = "hidden";
     });
-  }*/
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', window.location.protocol+"//"+window.location.host+"/signin/google");
+    xhr.onload = function(){
+      console.log(xhr.responseText);
+      document.cookie = "name=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    };
+    xhr.send();
+  }
   </script>
        
-        <script src="https://apis.google.com/js/platform.js" async defer>
-        </script>
+        
