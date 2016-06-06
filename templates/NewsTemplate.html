@@ -65,6 +65,20 @@ and open the template in the editor.
      js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
+
+
+
+
+  //to send to the server 
+  function sendserver(value){
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST',window.location.href);
+    xhr.onload = function(){
+        console.log("sent to server");
+        console.log('Received from server: ' + xhr.responseText);
+    };
+    xhr.send('value=' + value);
+  }
 </script>
 
          <a class="twitter-share-button"

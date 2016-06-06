@@ -91,19 +91,17 @@ function fb_login(){
 }
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
-  var fb_name;
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Successful login for: ' + response.name);
-      fb_name = response.name;
+      document.getElementById('namebox').value  = response.name;
     });
   document.getElementById('close').click();
   document.getElementById('modal').style.visibility = "hidden";
   document.getElementById('fbsignoutbox').style.visibility = "visible";
   document.getElementById('namebox').style.visibility = "visible";  
-  var y= fb_name.toUpperCase();
-  document.getElementById('namebox').value = y;
+  
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST',window.location.protocol+"//"+window.location.host+"/signin/fb");

@@ -90,6 +90,17 @@ class TeamsHandler(Handler):
     def get(self):
         self.render("teams.html")
 class ArticleHandler(Handler):
+    def post(self, post_id):
+        if memcache.get(post_id) == None:
+            memcache.add(key=post_id+"total", value=0, time = 3600)
+            memcache.add(key=post_id+"up", value=0, time = 3600)
+        memcache.incr(post_id+"total")
+        value = (int)self.request.get("value")
+        if value == 1:
+            memcache.incr(post_id+"up")
+        self.response.set_cookie('vote',"success",path='/')
+        self.response.out.write("registered vote")
+
     def get(self,post_id):
         data = article.get_by_id(int(post_id))
         data.views = data.views + 1
@@ -212,5 +223,6 @@ app = webapp2.WSGIApplication([
     ('/Internationalnews',RSSIntHandler),('/eplnews',RSSplHandler),
     ('/livescores',LiveScoreHandler),('/popular',PopularNewsHandler),
     (r'/news/(\d+)',ArticleHandler),('/fb',fbHandler),
-    ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler)]
+    ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
+    ]
     , debug=True)
