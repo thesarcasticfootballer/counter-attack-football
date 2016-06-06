@@ -64,6 +64,8 @@ class article(db.Model):
     picture = db.StringProperty()
     views = db.IntegerProperty(default=0)
     featured = db.IntegerProperty(default = 0)
+    total = db.IntegerProperty(default = 0)
+    up = db.IntegerProperty(default = 0)
     
     
     
@@ -91,13 +93,17 @@ class TeamsHandler(Handler):
         self.render("teams.html")
 class ArticleHandler(Handler):
     def post(self, post_id):
+        data = article.get_by_id(int(post_id))
         if memcache.get(post_id) == None:
             memcache.add(key=post_id+"total", value=0, time = 3600)
             memcache.add(key=post_id+"up", value=0, time = 3600)
         memcache.incr(post_id+"total")
-        value = (int)self.request.get("value")
+        data.total =data.total +1;
+        value = int(self.request.get("value"))
         if value == 1:
             memcache.incr(post_id+"up")
+            data.up = data.up + 1;
+        data.put()
         self.response.set_cookie('vote',"success",path='/')
         self.response.out.write("registered vote")
 
@@ -223,6 +229,5 @@ app = webapp2.WSGIApplication([
     ('/Internationalnews',RSSIntHandler),('/eplnews',RSSplHandler),
     ('/livescores',LiveScoreHandler),('/popular',PopularNewsHandler),
     (r'/news/(\d+)',ArticleHandler),('/fb',fbHandler),
-    ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
-    ]
-    , debug=True)
+    ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler)
+    ], debug=True)

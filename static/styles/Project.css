@@ -983,3 +983,12 @@ box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
      width: 50%;
     border-radius: 50%;
 }
+.votingbox
+{
+     font-size: 20px;
+    margin-bottom: 7px;
+    padding: : 5px;
+    color: #ffa500;
+    font-family:'Fjalla One', sans-serif;
+    font-weight: 500;
+}
