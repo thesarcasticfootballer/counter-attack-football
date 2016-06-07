@@ -22,7 +22,7 @@ import logging
 from google.appengine.ext import db
 from google.appengine.api import users
 from google.appengine.api import images
-from datetime import datetime
+import datetime
 import urllib2
 import time
 import json
@@ -94,15 +94,26 @@ class TeamsHandler(Handler):
         self.render("teams.html")
 class ArticleHandler(Handler):
     def post(self, post_id):
-        if memcache.get(post_id) == None:
-            memcache.add(key=post_id+"total", value=0, time = 3600)
-            memcache.add(key=post_id+"up", value=0, time = 3600)
+        data = article.get_by_id(int(post_id))
+        if memcache.get(post_id+"total") == None:
+            if data.total == 0:
+                memcache.add(key=post_id+"total", value=0, time = 3600)
+                memcache.add(key=post_id+"up", value=0, time = 3600)
+            else:
+                memcache.add(key=post_id+"total", value=data.total, time = 4000)
+                memcache.add(key=post_id+"up", value=data.up, time = 4000)
         memcache.incr(post_id+"total")
         value = int(self.request.get("value"))
         if value == 1:
             memcache.incr(post_id+"up")
-        self.response.set_cookie('vote',"success",path='/')
-        self.response.out.write("registered vote")
+        d = datetime.datetime.now()
+        d = d + datetime.timedelta(30) 
+        total = float(memcache.get(post_id+"total"))
+        up = float(memcache.get(post_id+"up"))
+        percentage = float((up/total)*100.0)
+        ans = "%s,%s" % (percentage,total)
+        self.response.set_cookie('vote',"success",path='/news/'+ post_id,expires=d)
+        self.response.out.write(ans)
 
     def get(self,post_id):
         data = article.get_by_id(int(post_id))
@@ -133,7 +144,7 @@ class NewsHandler(Handler):
         
         if date1 == "":
             date1 = "2016-01-01"
-        dateobj = datetime.strptime(date1, '%Y-%m-%d')
+        dateobj = datetime.datetime.strptime(date1, '%Y-%m-%d')
         x = "where created >= DATE('" + date1 + "')" +  " order by " + sortype
         adata = article.gql(x)
         data  = article.gql("order by created desc limit 6")

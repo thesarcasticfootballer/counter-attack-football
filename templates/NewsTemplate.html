@@ -8,6 +8,7 @@ and open the template in the editor.
     <head>
         <title>{{data.headline}}</title>
 
+
 <!--facebook meta tags-->
       <meta property="og:url"           content="{{url}}" />
       <meta property="og:type"          content="website" />
@@ -16,7 +17,7 @@ and open the template in the editor.
       <meta property="og:image"         content="{{data.picture}}" />
        {% include 'head.html' %}
     </head>
-    <body >
+    <body onload="check()">
     
            {% include 'navbar.html' %}
         
@@ -50,6 +51,21 @@ and open the template in the editor.
 
    <div id="fb-root"></div>
   <script>
+
+function read_cookie(key)
+{
+    var result;
+    return (result = new RegExp('(?:^|; )' + encodeURIComponent(key) + '=([^;]*)').exec(document.cookie)) ? (result[1]) : null;
+}
+function check()
+{
+if (read_cookie("vote"))
+{
+  document.getElementById('voteform').style.visibility = "hidden";
+  document.getElementById('resultsbox').style.visibility = "visible";
+}
+}
+
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '945733035525846',
@@ -70,12 +86,29 @@ and open the template in the editor.
 
 
   //to send to the server 
-  function sendserver(value){
+  function sendserver(){
+    var value;
+    if (document.getElementById('yes_form').checked)
+        value = 1;
+    else if (document.getElementById('no_form').checked)
+        value =0;
+    else
+    {
+        alert("please choose yes/no");
+        window.location.reload();
+      }
+    document.getElementById('resultsbox').style.visibility = "visible";
     var xhr = new XMLHttpRequest();
     xhr.open('POST',window.location.href);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function(){
         console.log("sent to server");
         console.log('Received from server: ' + xhr.responseText);
+        var ans = xhr.responseText;
+        ans = ans.split(',');
+        perc = ans[0];
+        document.getElementById('yes').style.width =  perc +'%';
+        document.getElementById('no').style.width = (100-perc) + '%';
     };
     xhr.send('value=' + value);
   }
@@ -100,21 +133,24 @@ Tweet</a>
     <div class ="row"> <div class = "newstemp-picture"><img class = "hp1" src="{{data.picture}}" alt= "Image not Found" style = "width: 95%; height: 400"></div></div>
                 <div class = "row"><div class = "article-sideheadline">{{data.sideheadline}}</div></div>
         <div class = "row"><div class = "article-content">{{data.content | safe}}</div></div>
-       <div class ="votingbox">
+       <div class ="votingbox" id="voteform">
            
            Was this news sarcastic? <br>
-           <form method ="post">
+           <form >
            
-           <input type = "radio" name ="value" value = 1> YES <br>
-           <input type = "radio" name ="value" value = 0> NO<br>
-           <input type = "submit" value = "VOTE NOW">
+           <input type = "radio" name ="value" id="yes_form" value = 1> YES <br>
+           <input type = "radio" name ="value" id= "no_form" value = 0> NO<br>
+           <input type = "button" value = "VOTE NOW" onclick="sendserver()">
+         </form>
                 </div>
-           <div class="resultsbox">
+
+
+           <div class="resultsbox" id="resultsbox" style="visibility:hidden">
                Was this news sarcastic<br>
-              YES <div class="answeryes" style= " width : 70%" >
+              YES <div class="answeryes" id="yes" style= " width : 70%" >
                a
                </div><br>
-           NO <div class="answerno"  style= " width : 30%" >
+           NO <div class="answerno" id="no" style= " width : 30%" >
                a
                </div>
             
