@@ -95,7 +95,7 @@ class ArticleHandler(Handler):
             memcache.add(key=post_id+"total", value=0, time = 3600)
             memcache.add(key=post_id+"up", value=0, time = 3600)
         memcache.incr(post_id+"total")
-        value = (int)self.request.get("value")
+        value = int(self.request.get("value"))
         if value == 1:
             memcache.incr(post_id+"up")
         self.response.set_cookie('vote',"success",path='/')
