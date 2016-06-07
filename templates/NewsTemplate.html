@@ -100,7 +100,25 @@ Tweet</a>
     <div class ="row"> <div class = "newstemp-picture"><img class = "hp1" src="{{data.picture}}" alt= "Image not Found" style = "width: 95%; height: 400"></div></div>
                 <div class = "row"><div class = "article-sideheadline">{{data.sideheadline}}</div></div>
         <div class = "row"><div class = "article-content">{{data.content | safe}}</div></div>
-       
+       <div class ="votingbox">
+           
+           Was this news sarcastic? <br>
+           <form method ="post">
+           
+           <input type = "radio" name ="value" value = 1> YES <br>
+           <input type = "radio" name ="value" value = 0> NO<br>
+           <input type = "submit" value = "VOTE NOW">
+                </div>
+           <div class="resultsbox">
+               Was this news sarcastic<br>
+              YES <div class="answeryes" style= " width : 70%" >
+               a
+               </div><br>
+           NO <div class="answerno"  style= " width : 30%" >
+               a
+               </div>
+            
+           </div>
         </div>
     </div>
     <div class ="col-sm-3">

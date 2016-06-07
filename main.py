@@ -64,6 +64,9 @@ class article(db.Model):
     picture = db.StringProperty()
     views = db.IntegerProperty(default=0)
     featured = db.IntegerProperty(default = 0)
+    total = db.IntegerProperty(default = 0)
+    up = db.IntegerProperty(default = 0)
+    
     
     
     
@@ -223,6 +226,5 @@ app = webapp2.WSGIApplication([
     ('/Internationalnews',RSSIntHandler),('/eplnews',RSSplHandler),
     ('/livescores',LiveScoreHandler),('/popular',PopularNewsHandler),
     (r'/news/(\d+)',ArticleHandler),('/fb',fbHandler),
-    ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
-    ]
-    , debug=True)
+    ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler)
+    ], debug=True)
