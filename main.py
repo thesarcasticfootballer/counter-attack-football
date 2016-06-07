@@ -69,6 +69,7 @@ class article(db.Model):
     
     
     
+    
 class WriteFormHandler(Handler):                             
     def get(self):     
         self.render("WriteForm.html")
