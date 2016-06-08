@@ -20,7 +20,11 @@ handlers:
 
 - url: /fonts
   static_dir: static/fonts
- 
+
+- url: /move
+  script: main.app
+  login: admin 
+
 - url: .*
   script: main.app
 

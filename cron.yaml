@@ -1,0 +1,4 @@
+cron:
+- description: moving votes to db every 59 min
+  url: /move
+  schedule: every 59 mins

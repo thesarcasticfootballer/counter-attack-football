@@ -27,6 +27,7 @@ import urllib2
 import time
 import json
 from google.appengine.api import memcache
+import cgi
 
 template_dir = os.path.join(os.path.dirname(__file__),'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
@@ -122,7 +123,18 @@ class ArticleHandler(Handler):
         adata = article.gql("order by views desc limit 6")
         url = self.request.url
         host = self.request.host
-        self.render("NewsTemplate.html",adata = adata,data = data,url = url, host = host)
+        if memcache.get(post_id+"total"):
+            total = float(memcache.get(post_id+"total"))
+            up = float(memcache.get(post_id+"up"))
+            percentage = float((up/total)*100.0)
+        else:
+            total = data.total
+            if total == 0:
+                percentage = 0
+            else:
+                up = data.up
+                percentage = float(up/total)*100.0
+        self.render("NewsTemplate.html",adata = adata,data = data,url = url, host = host, yes=percentage, no=(100-percentage))
         
 class AboutHandler(Handler):
     def get(self):
@@ -140,8 +152,7 @@ class NewsHandler(Handler):
         self.render("news.html",adata = adata,data = data)
     def post(self):
         date1 = self.request.get("datebox")
-        sortype = self.request.get("sorting")
-        
+        sortype = self.request.get("sorting")  
         if date1 == "":
             date1 = "2016-01-01"
         dateobj = datetime.datetime.strptime(date1, '%Y-%m-%d')
@@ -225,6 +236,15 @@ class FBSigninHandler(Handler):
 
 
 
+class MoveDBHandler(Handler):
+    def get(self):
+        keys = article.all(keys_only =True)
+        for k in keys:
+            if memcache.get(str(k.id())+"total"):
+                data = article.get_by_id(k.id())
+                data.total = memcache.get(str(k.id())+"total")
+                data.up = memcache.get(str(k.id())+"up")
+                data.put()
 
 
 
@@ -237,5 +257,5 @@ app = webapp2.WSGIApplication([
     ('/Internationalnews',RSSIntHandler),('/eplnews',RSSplHandler),
     ('/livescores',LiveScoreHandler),('/popular',PopularNewsHandler),
     (r'/news/(\d+)',ArticleHandler),('/fb',fbHandler),
-    ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler)
-    ], debug=True)
+    ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
+    ('/move', MoveDBHandler)], debug=True)

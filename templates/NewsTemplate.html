@@ -98,6 +98,7 @@ if (read_cookie("vote"))
         window.location.reload();
       }
     document.getElementById('resultsbox').style.visibility = "visible";
+    document.getElementById('voteform').style.visibility = "hidden";
     var xhr = new XMLHttpRequest();
     xhr.open('POST',window.location.href);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -138,8 +139,8 @@ Tweet</a>
            Was this news sarcastic? <br>
            <form >
            
-           <input type = "radio" name ="value" id="yes_form" value = 1> YES <br>
-           <input type = "radio" name ="value" id= "no_form" value = 0> NO<br>
+           <input type = "radio" name ="value" id="yes_form" value = 1 required> YES <br>
+           <input type = "radio" name ="value" id= "no_form" value = 0 required> NO<br>
            <input type = "button" value = "VOTE NOW" onclick="sendserver()">
          </form>
                 </div>
@@ -147,10 +148,10 @@ Tweet</a>
 
            <div class="resultsbox" id="resultsbox" style="visibility:hidden">
                Was this news sarcastic<br>
-              YES <div class="answeryes" id="yes" style= " width : 70%" >
+              YES <div class="answeryes" id="yes" style= " width : {{yes}}%" >
                a
                </div><br>
-           NO <div class="answerno" id="no" style= " width : 30%" >
+           NO <div class="answerno" id="no" style= " width : {{no}}%" >
                a
                </div>
             
