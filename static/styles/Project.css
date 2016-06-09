@@ -489,7 +489,7 @@ table
     margin: 10px;
     padding: 20px;
     border-radius:0%;
-    background-image: url("/images/newsbox.jpg");
+    background-color: #000000;
 }
 .mostpop
 {
