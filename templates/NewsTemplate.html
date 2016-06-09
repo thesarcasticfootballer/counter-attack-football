@@ -16,6 +16,46 @@ and open the template in the editor.
       <meta property="og:description"   content="{{data.sideheadline}}" />
       <meta property="og:image"         content="{{data.picture}}" />
        {% include 'head.html' %}
+        <meta name="description" content="chart created using amCharts live editor" />
+
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="http://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="http://www.amcharts.com/lib/3/pie.js"></script>
+		<script type="text/javascript" src="http://www.amcharts.com/lib/3/themes/black.js"></script>
+
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+			AmCharts.makeChart("chartdiv",
+				{
+					"type": "pie",
+					"angle": 56.7,
+					"balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+					"depth3D": 32,
+					"labelRadius": 30,
+					"labelText": "[[title]] - [[percents]]%",
+					"startAngle": 0,
+					"baseColor": "#FF5500",
+					"pullOutEffect": "easeInSine",
+					"startEffect": "easeOutSine",
+					"titleField": "category",
+					"valueField": "column-1",
+					"theme": "black",
+					"allLabels": [],
+					"balloon": {},
+					"titles": [],
+					"dataProvider": [
+						{
+							"category": "YES",
+							"column-1": {{yes}}
+						},
+						{
+							"category": "NO",
+							"column-1": {{no}}
+						}
+					]
+				}
+			);
+		</script>
     </head>
     <body onload="check()">
     
@@ -147,15 +187,10 @@ Tweet</a>
 
 
            <div class="resultsbox" id="resultsbox" style="visibility:hidden">
-               Was this news sarcastic<br>
-              YES <div class="answeryes" id="yes" style= " width : {{yes}}%" >
-               a
-               </div><br>
-           NO <div class="answerno" id="no" style= " width : {{no}}%" >
-               a
-               </div>
+              <div id="chartdiv" style="width: 100%; height: 400px; background-color: #000000;" ></div>
             
            </div>
+                
         </div>
     </div>
     <div class ="col-sm-3">
@@ -175,3 +210,12 @@ Tweet</a>
         <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
      </body>
+    
+</html>
+<!-- Was this news sarcastic<br>
+              YES <div class="answeryes" id="yes" style= " width : {{yes}}%" >
+               a
+               </div><br>
+           NO <div class="answerno" id="no" style= " width : {{no}}%" >
+               a
+               </div>-->
