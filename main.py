@@ -109,10 +109,9 @@ class ArticleHandler(Handler):
             memcache.incr(post_id+"up")
         d = datetime.datetime.now()
         d = d + datetime.timedelta(30) 
-        total = float(memcache.get(post_id+"total"))
-        up = float(memcache.get(post_id+"up"))
-        percentage = float((up/total)*100.0)
-        ans = "%s,%s" % (percentage,total)
+        total = memcache.get(post_id+"total")
+        up = memcache.get(post_id+"up")
+        ans = "%s,%s" % (up,(total-up))
         self.response.set_cookie('vote',"success",path='/news/'+ post_id,expires=d)
         self.response.out.write(ans)
 
@@ -124,17 +123,15 @@ class ArticleHandler(Handler):
         url = self.request.url
         host = self.request.host
         if memcache.get(post_id+"total"):
-            total = float(memcache.get(post_id+"total"))
-            up = float(memcache.get(post_id+"up"))
-            percentage = float((up/total)*100.0)
+            total = memcache.get(post_id+"total")
+            up = memcache.get(post_id+"up")
         else:
             total = data.total
             if total == 0:
-                percentage = 0
+                up = 0
             else:
                 up = data.up
-                percentage = float(up/total)*100.0
-        self.render("NewsTemplate.html",adata = adata,data = data,url = url, host = host, yes=percentage, no=(100-percentage))
+        self.render("NewsTemplate.html",adata = adata,data = data,url = url, host = host, yes=up, no=(total-up))
         
 class AboutHandler(Handler):
     def get(self):

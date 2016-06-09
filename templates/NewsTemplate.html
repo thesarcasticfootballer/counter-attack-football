@@ -25,7 +25,9 @@ and open the template in the editor.
 
 		<!-- amCharts javascript code -->
 		<script type="text/javascript">
-			AmCharts.makeChart("chartdiv",
+    var chart;
+    function makechart(){
+			chart = AmCharts.makeChart("chartdiv",
 				{
 					"type": "pie",
 					"angle": 56.7,
@@ -55,6 +57,7 @@ and open the template in the editor.
 					]
 				}
 			);
+    }
 		</script>
     </head>
     <body onload="check()">
@@ -103,6 +106,7 @@ if (read_cookie("vote"))
 {
   document.getElementById('voteform').style.visibility = "hidden";
   document.getElementById('resultsbox').style.visibility = "visible";
+  makechart();
 }
 }
 
@@ -147,9 +151,19 @@ if (read_cookie("vote"))
         console.log('Received from server: ' + xhr.responseText);
         var ans = xhr.responseText;
         ans = ans.split(',');
-        perc = ans[0];
-        document.getElementById('yes').style.width =  perc +'%';
-        document.getElementById('no').style.width = (100-perc) + '%';
+        makechart();
+        var data =[
+            {
+              "category": "YES",
+              "column-1": ans[0]
+            },
+            {
+              "category": "NO",
+              "column-1": ans[1]
+            }
+          ]; 
+        chart.dataProvider = data; 
+        chart.validateData();
     };
     xhr.send('value=' + value);
   }
@@ -187,7 +201,7 @@ Tweet</a>
 
 
            <div class="resultsbox" id="resultsbox" style="visibility:hidden">
-              <div id="chartdiv" style="width: 100%; height: 400px; background-color: #000000;" ></div>
+              <div id="chartdiv" style="width: 100%; height: 400px; background-color: #000000;"></div>
             
            </div>
                 
