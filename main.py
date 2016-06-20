@@ -36,7 +36,7 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
 
 CLIENT_ID = "636222690890-s7qdqru8kkk7v349r333i74q2a01btk5.apps.googleusercontent.com"
 FB_ID = "945733035525846|e4017e80ce68c389ebcc98ba625b9b46"
-FB_APP = 945733035525846
+FB_APP = '945733035525846'
 
 
 class Handler(webapp2.RequestHandler):
@@ -202,12 +202,12 @@ class GSigninHandler(Handler):
                     raise "Invalid!!"
                 if user['exp'] < time.time():
                     raise "Invalid!!"
-            except "Invalid!!":
-                self.response.out.write("not valid")
-            else:
                 self.response.set_cookie('name',user['sub'],path='/')
                 self.response.out.write(user['given_name'])
                 memcache.add(key = user['sub'], value = user, time=3600)
+            except "Invalid!!":
+                self.response.out.write("not valid")
+                
 
 
 class FBSigninHandler(Handler):
@@ -218,19 +218,17 @@ class FBSigninHandler(Handler):
         if check.getcode() == 200:
             user = json.loads(check.read())
             try:
-                if user['expires_at'] < time.time():
+                if user['data']['expires_at'] < time.time():
                     raise "Invalid!!"
-                if user['is_valid'] == False:
+                if user['data']['is_valid'] == False:
                     raise "Invalid!!"
-                if user['app_id'] != FB_ID:
+                if user['data']['app_id'] != FB_APP:
                     raise "Invalid!!"
+                self.response.set_cookie('name',user['data']['user_id'],path='/')
+                self.response.out.write("registered at server side")
+                memcache.add(key = user['data']['user_id'], value = user, time=3600)
             except "Invalid!!":
                 self.response.out.write("not valid")
-        else:
-            self.response.set_cookie('name',user['user_id'],path='/')
-            self.response.out.write("registered at server side")
-            memcache.add(key = user['user_id'], value = user, time=3600)
-
 
 
 class MoveDBHandler(Handler):
@@ -255,4 +253,4 @@ app = webapp2.WSGIApplication([
     ('/livescores',LiveScoreHandler),('/popular',PopularNewsHandler),
     (r'/news/(\d+)',ArticleHandler),('/fb',fbHandler),
     ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
-    ('/move', MoveDBHandler)], debug=True)
+    ('/move', MoveDBHandler)], debug=False)
