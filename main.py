@@ -47,11 +47,21 @@ class Handler(webapp2.RequestHandler):
         return t.render(params)
     def render(self,template,**kw):
         self.write(self.render_str(template,**kw))
+    def cache(self, key):
+        return memcache.get(key)
+
 
 class MainHandler(Handler):
     def get(self):
-        data =article.gql("order by created desc limit 1")
-        adata = article.gql("order by created desc limit 6 ")
+        content = self.cache('home')
+        if content:
+            data = content['data']
+            adata = content['adata']
+        else:
+            data =list(article.gql("order by created desc limit 1"))
+            adata = list(article.gql("order by created desc limit 6 "))
+            content = {'data':data,'adata':adata}
+            memcache.add(key="home", value=content, time=3600)
         
         self.render("Project.html",adata = adata,data = data)
     
@@ -88,6 +98,8 @@ class WriteFormHandler(Handler):
         a = article(headline = headline,content =content,author = author,picture = picture,sideheadline = sideheadline,featured = featured)
          
         a.put();
+        memcache.delete('home')
+        memcache.delete('popular')
         self.redirect('/news')
 
 class TeamsHandler(Handler):
@@ -175,12 +187,23 @@ class fbHandler(Handler):
         
 class PopularNewsHandler(Handler):
     def get(self):
-        data = article.gql(' where featured = 1 order by created desc limit 1 ')
-        adata = article.gql('where featured = 1 order by created desc limit 5 offset 1')
-        allfeatured = article.gql(' where featured = 1 order by created desc limit 6')
-        breaking = article.gql("order by created desc limit 10  ")
-        popular = article.gql(' order by views desc limit 12')
-        latest  = article.gql(' order by created desc limit 6')
+        content = self.cache('popular')
+        if content:
+            data = content['data']
+            adata = content['adata']
+            allfeatured = content['allfeatured']
+            breaking = content['breaking']
+            popular = content['popular']
+            latest = content['latest']
+        else:
+            data = list(article.gql(' where featured = 1 order by created desc limit 1 '))
+            adata = list(article.gql('where featured = 1 order by created desc limit 5 offset 1'))
+            allfeatured = list(article.gql(' where featured = 1 order by created desc limit 6'))
+            breaking = list(article.gql("order by created desc limit 10  "))
+            popular = list(article.gql(' order by views desc limit 12'))
+            latest  = list(article.gql(' order by created desc limit 6'))
+            content = {'data':data,'adata':adata,'allfeatured':allfeatured,'breaking':breaking,'popular':popular,'latest':latest}
+            memcache.add(key='popular',value=content,time=3600)
         self.render("mostread.html",adata = adata,data =data,allfeatured = allfeatured,popular = popular,latest = latest,breaking = breaking)
 
 
