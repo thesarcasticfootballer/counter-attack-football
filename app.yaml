@@ -3,6 +3,7 @@ version: 1
 runtime: python27
 api_version: 1
 threadsafe: yes
+default_expiration: "1d 0h"
 
 handlers:
 - url: /favicon\.ico
@@ -20,6 +21,10 @@ handlers:
 
 - url: /fonts
   static_dir: static/fonts
+
+- url: /sitemap.xml
+  static_files: sitemap.xml
+  upload: sitemap.xml
 
 - url: /move
   script: main.app
