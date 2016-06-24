@@ -18,9 +18,9 @@ and open the template in the editor.
 <link rel="stylesheet" type="text/css" href="/styles/examples.css" media="screen"/>
         
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
-
 <script type="text/javascript" src="/styles/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="/styles/jquery.sliderPro.min.js"></script>
+
         <script type="text/javascript">
 	$( document ).ready(function( $ ) {
 		$( '#example5' ).sliderPro({
@@ -48,124 +48,14 @@ and open the template in the editor.
 		});
 	});
 </script>
+        
     </head>
     <body>
-      <!--script>
-  // This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      testAPI();
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-    }
-  }
-
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-
-  window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '945733035525846',
-    cookie     : true,  // enable cookies to allow the server to access 
-                        // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.5' // use graph api version 2.5
-  });
-
-  // Now that we've initialized the JavaScript SDK, we call 
-  // FB.getLoginStatus().  This function gets the state of the
-  // person visiting this page and can return one of three states to
-  // the callback you provide.  They can be:
-  //
-  // 1. Logged into your app ('connected')
-  // 2. Logged into Facebook, but not your app ('not_authorized')
-  // 3. Not logged into Facebook and can't tell if they are logged into
-  //    your app or not.
-  //
-  // These three cases are handled in the callback function.
-
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-
-  };
-
-  // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-  // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
-  function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-    });
-  }
-</script-->
         
    <script src="https://apis.google.com/js/platform.js" async defer>
         </script>
         {% include 'navbar.html' %}
-        <!--nav class="navbar navbar-inverse ">
-  <div class="container-fluid abc" >
-   
-      
-    
-      <ul class="nav navbar-nav ">
-        <li><a class = "active" style = "color:white;" href="/">HOME</a></li>
-       <li><a style = "color:white;" href="/teams">TEAMS</a></li>
-        </li>
-        <li><a  style = "color:white;" href="/popular">NEWS</a></li>
-         <li><a style = "color:white;" href="/popular">POPULAR</a>
-      </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-                  <li class="dropdown">
-          <a class="dropdown-toggle" style = "color:white;"  data-toggle="dropdown" href="#">REAL NEWS<span class="caret"></span> </a>
-          <ul class="dropdown-menu" style= "background-color: #111111;" >
-            <li><a style = "font-weight: 700;color: #ffa600;" href="/allnews">ALL NEWS</a></li>
-            <li><a style = "font-weight: 700;color: #ffa600;" href="/eplnews">PREMIER LEAGUE</a></li>
-            <li><a style = "font-weight: 700;color: #ffa600;" href="/uclnews">CHAMPIONS LEAGUE</a></li>
-              <li><a style = "font-weight: 700;color: #ffa600;" href="/Internationalnews">INTERNATIONAL</a></li>
-          </ul>
-        </li>
        
-        <li><a   style = "color:white;"  href="/about"> ABOUT</a></li>
-         <input id = "namebox" type = "text" value = "" readonly>        <li> <a href="#" id="signoutbox" onclick="signOut();">SIGN OUT</a>
-          </li>
-      </ul>
-    
-  </div>
-</nav-->
-           
             
         <div class="container">
         <div class="col-lg-12">
@@ -174,9 +64,9 @@ and open the template in the editor.
             <div class="g-signin2" data-onsuccess="onSignIn" style="visibility: hidden"></div>
             <div class ="row" style ="padding: 5px">
 	<div class = "frontpagelogo">
-        <div class ="col-md-7">
+        <div class ="col-sm-7">
             <img class ="fplogo" src = "/images/logo_large.JPG"></div>
-           <div class ="col-md-3">
+           <div class ="col-sm-3">
 <div class="addthis_horizontal_follow_toolbox"></div>
 
         </div>
@@ -236,6 +126,7 @@ and open the template in the editor.
     <br>
 <br>
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5762625c02c749c4"></script>
 <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>

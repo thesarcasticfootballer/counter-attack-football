@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald');
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
 @import url('https://fonts.googleapis.com/css?family=Fjalla+One');
-    @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
 @import url('https://fonts.googleapis.com/css?family=Dosis');
 body
 {
@@ -89,6 +87,7 @@ a
 
 .img-circle{
     border-radius: 50%;
+   height: 150; width: 150; 
 }
 
 
@@ -1029,7 +1028,7 @@ box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
     border-top: 10px #ffa500 solid;
     padding: 10px;
 }
-img 
+img
 {
-    width : 100%;
+    width: 100%;
 }
