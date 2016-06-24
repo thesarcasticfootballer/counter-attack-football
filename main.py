@@ -53,17 +53,17 @@ class Handler(webapp2.RequestHandler):
 
 class MainHandler(Handler):
     def get(self):
-        content = self.cache('home')
-        if content:
-            data = content['data']
-            adata = content['adata']
-        else:
-            data =list(article.gql("order by created desc limit 1"))
+        adata = self.cache('home')
+        #if adata:
+            #data = content['data']
+            #adata = content['adata']
+        if not adata:
+            #data =list(article.gql("order by created desc limit 1"))
             adata = list(article.gql("order by created desc limit 6 "))
-            content = {'data':data,'adata':adata}
-            memcache.add(key="home", value=content, time=3600)
+            #content = {'data':data,'adata':adata}
+            memcache.add(key="home", value=adata, time=3600)
         
-        self.render("Project.html",adata = adata,data = data)
+        self.render("Project.html",adata = adata)
     
         
 class article(db.Model):
@@ -128,10 +128,21 @@ class ArticleHandler(Handler):
         self.response.out.write(ans)
 
     def get(self,post_id):
-        data = article.get_by_id(int(post_id))
-        data.views = data.views + 1
-        data.put()
-        adata = article.gql("order by views desc limit 6")
+        content = self.cache(post_id)
+        if content:
+            data = content['data']
+            adata = content['adata']
+        else:
+            data = article.get_by_id(int(post_id))
+            #data.views = data.views + 1
+            #data.put()
+            adata = list(article.gql("order by views desc limit 6"))
+            content = {'data':data,'adata':adata}
+            memcache.add(key=post_id, value=content, time=4000)
+        views = self.cache(post_id+'views')
+        if not views:
+            memcache.add(key=post_id+'views',value=data.views,time=4000)
+        memcache.incr(post_id+"views")
         url = self.request.url
         host = self.request.host
         if memcache.get(post_id+"total"):
@@ -258,12 +269,19 @@ class MoveDBHandler(Handler):
     def get(self):
         keys = article.all(keys_only =True)
         for k in keys:
-            if memcache.get(str(k.id())+"total"):
+            total = memcache.get(str(k.id())+"total")
+            views = memcache.get(str(k.id())+"views")
+            if total or views:
                 data = article.get_by_id(k.id())
-                data.total = memcache.get(str(k.id())+"total")
-                data.up = memcache.get(str(k.id())+"up")
+                if total:
+                    data.total = total
+                    data.up = memcache.get(str(k.id())+"up")
+                else:
+                    data.views = views
                 data.put()
-
+            memcache.delete(str(k.id())+"total")
+            memcache.delete(str(k.id())+"up")
+            memcache.delete(str(k.id())+"views")
 
 
 
