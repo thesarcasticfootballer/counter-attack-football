@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald');
 @import url('https://fonts.googleapis.com/css?family=Fjalla+One');
 @import url('https://fonts.googleapis.com/css?family=Dosis');
+
 body
 {
 background-image: url("/images/PAISLEY.jpg");
@@ -9,7 +10,7 @@ background-image: url("/images/PAISLEY.jpg");
     overflow:auto;
     
     background-repeat: repeat;
-    cursor:url('http://upload.wikimedia.org/wikipedia/commons/d/de/POL_apple.jpg');
+    
     height: 100%;
     width: 100%;
 }
@@ -813,6 +814,12 @@ h4 span {
    width: 92.3%; 
 
 }
+#hollowboxfeatured1{ 
+   position: absolute;
+   bottom: 20px;
+   width: 90%; 
+
+}
 #hollowboxlatest{ 
    position: absolute;
    bottom: 20px;
@@ -824,6 +831,20 @@ h4 span {
    bottom: 10px;
    width: 90%; 
 
+}
+#hollowboxhot
+{
+    position: absolute; 
+ 
+   width: 100%;  
+}
+#hollowhotbox
+{
+    position: absolute;
+   right: 30px;
+ top: 5px;
+    font-size: 50px;
+   width: 30%; 
 }
 .caret
 {
@@ -1033,4 +1054,18 @@ box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 img
 {
     width: 100%;
+}
+.homepage
+{
+    margin-bottom: 40px;
+   
+}
+.homepage img
+{
+    box-shadow: 0px 0px 20px 2px #ffa500;
+}
+span span:hover
+{
+    color: #ff5500;
+    background-color: black;
 }
