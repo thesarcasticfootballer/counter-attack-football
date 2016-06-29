@@ -57,13 +57,29 @@ class MainHandler(Handler):
         if content:
             data = content['data']
             adata = content['adata']
+            hot = content['hot']
+            newnotfeat = content['newnotfeat']
+            newfeat = content['newfeat']
+            newfeat1 = content['newfeat1']
+            newfeat2 = content['newfeat2']
+            newfeat3 = content['newfeat3']
+           
+            
+        
         else:
             data =list(article.gql("order by created desc limit 1"))
             adata = list(article.gql("order by created desc limit 6 "))
-            content = {'data':data,'adata':adata}
+            hot = list(article.gql("order by views desc limit 1 "))
+            newnotfeat = list(article.gql("where featured = 0 order by created desc limit 3 "))
+            newfeat = list(article.gql("where featured = 1 order by created desc limit 1 "))
+            newfeat1 = list(article.gql("where featured = 1 order by created desc limit 1 offset 1"))
+            newfeat2= list(article.gql("where featured = 1 order by created desc limit 1 offset 2"))
+            newfeat3 = list(article.gql("where featured = 1 order by created desc limit 2 offset 3 "))
+            
+            content = {'data':data,'adata':adata,'hot':hot,'newnotfeat':newnotfeat,'newfeat':newfeat,'newfeat1':newfeat1,'newfeat2':newfeat2,'newfeat3':newfeat3}
             memcache.add(key="home", value=content, time=3600)
-        
-        self.render("Project.html",adata = adata,data = data)
+           
+        self.render("Project.html",adata = adata,data = data,hot=hot,newnotfeat =newnotfeat,newfeat=newfeat,newfeat1=newfeat1,newfeat2=newfeat2,newfeat3=newfeat3)
     
         
 class article(db.Model):
@@ -156,7 +172,7 @@ class TeamsheetHandler(Handler):
         self.render("Teamsheet.html")
 class NewsHandler(Handler):
     def get(self):
-        adata = article.gql("order by created desc")
+        adata = article.gql("order by created desc limit 10")
         data  = article.gql("order by created desc limit 6")
         self.render("news.html",adata = adata,data = data)
     def post(self):
