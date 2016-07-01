@@ -61,8 +61,7 @@ class MainHandler(Handler):
             #data =list(article.gql("order by created desc limit 1"))
             adata = list(article.gql("order by created desc limit 6 "))
             #content = {'data':data,'adata':adata}
-            memcache.add(key="home", value=adata, time=3600)
-        
+            memcache.add(key="home", value=adata, time=3600)     
         self.render("Project.html",adata = adata)
     
         
