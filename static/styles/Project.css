@@ -23,7 +23,7 @@ padding: 0px;
 
     
     display:flex;
-background-color: #ffa500;
+
     border-color: #ffa500;
    
 }
@@ -44,8 +44,9 @@ font-size: 14px;
 
 
  li:hover:not(.active) {
-    background-color: #ee6600;
+    
     text-decoration: none;
+     background: linear-gradient(#ff3500,#ffa500);
     color: white;
     
 }
@@ -54,7 +55,7 @@ li:not(.active)
      color: white;
 }
 li:hover, li:active {
-    background-color: #ee6600;
+   background: linear-gradient(#ff3500,#ffa500);
     text-decoration: none;
     color: white;
     
@@ -67,7 +68,7 @@ li:hover, li:active {
 }
 
 .active {
-    background-color: #ee6600;
+    background: linear-gradient(#ff3500,#ff0500);
 }
 
 h3
@@ -136,7 +137,7 @@ td
 }
 
 th {
-    background-color: #ffa500;
+   background: linear-gradient(#ff3500,#ffa500)
     color: white;
 }
 .closeX
@@ -551,12 +552,12 @@ font-size: 18px;
 }
 .abc
 {
-    background-color: #ffa500;
+   background: linear-gradient(#ff3500,#ffa500);
     
 }
 
 li:hover {
-    background-color: #ffa500;
+   background: linear-gradient(#ff3500,#ffa500)
     text-decoration: none;
     color: white;
     
@@ -571,7 +572,7 @@ li:hover {
 }
 .dropdownm-menu
 {
-    background-color: #ffa500;
+   background: linear-gradient(#ff3500,#ffa500)
     text-decoration: none;
     color: white;
 }
@@ -697,7 +698,7 @@ font-size: 14px;
 }
 #namebox: hover
 {
-    background: #ffa500;
+    background: linear-gradient(#ff3500,#ffa500);
 }
 #namebox
 {
@@ -705,7 +706,7 @@ font-size: 14px;
     font-family: 'Oswald',sans-serif;
 font-size: 14px;
     font-weight: 800;
-   background: #ffa500;
+   background: linear-gradient(#ff3500,#ffa500);
     padding-top: 10px;
     margin-top: 0px;
     
@@ -904,7 +905,7 @@ viewbox
     font-family:'Fjalla One', sans-serif;
     font-weight: 700;
     color:#000000;
-    background-color: #ffa500;
+   background: linear-gradient(#ff7500,#ffa500);
     width: 100%;
     margin: 0px;
 }
@@ -929,8 +930,8 @@ viewbox
     font-weight: 500;
     text-align: center;
     color: black;
-    border: 3px solid #ffa500;
-    background-color: #ffa500;
+    
+   background: linear-gradient(#ff7500,#ffa500);
     text-decoration: none;
     padding-left: 0px;
     padding-right: 0px;
@@ -958,7 +959,7 @@ viewbox
 box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
     }
 .button1 {
-    background-color: #ffa500;
+   background: #ffa500;
     border: #ffa500;
     color: black;
     padding: 15px 32px;
@@ -1026,7 +1027,7 @@ box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 {
     width: 70%;
     display: block;
-    background-color: #ffa500;
+   background: linear-gradient(#ff3500,#ffa500)
 }
 .frontpagelogo
 {
@@ -1067,5 +1068,5 @@ img
 span span:hover
 {
     color: #ff5500;
-    background-color: black;
+    background-color:bslack;
 }
