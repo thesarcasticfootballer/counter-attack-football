@@ -96,7 +96,7 @@ class WriteFormHandler(Handler):
     def get(self):     
         self.render("WriteForm.html")
     def post(self):
-        headline = self.request.get("headline").upper()
+        headline = self.request.get("headline")
         content  = self.request.get("content") 
         author   = self.request.get("author")
         sideheadline = self.request.get("sideheadline")
@@ -287,12 +287,15 @@ class MoveDBHandler(Handler):
                 if total:
                     data.total = total
                     data.up = memcache.get(str(k.id())+"up")
+                    memcache.delete(str(k.id())+"total")
+                    memcache.delete(str(k.id())+"up")
                 else:
                     data.views = views
+                    memcache.delete(str(k.id())+"views")
                 data.put()
-            memcache.delete(str(k.id())+"total")
-            memcache.delete(str(k.id())+"up")
-            memcache.delete(str(k.id())+"views")
+            
+            
+            
 
 
 
