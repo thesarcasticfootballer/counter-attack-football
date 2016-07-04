@@ -153,7 +153,7 @@ class ArticleHandler(Handler):
         views = self.cache(post_id+'views')
         if not views:
             memcache.add(key=post_id+'views',value=data.views,time=4000)
-        memcache.incr(post_id+"views")
+        memcache.incr(post_id+'views')
         url = self.request.url
         host = self.request.host
         if memcache.get(post_id+"total"):
@@ -284,17 +284,18 @@ class MoveDBHandler(Handler):
             views = memcache.get(str(k.id())+"views")
             if total or views:
                 data = article.get_by_id(k.id())
-                if total:
+                if (total > data.total):
                     data.total = total
                     data.up = memcache.get(str(k.id())+"up")
-                    memcache.delete(str(k.id())+"total")
-                    memcache.delete(str(k.id())+"up")
-                else:
+                    #memcache.delete(str(k.id())+"total")
+                    #memcache.delete(str(k.id())+"up")
+                if (views > data.views):
                     data.views = views
-                    memcache.delete(str(k.id())+"views")
+                    #memcache.delete(str(k.id())+"views")
                 data.put()
-            
-            
+        memcache.flush_all()
+                
+                                                                                                                                                                                    
             
 
 
