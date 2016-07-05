@@ -5,181 +5,163 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <head>
-        <title>News</title>
-      {% include 'head.html' %}
-    </head>
-    <body >
-    
-           {% include 'navbar.html' %}
-        
-  
+
+<head>
+    <title>News</title>
+    {% include 'head.html' %}
+</head>
+
+<body>
+
+    {% include 'navbar.html' %}
 
 
 
 
-            <div class= "container">
-                            
-   
+
+
+    <div class="container">
+
+
         <div class="g-signin2" data-onsuccess="onSignIn" style="visibility: hidden"></div>
-     
 
-<br>
-        
-        <div class= "row">
-       
-        
-<div class = "col-md-7">
-    <div class = "article-headline">TOP FEATURED</div>
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-   
 
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-     
-        
-          
-        {% for article in data %}
-         
-               <div class = "item active"><a href ="/news/{{article.key().id()}}"><img class= "hp1" src="{{article.picture}}" alt= "Image not Found" style = "width: 100%; height: 400 ; align: center;">
-                  
-                   <div class = "caption"><a href ="/news/{{article.key().id()}}"> <span id ="carouselspan">  <h2><span id ="hollowbox2">{{article.headline}} <br><br></span></h2></span></a></div>
-                </div>
-               
-  
-    
-    {% endfor %}
-        
-        
-        {% for article in adata %}
-         
-                <div class = "item "><a href ="/news/{{article.key().id()}}"><img class= "hp1" src="{{article.picture}}" alt= "Image not Found" style = "width: 100%; height: 400;align: center;">
-                   </a>
-                    <a href ="/news/{{article.key().id()}}"> <span id ="carouselspan">  <h2><span id ="hollowbox2">{{article.headline}} <br><br></span></h2></span></a>
-                </div>
-                
-            
-  
-    
-    {% endfor %}
-    </div>
+        <br>
 
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-        <div class ="indicator">
-         <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
-    <li data-target="#myCarousel" data-slide-to="4"></li>
-        <li data-target="#myCarousel" data-slide-to="5"></li>
-        </ol></div>
-  </div>
-        
-        
-        
-        
-          
-           
-    </div>
-    <div class ="col-md-5">
-        <div class = "article-headline">BREAKING NEWS</div>
-        {% for article in breaking %}
-        <div class ="breakingnews">
-        <a href ="/news/{{article.key().id()}}"> {{article.headline[:40]}} </div>
-            </a>
-        {% endfor %}
-      
-    </div>
-    
-    
-    
-    
-    
-    
-    
-        </div>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-    <br>
-        <div class ="row">
-            
-            <div class = "col-md-5 topnewsbox">
-                <div class = "news-category">LATEST NEWS</div>
-                <hr class = "news-categorytop">
-             {% for article in latest %}
-              
-         <div class = "article-picture"><a href ="/news/{{article.key().id()}}"><img class= "hp1" src="{{article.picture}}" alt= "Image not Found" style = "width: 100%; height: 400; align: center;">   <span id ="hollowbox3">  <h3><span id ="hollowboxlatest">{{article.headline}}</span></h3></span></a></div>
-                <br><div class = "newscontent"> {{article.content[:80] | safe}}...<br><a href ="/news/{{article.key().id()}}">Read more</a>
+        <div class="row">
+
+
+            <div class="col-md-7">
+                <div class="article-headline">TOP FEATURED</div>
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        {% for article in data %}
+
+                        <div class="item active">
+                            <a href="/news/{{article.key().id()}}"><img class="hp1" src="{{article.picture}}" alt="Image not Found" style="width: 100%; height: 400 ; align: center;">
+
+                                <div class="caption">
+                                    <a href="/news/{{article.key().id()}}"> <span id="carouselspan">  <h2><span id ="hollowbox2">{{article.headline}} <br><br></span></h2>
+                                        </span>
+                                    </a>
+                                </div>
+                        </div>
+
+
+
+                        {% endfor %} {% for article in adata %}
+
+                        <div class="item ">
+                            <a href="/news/{{article.key().id()}}"><img class="hp1" src="{{article.picture}}" alt="Image not Found" style="width: 100%; height: 400;align: center;">
+                            </a>
+                            <a href="/news/{{article.key().id()}}"> <span id="carouselspan">  <h2><span id ="hollowbox2">{{article.headline}} <br><br></span></h2>
+                                </span>
+                            </a>
+                        </div>
+
+
+
+
+                        {% endfor %}
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                    <div class="indicator">
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                            <li data-target="#myCarousel" data-slide-to="3"></li>
+                            <li data-target="#myCarousel" data-slide-to="4"></li>
+                            <li data-target="#myCarousel" data-slide-to="5"></li>
+                        </ol>
+                    </div>
                 </div>
-               <hr style= "border: 1px solid #515151;width: 95%;">
-        {% endfor %}
             </div>
-            <div class = "col-md-4 topnewsbox">
-                <div class = "news-category">FEATURED</div>
-                <hr class = "news-categorytop">
-             {% for article in allfeatured %}
-                
-               <div class ="article-picture"><a href ="/news/{{article.key().id()}}"><img class= "hp1" src="{{article.picture}}" alt= "Image not Found" style = "width: 100%; height: 400; align: center;">
-                   <span id ="hollowbox3">  <h3><span id ="hollowboxfeatured">{{article.headline}}</span></h3></span>
-                   </a>
-                 
+            <div class="col-md-5">
+                <div class="article-headline">BREAKING NEWS</div>
+                {% for article in breaking %}
+                <div class="breakingnews">
+                    <a href="/news/{{article.key().id()}}"> {{article.headline[:40]}} 
+                    </a> </div>{% endfor %}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+
+            <div class="col-md-5 topnewsbox">
+                <div class="news-category">LATEST NEWS</div>
+                <hr class="news-categorytop"> {% for article in latest %}
+
+                <div class="article-picture">
+                    <a href="/news/{{article.key().id()}}"><img class="hp1" src="{{article.picture}}" alt="Image not Found" style="width: 100%; height: 400; align: center;"> <span id="hollowbox3">  <h3><span id ="hollowboxlatest">{{article.headline}}</span></h3>
+                        </span>
+                    </a>
                 </div>
                 <br>
-                <div class = "article-posted">Posted on {{article.created}}</div>
-                
-                <br><div class = "article-created">Written By {{article.author}}    <br><br>
-               <span class= "glyphicon glyphicon-eye-open"></span> &nbsp; {{article.views}}</div> 
-               <br>
-               <hr style= "margin-top: 15px;border: 1px solid #515151;width: 95%;">
-        {% endfor %}
-            </div>
-            <div class = "col-md-3 topnewsbox">
-                <div class = "news-category">POPULAR</div>
-                <hr class = "news-categorytop">
-             {% for article in popular %}
-              
-           <div class ="article-picture"><a href ="/news/{{article.key().id()}}"><img class= "hp1" src="{{article.picture}}" alt= "Image not Found" style = "width: 100%; height: 400; align: center;">
-                   <span id ="hollowbox3">  <h5><span id ="hollowboxpopular">{{article.headline}}</span></h5></span>
-                   </a>
-                 
+                <div class="newscontent"> {{article.content[:80] | safe}}...
+                    <br><a href="/news/{{article.key().id()}}">Read more</a>
                 </div>
-               
-               <div class = "article-created">
-               <!--<span class= "glyphicon glyphicon-eye-open"></span>--->&nbsp; Read {{article.views}} &nbsp; times</div> 
-              <hr style= "margin-top: 6px;margin-bottom:17px;border: 1px solid #515151;width: 95%">
-        {% endfor %}
+                <hr style="border: 1px solid #515151;width: 95%;"> {% endfor %}
             </div>
-            
+            <div class="col-md-4 topnewsbox">
+                <div class="news-category">FEATURED</div>
+                <hr class="news-categorytop"> {% for article in allfeatured %}
+
+                <div class="article-picture">
+                    <a href="/news/{{article.key().id()}}"><img class="hp1" src="{{article.picture}}" alt="Image not Found" style="width: 100%; height: 400; align: center;">
+                        <span id="hollowbox3">  <h3><span id ="hollowboxfeatured">{{article.headline}}</span></h3>
+                        </span>
+                    </a>
+
+                </div>
+                <br>
+                <div class="article-posted">Posted on {{article.created}}</div>
+
+                <br>
+                <div class="article-created">Written By {{article.author}}
+                    <br>
+                    <br>
+                    <span class="glyphicon glyphicon-eye-open"></span> &nbsp; {{article.views}}</div>
+                <br>
+                <hr style="margin-top: 15px;border: 1px solid #515151;width: 95%;"> {% endfor %}
             </div>
-        
+            <div class="col-md-3 topnewsbox">
+                <div class="news-category">POPULAR</div>
+                <hr class="news-categorytop"> {% for article in popular %}
+
+                <div class="article-picture">
+                    <a href="/news/{{article.key().id()}}"><img class="hp1" src="{{article.picture}}" alt="Image not Found" style="width: 100%; height: 400; align: center;">
+                        <span id="hollowbox3">  <h5><span id ="hollowboxpopular">{{article.headline}}</span></h5>
+                        </span>
+                    </a>
+
+                </div>
+
+                <div class="article-created">
+                    <!--<span class= "glyphicon glyphicon-eye-open"></span>--->&nbsp; Read {{article.views}} &nbsp; times</div>
+                <hr style="margin-top: 6px;margin-bottom:17px;border: 1px solid #515151;width: 95%"> {% endfor %}
+            </div>
+
+        </div>
     </div>
 
-                
-        <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-     </body>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</body>
