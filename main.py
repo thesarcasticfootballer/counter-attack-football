@@ -280,6 +280,12 @@ class MoveDBHandler(Handler):
     def get(self):
         keys = article.all(keys_only =True)
         for k in keys:
+            #data = article.get_by_id(k.id())
+            #url = data.picture
+            #url = url.replace('/q_auto','',1)
+            #url = url.replace('upload/','upload/q_auto/',1)
+            #data.picture = url
+            #data.put()
             total = memcache.get(str(k.id())+"total")
             views = memcache.get(str(k.id())+"views")
             if total or views:
