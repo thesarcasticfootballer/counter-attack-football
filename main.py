@@ -206,6 +206,24 @@ class LiveScoreHandler(Handler):
 class fbHandler(Handler):
     def get(self):
         self.render("fbtest.html")
+class AboutusHandler(Handler):
+    def get(self):
+        self.render("aboutus.html")
+class HomeHandler(Handler):
+ def get(self):
+        content = self.cache('popular')
+        if content:
+            data = content['data']
+            adata = content['adata']
+           
+        else:
+            data = list(article.gql(' where featured = 1 order by created desc limit 1 '))
+            adata = list(article.gql('where featured = 1 order by created desc limit 5 offset 1'))
+           
+            content = {'data':data,'adata':adata}
+            memcache.add(key='homepage',value=content,time=3600)
+        self.render("Homepage.html",adata = adata,data =data)
+
         
 class PopularNewsHandler(Handler):
     def get(self):
@@ -280,6 +298,12 @@ class MoveDBHandler(Handler):
     def get(self):
         keys = article.all(keys_only =True)
         for k in keys:
+            #data = article.get_by_id(k.id())
+            #url = data.picture
+            #url = url.replace('/q_auto','',1)
+            #url = url.replace('upload/','upload/q_auto/',1)
+            #data.picture = url
+            #data.put()
             total = memcache.get(str(k.id())+"total")
             views = memcache.get(str(k.id())+"views")
             if total or views:
@@ -294,9 +318,58 @@ class MoveDBHandler(Handler):
                     #memcache.delete(str(k.id())+"views")
                 data.put()
         memcache.flush_all()
-                
-                                                                                                                                                                                    
+                 
             
+class NewsArticleHandler(Handler):
+    def post(self, post_id):
+        data = article.get_by_id(int(post_id))
+        if memcache.get(post_id+"total") == None:
+            if data.total == 0:
+                memcache.add(key=post_id+"total", value=0, time = 3600)
+                memcache.add(key=post_id+"up", value=0, time = 3600)
+            else:
+                memcache.add(key=post_id+"total", value=data.total, time = 4000)
+                memcache.add(key=post_id+"up", value=data.up, time = 4000)
+        memcache.incr(post_id+"total")
+        value = int(self.request.get("value"))
+        if value == 1:
+            memcache.incr(post_id+"up")
+        d = datetime.datetime.now()
+        d = d + datetime.timedelta(30) 
+        total = memcache.get(post_id+"total")
+        up = memcache.get(post_id+"up")
+        ans = "%s,%s" % (up,(total-up))
+        self.response.set_cookie('vote',"success",path='/news/'+ post_id,expires=d)
+        self.response.out.write(ans)
+
+    def get(self,post_id):
+        content = self.cache(post_id)
+        if content:
+            data = content['data']
+            adata = content['adata']
+        else:
+            data = article.get_by_id(int(post_id))
+            #data.views = data.views + 1
+            #data.put()
+            adata = list(article.gql("order by views desc limit 6"))
+            content = {'data':data,'adata':adata}
+            memcache.add(key=post_id, value=content, time=4000)
+        views = self.cache(post_id+'views')
+        if not views:
+            memcache.add(key=post_id+'views',value=data.views,time=4000)
+        memcache.incr(post_id+'views')
+        url = self.request.url
+        host = self.request.host
+        if memcache.get(post_id+"total"):
+            total = memcache.get(post_id+"total")
+            up = memcache.get(post_id+"up")
+        else:
+            total = data.total
+            if total == 0:
+                up = 0
+            else:
+                up = data.up
+        self.render("articletemplate.html",adata = adata,data = data,url = url, host = host, yes=up, no=(total-up))
 
 
 
@@ -305,8 +378,8 @@ app = webapp2.WSGIApplication([
     ('/about',AboutHandler),('/teamsheet',TeamsheetHandler),
     ('/article',WriteFormHandler),('/news',NewsHandler),
     ('/allnews',RSSHandler),('/uclnews',RSSuclHandler),
-    ('/Internationalnews',RSSIntHandler),('/eplnews',RSSplHandler),
+    ('/Internationalnews',RSSIntHandler),('/aboutus',AboutusHandler),('/home',HomeHandler),
     ('/livescores',LiveScoreHandler),('/popular',PopularNewsHandler),
-    (r'/news/(\d+)',ArticleHandler),('/fb',fbHandler),
+    (r'/news/(\d+)',ArticleHandler),(r'/article/(\d+)',NewsArticleHandler),('/fb',fbHandler),
     ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
     ('/move', MoveDBHandler)], debug=False)

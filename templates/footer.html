@@ -1,0 +1,36 @@
+   <script src="/jsfiles/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/jsfiles/js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+$(document).ready(function () {
+    var trigger = $('.hamburger'),
+        overlay = $('.overlay'),
+       isClosed = false;
+
+    function buttonSwitch() {
+
+        if (isClosed === true) {
+            overlay.hide();
+            trigger.removeClass('is-open');
+            trigger.addClass('is-closed');
+            isClosed = false;
+        } else {
+            overlay.show();
+            trigger.removeClass('is-closed');
+            trigger.addClass('is-open');
+            isClosed = true;
+        }
+    }
+
+    trigger.click(function () {
+        buttonSwitch();
+    });
+
+    $('[data-toggle="offcanvas"]').click(function () {
+        $('#wrapper').toggleClass('toggled');
+    });
+});
+    </script>

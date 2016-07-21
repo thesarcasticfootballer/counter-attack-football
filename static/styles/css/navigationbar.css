@@ -1,0 +1,82 @@
+/**********************************
+Responsive navbar-brand image CSS
+- Remove navbar-brand padding for firefox bug workaround
+- add 100% height and width auto ... similar to how bootstrap img-responsive class works
+***********************************/
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 100%;
+  padding: 15px;
+  width: auto;
+}
+
+
+
+
+
+
+
+
+.example6 .navbar-brand{ 
+  background: url("/images/largelogo.jpg") center / contain no-repeat;
+  width: 200px;
+}
+
+
+
+
+
+
+
+
+
+.brand-centered .navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+
+/* CSS Transform Align Navbar Brand Text ... This could also be achieved with table / table-cells */
+.navbar-alignit .navbar-header {
+	  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  height: 50px;
+}
+.navbar-alignit .navbar-brand {
+	top: 50%;
+	display: block;
+	position: relative;
+	height: auto;
+	transform: translate(0,-50%);
+	margin-right: 15px;
+  margin-left: 15px;
+}
+
+
+
+.navbar
+{
+    background-color: #BA1C1f;
+  font-family: 'Fjalla One',sans-serif;
+}
+
+.navbar-nav>li>.dropdown-menu {
+	z-index: 9999;
+}
+
+body {
+background: url("/images/background1.jpg");
+    overflow-x:hidden;
+    background-size: 100%;
+    overflow-y: hidden;
+}
+

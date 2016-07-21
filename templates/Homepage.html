@@ -1,0 +1,77 @@
+<html>
+
+<head>
+    
+        <link href="styles/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  
+<link href="styles/css/homepage.css" rel="stylesheet">
+
+    </head> 
+    <body>
+    
+{% include 'navigationbar.html' %}
+        
+        
+          <div class = "container">
+              
+              <div class = "col-lg-12">
+          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+ <!-- <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="5"></li>
+  </ol> -->
+ 
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+      {% for article in data %}
+    <div class="item active">
+        <a href="/article/{{article.key().id()}}">
+      <img src={{article.picture}} alt="Image not Found">
+          
+     </a>
+         <a href="/article/{{article.key().id()}}">
+             <span id="article-span">{{article.headline}}</span></a> 
+    </div>
+         
+      {% endfor %}
+      {% for article in adata %}
+       <div class="item ">
+                            <a href="/article/{{article.key().id()}}"><img src="{{article.picture}}" alt="Image not Found" >
+                            </a>
+            <a href="/article/{{article.key().id()}}">
+                <span id="article-span">{{article.headline}}</span> </a>
+                        </div>
+
+  
+       
+      {% endfor %}
+  
+              </div>
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+              </a></div>
+ <!-- Carousel -->
+              </div>
+            </div>    </div>
+      </div> 
+  {% include 'footer.html' %} 
+<script>
+	$('.carousel').carousel({
+		interval: 3000
+	})
+    
+</script>
+
+
+  </body>
+</html>

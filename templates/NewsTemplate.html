@@ -179,11 +179,11 @@ Tweet</a>
   </div>
 
 
-            <div class ="NewsTemp">
+            <div class ="NewsTemp" itemscope itemtype="http://schema.org/Article">
                 <div class = "row">
-                    <div class = "article-sideheadline1">{{data.headline}}</div></div>
-    <div class = "article-created">{{data.created}}</div>
-  <div class = "article-author">by {{data.author}}</div>
+                    <div class = "article-sideheadline1" itemprop="headline">{{data.headline}}</div></div>
+    <div class = "article-created" itemprop="datePublished">{{data.created}}</div>
+                <div class = "article-author">by <span itemprop ="author"> {{data.author}}</span></div>
   <br><br>
     <div class ="row"> <div class = "newstemp-picture"><img class = "hp1" src="{{data.picture}}" alt= "Image not Found" style = "width: 95%; height: 400"></div></div>
                 <div class = "row"><div class = "article-sideheadline">{{data.sideheadline}}</div></div>

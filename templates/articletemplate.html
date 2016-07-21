@@ -1,0 +1,69 @@
+<html>
+
+<head>
+
+    <link href="/styles/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles/css/articletemplate.css" rel="stylesheet">
+    <title>{{data.headline}}</title>
+
+</head>
+
+<body>
+
+    {% include 'navigationbar.html' %}
+    <div class="container">
+
+        <div class="col-md-9" itemscope itemtype="http://schema.org/Article">
+            <div class="row">
+                <div class="article-headline" itemprop="headline">{{data.headline}}</div>
+            </div>
+               <hr>
+            <div class="row">
+                <div class="article-date" itemprop="datePublished">{{data.created}}</div>
+            </div>
+            <div class="row">
+                <div class="article-author">by <span itemprop="author">{{data.author}}</span></div>
+            </div>
+            <br>
+            <br>
+         
+            <div class="row">
+                <div><img class="article-img" src="{{data.picture}}" alt="Image not Found"></div>
+            </div>
+            <div class="row">
+                <div class="article-sideheadline">{{data.sideheadline}}</div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="article-content">{{data.content | safe}}</div>
+            </div><br>
+
+            <div class="votingbox" id="voteform">
+
+                WAS THIS NEWS SARCASTIC?
+                <br>
+                <form>
+
+                    <input type="radio" name="value" id="yes_form" value=1 required> YES
+                    <br>
+                    <input type="radio" name="value" id="no_form" value=0 required> NO
+                    <br>
+                    <input type="button" class = "btn btn-default" value="VOTE NOW" onclick="sendserver()">
+                </form>
+            </div>
+
+
+            <div class="resultsbox" id="resultsbox" style="visibility:hidden">
+                WAS THIS NEWS SARCASTIC?
+                <div id="chartdiv" style="width: 100%; height: 400px; background-color: #000000;"></div>
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+    </div>
+    {% include 'footer.html' %}
+</body>
+
+</html>
