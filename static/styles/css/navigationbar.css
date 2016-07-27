@@ -23,7 +23,7 @@ Responsive navbar-brand image CSS
 
 
 .example6 .navbar-brand{ 
-  background: url("/images/largelogo.jpg") center / contain no-repeat;
+  background: url("/images/logo.jpg") center / contain no-repeat;
   width: 200px;
 }
 
@@ -61,12 +61,22 @@ Responsive navbar-brand image CSS
   margin-left: 15px;
 }
 
-
-
+.navbar-inverse .navbar-nav>li>a
+{
+   font-family: 'Fjalla One',sans-serif;
+    color: white;
+}
+.navbar-inverse .navbar-nav>li>a:hover
+{
+   font-family: 'Fjalla One',sans-serif;
+    color: white;
+    background-color: #cc0000;
+}
 .navbar
 {
-    background-color: #BA1C1f;
-  font-family: 'Fjalla One',sans-serif;
+    background-color: #e60000;
+
+    border-color: #e60000;
 }
 
 .navbar-nav>li>.dropdown-menu {
@@ -77,6 +87,6 @@ body {
 background: url("/images/background1.jpg");
     overflow-x:hidden;
     background-size: 100%;
-    overflow-y: hidden;
+
 }
 

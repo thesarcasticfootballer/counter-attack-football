@@ -210,15 +210,15 @@ class AboutusHandler(Handler):
     def get(self):
         self.render("aboutus.html")
 class HomeHandler(Handler):
- def get(self):
-        content = self.cache('popular')
+  def get(self):
+        content = self.cache('homepage')
         if content:
-            data = content['data']
-            adata = content['adata']
+                   data = content['data']
+                   adata = content['adata']
            
         else:
-            data = list(article.gql(' where featured = 1 order by created desc limit 1 '))
-            adata = list(article.gql('where featured = 1 order by created desc limit 5 offset 1'))
+            data = list(article.gql('  order by created desc limit 1 '))
+            adata = list(article.gql(' order by created desc limit 5 offset 1'))
            
             content = {'data':data,'adata':adata}
             memcache.add(key='homepage',value=content,time=3600)
