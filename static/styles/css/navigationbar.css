@@ -70,13 +70,13 @@ Responsive navbar-brand image CSS
 {
    font-family: 'Fjalla One',sans-serif;
     color: white;
-    background-color: #cc0000;
+    background-color: #ff6500;
 }
 .navbar
 {
-    background-color: #e60000;
+    background-color: #ff6500;
 
-    border-color: #e60000;
+    border-color: #ff6500;
 }
 
 .navbar-nav>li>.dropdown-menu {
@@ -84,7 +84,7 @@ Responsive navbar-brand image CSS
 }
 
 body {
-background: url("/images/background1.jpg");
+background: url("http://www.iwallfree.com/wp-content/uploads/2014/03/Orange-wallpaper-drawing-full-hd-abstract-high-resolution.jpeg");
     overflow-x:hidden;
     background-size: 100%;
 

@@ -2,6 +2,7 @@
 {
 font-family: Century Gothic, sans-serif; 
 font-size: 50px;
+     font-weight: 600;
     color: #BA1C1F;
 }
 .article-author,.article-created
@@ -18,7 +19,7 @@ font-size: 25px;
 {
     font-family: Century Gothic, sans-serif; 
 font-size: 30px;
-    font-weight: 500;
+    font-weight: 600;
     color: #BA1C1F;
 }
 .article-img
@@ -38,4 +39,13 @@ font-size: 30px;
     background-color: #BA1C1F;
     color: white;
     
+}
+.article
+{
+    background-color:  #ffeab9;
+    padding: 30px;
+    padding-bottom: 0px;
+
+
+    margin: 10px;
 }
