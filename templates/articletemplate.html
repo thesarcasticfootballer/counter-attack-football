@@ -1,14 +1,134 @@
 <html>
 
 <head>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="/styles/css/bootstrap.min.css" rel="stylesheet">
     <link href="/styles/css/articletemplate.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
+
     <title>{{data.headline}}</title>
+
+
+<style type="text/css">
+.button {
+  border-radius: 4px;
+  /*background-color: #f4511e;*/
+  border: none;
+  /*color: #FFFFFF;*/
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.icon{
+  /*content: '»';*/
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover .icon {
+  opacity: 1;
+  right: 0;
+}
+</style>
+
+<script type="text/javascript">
+
+function read_cookie(key)
+{
+    var result;
+    return (result = new RegExp('(?:^|; )' + encodeURIComponent(key) + '=([^;]*)').exec(document.cookie)) ? (result[1]) : null;
+}
+
+function check()
+{
+if (read_cookie("vote"))
+{
+  document.getElementById('voteform').style.visibility = "hidden";
+  document.getElementById('resultsbox').style.visibility = "visible";
+  Morris.Donut({
+    element: 'chartdiv',
+    data: [
+    {label: "Yes", value: {{yes}}},
+    {label: "No", value: {{no}}}
+  ]
+});
+}
+}
+
+ function sendserver(button){
+    var value = button.value;
+    /*if (document.getElementById('yes_form').checked)
+        value = 1;
+    else if (document.getElementById('no_form').checked)
+        value =0;
+    else
+    {
+        alert("please choose yes/no");
+        window.location.reload();
+      }*/
+    document.getElementById('resultsbox').style.visibility = "visible";
+    document.getElementById('voteform').style.visibility = "hidden";
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST',window.location.href);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function(){
+        console.log("sent to server");
+        console.log('Received from server: ' + xhr.responseText);
+        var ans = xhr.responseText;
+        ans = ans.split(',');
+        /*makechart();
+        var data =[
+            {
+              "category": "YES",
+              "column-1": ans[0]
+            },
+            {
+              "category": "NO",
+              "column-1": ans[1]
+            }
+          ]; 
+        chart.dataProvider = data; 
+        chart.validateData();*/
+    Morris.Donut({
+    element: 'chartdiv',
+    data: [
+    {label: "Yes", value: parseInt(ans[0])},
+    {label: "No", value: parseInt(ans[1])}
+  ]
+});
+    };
+    xhr.send('value=' + value);
+  }
+
+</script>
 
 </head>
 
-<body>
+<body onload="check()">
 
     {% include 'navigationbar.html' %}
     <div class="container">
@@ -43,20 +163,24 @@
 
                 WAS THIS NEWS SARCASTIC?
                 <br>
-                <form>
+                <!--form-->
 
-                    <input type="radio" name="value" id="yes_form" value=1 required> YES
+                    <button class="button" name="value" id="yes_form" value=1 onclick="sendserver(this)" required><span> YES</span>
+                        <span class="glyphicon glyphicon-thumbs-up icon"></span>
+                    </button>
                     <br>
-                    <input type="radio" name="value" id="no_form" value=0 required> NO
+                    <button class="button" name="value" id="no_form" value=0 required onclick="sendserver(this)"><span> NO</span>
+                        <span class="glyphicon glyphicon-thumbs-down icon"></span>
+                    </button>
                     <br>
-                    <input type="button" class = "btn btn-default" value="VOTE NOW" onclick="sendserver()">
-                </form>
+                    <!--input type="button" class = "btn btn-default" value="VOTE NOW" onclick="sendserver()"-->
+                <!--/form-->
             </div>
 
 
             <div class="resultsbox" id="resultsbox" style="visibility:hidden">
                 WAS THIS NEWS SARCASTIC?
-                <div id="chartdiv" style="width: 100%; height: 400px; background-color: #000000;"></div>
+                <div id="chartdiv"></div>
 
             </div>
 

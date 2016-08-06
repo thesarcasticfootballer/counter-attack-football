@@ -339,7 +339,7 @@ class NewsArticleHandler(Handler):
         total = memcache.get(post_id+"total")
         up = memcache.get(post_id+"up")
         ans = "%s,%s" % (up,(total-up))
-        self.response.set_cookie('vote',"success",path='/news/'+ post_id,expires=d)
+        self.response.set_cookie('vote',"success",path=self.request.url,expires=d)
         self.response.out.write(ans)
 
     def get(self,post_id):
