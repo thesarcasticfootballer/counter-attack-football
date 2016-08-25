@@ -15,6 +15,15 @@
 
 
 <style type="text/css">
+@media only screen and (max-width: 500px)
+{
+img
+{
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
+}
 .button {
   border-radius: 4px;
   /*background-color: #f4511e;*/
@@ -65,7 +74,8 @@ function read_cookie(key)
 
 function check()
 {
-if (read_cookie("vote"))
+  var temp = {{yes}}+{{no}};
+if (read_cookie("vote") && temp!=0)
 {
   document.getElementById('voteform').style.visibility = "hidden";
   document.getElementById('resultsbox').style.visibility = "visible";
@@ -185,9 +195,9 @@ if (read_cookie("vote"))
             </div>
 
 
-            <div class="resultsbox" id="resultsbox" style="visibility:hidden">
+            <div class="resultsbox row" id="resultsbox" style="visibility:hidden">
                 WAS THIS NEWS SARCASTIC?
-                <div class="panel-body">
+                <div class="panel-body col-lg-12">
                                 <div id="chartdiv"></div>
                                 <div class="text-right">
                                     
@@ -197,9 +207,6 @@ if (read_cookie("vote"))
     </div></div>
 
         </div></div>
-    </div>
-    </div>
-    </div>
     {% include 'footer.html' %}
 </body>
 
