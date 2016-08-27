@@ -75,9 +75,9 @@ Responsive navbar-brand image CSS
 }
 .navbar
 {
-    background-color: #ff6500;
+    background-color: #D75C37;
 
-    border-color: #ff6500;
+    border-color: #D75C37;
 }
 
 .navbar-nav>li>.dropdown-menu {
@@ -85,7 +85,7 @@ Responsive navbar-brand image CSS
 }
 
 body {
-background: url("/images/background1.jpg");
+background-color:  #ebebeb;
     overflow-x:hidden;
     
 

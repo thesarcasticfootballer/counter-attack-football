@@ -1,26 +1,23 @@
-.article-headline
+.article-headline,.article-headline a,.article-headline a:hover
 {
-font-family: "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
 font-size: 50px;
-     font-weight: 600;
-    color: #ff1500;
 }
 .article-author,.article-created
 {
-  font-family: "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
+
 font-size: 25px;  
 }
 .article-content
 {
-font-family: "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
+
 font-size: 25px;
 }
-.article-sideheadline
+.article-sideheadline,.title-header
 {
-    font-family: "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
+   
 font-size: 30px;
-    font-weight: 600;
-    color: #ff1500;
+ margin-top: 0px;
+    color: #D75C37;
 }
 .article-img
 {
@@ -29,13 +26,13 @@ font-size: 30px;
 }
 .votingbox,.resultsbox
 {
-font-family: "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
+
 	font-size: 25px;
 	font-style: normal;
 	font-variant: small-caps;
 	font-weight: bold;
 	line-height: 47.5px;
-    color: #ff1500;  
+    color: #D75C37;  
     text-align: center; 
 }
 .btn-default:hover
@@ -46,10 +43,45 @@ font-family: "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman"
 }
 .article
 {
-    background-color:  #ffeab9;
+    
+    background-color:  #ebebeb;
     padding: 30px;
     padding-bottom: 0px;
 
 
     margin: 10px;
+}
+.thumbnail-header,.thumbnail-header a,.thumbnail-header a:hover
+{
+  
+font-size: 15px;
+    font-weight: 600;
+    color: black;
+    text-decoration: none;}
+.medium-thumbnail
+{
+    width: 100%;
+}
+.box
+{
+    
+    background-color: #cccccc;
+    display: block;
+    
+   
+font-size: 20px;
+  font-weight: 400;
+  padding: 5px;
+}
+
+
+
+.article-content img,.article-content p img
+{
+    padding: 35px;
+    padding-left: 15%;
+    padding-right: 15%;
+    width: 100%;
+
+ 
 }

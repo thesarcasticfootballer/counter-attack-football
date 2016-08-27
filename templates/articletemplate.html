@@ -62,6 +62,9 @@ img
   opacity: 1;
   right: 0;
 }
+.share-buttons{
+ 
+}
 </style>
 
 <script type="text/javascript">
@@ -79,7 +82,7 @@ if (read_cookie("vote") && temp!=0)
 {
   document.getElementById('voteform').style.visibility = "hidden";
   document.getElementById('resultsbox').style.visibility = "visible";
-     var colors_array= ["#007700", "#cc0000","#ffa500"];
+     var colors_array= ["#007700", "#D75C37","#ffa500"];
   Morris.Donut({
     element: 'chartdiv',
        colors: colors_array,
@@ -126,7 +129,7 @@ if (read_cookie("vote") && temp!=0)
           ]; 
         chart.dataProvider = data; 
         chart.validateData();*/
-          var colors_array= ["#007700", "#cc0000","#ffa500"];
+          var colors_array= ["#007700", "#D75C37","#ffa500"];
     Morris.Donut({
     element: 'chartdiv',
        colors: colors_array,   
@@ -142,43 +145,68 @@ if (read_cookie("vote") && temp!=0)
     
 
 </script>
-
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "00b5ee94-4370-40f4-90d2-90a976f79c5c", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 </head>
 
 <body onload="check()">
 
     {% include 'navigationbar.html' %}
+    <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.7&appId=945733035525846";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
     <div class="container">
-
-        <div class="col-lg-9 " itemscope itemtype="http://schema.org/Article">
-            <div class ="article">
+  <div class ="article" itemscope itemtype="http://schema.org/Article">
             <div class="row">
-                <div class="article-headline" itemprop="headline">{{data.headline}}</div>
+                <h1 class="article-headline" itemprop="headline">{{data.headline}}</h1>
+                
             </div>
-               <hr>
-            <div class="row">
-                <div class="article-date" itemprop="datePublished">{{data.created}}</div>
-            </div>
-            <div class="row">
-                <div class="article-author">by <span itemprop="author">{{data.author}}</span></div>
-            </div>
+             <hr style= "border: 4px solid #D75C37;padding-left:0px;margin-left:-20px;">
+               <div class = "row">
+        <div class="col-lg-9 "  style= "padding-right:50px;"ś>
+          
+            <div class="row box">
+                <h4>
+                <span itemprop="datePublished">{{data.created}}</span>
+            
+          |
+                BY  <span itemprop="author">{{data.author}}</span> |
+ <span class="share-buttons">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.sarcasticfootballer.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="/images/Facebook.png"></a>
+ <a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fwww.sarcasticfootballer.com&text=:%20http%3A%2F%2Fwww.sarcasticfootballer.com&via=sarcasticfutbal" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="/images/Twitter.png"></a>
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.sarcasticfootballer.com" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Google+" src="/images/Google+.png"></a>
+ <a href="http://www.tumblr.com/share?v=3&u=http%3A%2F%2Fwww.sarcasticfootballer.com&t=&s=" target="_blank" title="Post to Tumblr" onclick="window.open('http://www.tumblr.com/share?v=3&u=' + encodeURIComponent(document.URL) + '&t=' +  encodeURIComponent(document.title)); return false;"><img alt="Post to Tumblr" src="/images/Tumblr.png"></a>
+  <a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.sarcasticfootballer.com&description=" target="_blank" title="Pin it" onclick="window.open('http://pinterest.com/pin/create/button/?url=' + encodeURIComponent(document.URL) + '&description=' +  encodeURIComponent(document.title)); return false;"><img alt="Pin it" src="/images/Pinterest.png"></a></li>
+  <a href="http://www.reddit.com/submit?url=http%3A%2F%2Fwww.sarcasticfootballer.com&title=" target="_blank" title="Submit to Reddit" onclick="window.open('http://www.reddit.com/submit?url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;"><img alt="Submit to Reddit" src="/images/Reddit.png"></a>
+ 
+ </span>
+ 
+ </h4>
+              </div>
+            
             <br>
-            <br>
+            
          
             <div class="row">
-                <div><img class="article-img" src="{{data.picture}}" alt="Image not Found"></div>
-            </div>
+                <div class="fb-like" data-href="https://www.facebook.com/thesarcasticfootballer/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
+               <br> <div><img class="article-img" src="{{data.picture}}" alt="Image not Found"></div>
+            </div><br>
             <div class="row">
-                <div class="article-sideheadline">{{data.sideheadline}}</div>
+                <h2 class="article-sideheadline">{{data.sideheadline}}</h2>
             </div>
             <br>
             <div class="row">
-                <div class="article-content">{{data.content | safe}}</div>
+                <h3 class="article-content">{{data.content | safe}}</h3>
             </div><br>
 
             <div class="votingbox" id="voteform">
-
-                WAS THIS NEWS SARCASTIC?
+<h3>
+                WAS THIS NEWS SARCASTIC?</h3>
                 <br>
                 <!--form-->
 
@@ -196,7 +224,8 @@ if (read_cookie("vote") && temp!=0)
 
 
             <div class="resultsbox row" id="resultsbox" style="visibility:hidden">
-                WAS THIS NEWS SARCASTIC?
+                <h3>
+                WAS THIS NEWS SARCASTIC?</h3>
                 <div class="panel-body col-lg-12">
                                 <div id="chartdiv"></div>
                                 <div class="text-right">
@@ -206,6 +235,18 @@ if (read_cookie("vote") && temp!=0)
 
     </div></div>
 
+        
+        <div class ="col-lg-3">
+            
+             <h2 class="title-header">RECOMMENDED</h2>
+             <hr style= "border: 2px solid #D75C37;">
+             {% for article in adata %}
+               <h3 class = "thumbnail-header"><a href ="/article/{{article.key().id()}}">{{article.headline}}</a><br><br>
+         <div class = "article-picture"><a href ="/article/{{article.key().id()}}"><img class= "medium-thumbnail" src="{{article.picture}}" alt= "Image not Found" style = "width: 100%;"></a></div>
+               <br>
+               <hr style= "border: 1px solid #D75C37;width: 95%;">
+        {% endfor %}
+            </div></div>
         </div></div>
     {% include 'footer.html' %}
 </body>
