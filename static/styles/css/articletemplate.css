@@ -6,6 +6,7 @@ font-size: 50px;
 {
 
 font-size: 25px;  
+font-weight: 600;
 }
 .article-content
 {
@@ -16,6 +17,7 @@ font-size: 25px;
 {
    
 font-size: 30px;
+font-weight: 500;
  margin-top: 0px;
     color: #D75C37;
 }

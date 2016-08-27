@@ -71,7 +71,7 @@ Responsive navbar-brand image CSS
 {
    font-family: 'Fjalla One',sans-serif;
     color: white;
-    background-color: #ff2500;
+    background-color: #6991AC;
 }
 .navbar
 {
@@ -87,8 +87,15 @@ Responsive navbar-brand image CSS
 body {
 background-color:  #ebebeb;
     overflow-x:hidden;
-    
-
-
 }
+
+.navbar-inverse .navbar-nav .active
+{
+   font-family: 'Fjalla One',sans-serif;
+    color: white;
+    background-color: #6991AC;
+}
+
+
+
 
