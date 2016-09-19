@@ -77,7 +77,7 @@ Responsive navbar-brand image CSS
 {
     background-color: #D75C37;
 
-    border-color: #D75C37;
+    border-style: none;
 }
 
 .navbar-nav>li>.dropdown-menu {

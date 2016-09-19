@@ -111,7 +111,7 @@ and open the template in the editor.
                     </a>
                 </div>
                 <br>
-                <div class="newscontent"> {{article.content[:80] | safe}}...
+                <div class="newscontent"> {{article.content[:75] | safe}}...
                     <br><a href="/news/{{article.key().id()}}">Read more</a>
                 </div>
                 <hr style="border: 1px solid #515151;width: 95%;"> {% endfor %}

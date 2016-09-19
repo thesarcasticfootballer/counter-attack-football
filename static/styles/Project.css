@@ -1066,5 +1066,14 @@ box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 span span:hover
 {
     color: #ff5500;
-    background-color:bslack;
+    background-color:black;
 }
+.article-content img,.article-content p img
+{
+  padding: 35px;
+    padding-left: 15%;
+    padding-right: 15%;
+        min-height: 250px;
+    
+
+    width: 100%;}

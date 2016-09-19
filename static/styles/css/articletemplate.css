@@ -11,12 +11,13 @@ font-weight: 600;
 .article-content
 {
 
-font-size: 25px;
+font-size: 20px;
+    font-family: 'Georgia',sans-serif;
 }
 .article-sideheadline,.title-header
 {
    
-font-size: 30px;
+font-size: 20px;
 font-weight: 500;
  margin-top: 0px;
     color: #D75C37;
@@ -83,7 +84,10 @@ font-size: 20px;
     padding: 35px;
     padding-left: 15%;
     padding-right: 15%;
+        min-height: 250px;
+    
     width: 100%;
+
 
  
 }
