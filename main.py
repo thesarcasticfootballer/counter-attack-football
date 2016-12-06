@@ -51,31 +51,7 @@ class Handler(webapp2.RequestHandler):
         return memcache.get(key)
 
 
-class MainHandler(Handler):
-    def get(self):
-        content = self.cache('home')
-        if content:
-            data = content['data']
-            adata = content['adata']
-            hot = content['hot']
-            newnotfeat = content['newnotfeat']
-            newfeat = content['newfeat']
-            newfeat1 = content['newfeat1']
-            newfeat2 = content['newfeat2']
-            newfeat3 = content['newfeat3']
-        else:
-            data =list(article.gql("order by created desc limit 1"))
-            adata = list(article.gql("order by created desc limit 6 "))
-            hot = list(article.gql("order by views desc limit 1 "))
-            newnotfeat = list(article.gql("where featured = 0 order by created desc limit 3 "))
-            newfeat = list(article.gql("where featured = 1 order by created desc limit 1 "))
-            newfeat1 = list(article.gql("where featured = 1 order by created desc limit 1 offset 1"))
-            newfeat2= list(article.gql("where featured = 1 order by created desc limit 1 offset 2"))
-            newfeat3 = list(article.gql("where featured = 1 order by created desc limit 2 offset 3 "))    
-            content = {'data':data,'adata':adata,'hot':hot,'newnotfeat':newnotfeat,'newfeat':newfeat,'newfeat1':newfeat1,'newfeat2':newfeat2,'newfeat3':newfeat3}
-            memcache.add(key="home", value=content, time=3600)
-        self.render("Project.html",adata = adata,data = data,hot=hot,newnotfeat =newnotfeat,newfeat=newfeat,newfeat1=newfeat1,newfeat2=newfeat2,newfeat3=newfeat3)
-    
+
         
 class article(db.Model):
     headline = db.StringProperty(required = True)
@@ -115,102 +91,7 @@ class WriteFormHandler(Handler):
         memcache.delete('popular')
         self.redirect('/news')
 
-class TeamsHandler(Handler):
-    def get(self):
-        self.render("teams.html")
-class ArticleHandler(Handler):
-    def post(self, post_id):
-        data = article.get_by_id(int(post_id))
-        if memcache.get(post_id+"total") == None:
-            if data.total == 0:
-                memcache.add(key=post_id+"total", value=0, time = 3600)
-                memcache.add(key=post_id+"up", value=0, time = 3600)
-            else:
-                memcache.add(key=post_id+"total", value=data.total, time = 4000)
-                memcache.add(key=post_id+"up", value=data.up, time = 4000)
-        memcache.incr(post_id+"total")
-        value = int(self.request.get("value"))
-        if value == 1:
-            memcache.incr(post_id+"up")
-        d = datetime.datetime.now()
-        d = d + datetime.timedelta(30) 
-        total = memcache.get(post_id+"total")
-        up = memcache.get(post_id+"up")
-        ans = "%s,%s" % (up,(total-up))
-        self.response.set_cookie('vote',"success",path='/news/'+ post_id,expires=d)
-        self.response.out.write(ans)
 
-    def get(self,post_id):
-        content = self.cache(post_id)
-        if content:
-            data = content['data']
-            adata = content['adata']
-        else:
-            data = article.get_by_id(int(post_id))
-            #data.views = data.views + 1
-            #data.put()
-            adata = list(article.gql("order by views desc limit 6"))
-            content = {'data':data,'adata':adata}
-            memcache.add(key=post_id, value=content, time=4000)
-        views = self.cache(post_id+'views')
-        if not views:
-            memcache.add(key=post_id+'views',value=data.views,time=4000)
-        memcache.incr(post_id+'views')
-        url = self.request.url
-        host = self.request.host
-        if memcache.get(post_id+"total"):
-            total = memcache.get(post_id+"total")
-            up = memcache.get(post_id+"up")
-        else:
-            total = data.total
-            if total == 0:
-                up = 0
-            else:
-                up = data.up
-        self.render("NewsTemplate.html",adata = adata,data = data,url = url, host = host, yes=up, no=(total-up))
-        
-class AboutHandler(Handler):
-    def get(self):
-        self.render("About.htm")
-class RSSHandler(Handler):
-    def get(self):
-        self.render("rssfeeds.html")
-class TeamsheetHandler(Handler):
-    def get(self):
-        self.render("Teamsheet.html")
-class NewsHandler(Handler):
-    def get(self):
-        adata = article.gql("order by created desc limit 10")
-        data  = article.gql("order by created desc limit 6")
-        self.render("news.html",adata = adata,data = data)
-    def post(self):
-        date1 = self.request.get("datebox")
-        sortype = self.request.get("sorting")  
-        if date1 == "":
-            date1 = "2016-01-01"
-        dateobj = datetime.datetime.strptime(date1, '%Y-%m-%d')
-        x = "where created >= DATE('" + date1 + "')" +  " order by " + sortype
-        adata = article.gql(x)
-        data  = article.gql("order by created desc limit 6")
-        self.render("news.html",adata = adata,data = data)
-class RSSplHandler(Handler):
-    def get(self):
-        self.render("premierleaguerss.html")
-class RSSuclHandler(Handler):
-    def get(self):
-        self.render("Championsleaguerss.html")
-class RSSIntHandler(Handler):
-    def get(self):
-        self.render("InternationalFootball.html")
-class LiveScoreHandler(Handler):
-    def get(self):
-        self.render("Livescores.html")
-class fbHandler(Handler):
-    def get(self):
-        self.render("fbtest.html")
-class AboutusHandler(Handler):
-    def get(self):
-        self.render("aboutus.html")
 class HomeHandler(Handler):
   def get(self):
         content = self.cache('homepage')
@@ -231,26 +112,7 @@ class HomeHandler(Handler):
         self.render("Homepage.html",adata = adata,data =data,bdata = bdata,cdata =cdata,ddata=ddata)
 
         
-class PopularNewsHandler(Handler):
-    def get(self):
-        content = self.cache('popular')
-        if content:
-            data = content['data']
-            adata = content['adata']
-            allfeatured = content['allfeatured']
-            breaking = content['breaking']
-            popular = content['popular']
-            latest = content['latest']
-        else:
-            data = list(article.gql(' where featured = 1 order by created desc limit 1 '))
-            adata = list(article.gql('where featured = 1 order by created desc limit 5 offset 1'))
-            allfeatured = list(article.gql(' where featured = 1 order by created desc limit 6'))
-            breaking = list(article.gql("order by created desc limit 10  "))
-            popular = list(article.gql(' order by views desc limit 12'))
-            latest  = list(article.gql(' order by created desc limit 6'))
-            content = {'data':data,'adata':adata,'allfeatured':allfeatured,'breaking':breaking,'popular':popular,'latest':latest}
-            memcache.add(key='popular',value=content,time=3600)
-        self.render("mostread.html",adata = adata,data =data,allfeatured = allfeatured,popular = popular,latest = latest,breaking = breaking)
+
 
 
 class GSigninHandler(Handler):
@@ -387,12 +249,8 @@ class DisplayallHandler(Handler):
 
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),('/teams',TeamsHandler),
-    ('/about',AboutHandler),('/teamsheet',TeamsheetHandler),
-    ('/article',WriteFormHandler),('/news',NewsHandler),
-    ('/allnews',RSSHandler),('/uclnews',RSSuclHandler),
-    ('/Internationalnews',RSSIntHandler),('/aboutus',AboutusHandler),('/home',HomeHandler),
-    ('/livescores',LiveScoreHandler),('/popular',PopularNewsHandler),
-    (r'/news/(\d+)',ArticleHandler),(r'/article/(\d+)',NewsArticleHandler),('/fb',fbHandler),
+        ('/article',WriteFormHandler),('/',HomeHandler),
+  
+    (r'/news/(\d+)',NewsArticleHandler),
     ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
     ('/move', MoveDBHandler),('/all',DisplayallHandler)], debug=False)

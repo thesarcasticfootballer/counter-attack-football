@@ -1,4 +1,0 @@
-BBC SPORT FOOTBALL - http://feeds.bbci.co.uk/sport/0/football/rss.xml?edition=uk
-PREMIER LEAGUE - http://feeds.feedburner.com/PremierLeagueFootballNews
-CHAMPIONS LEAGUE - http://feeds.feedburner.com/ChampionsLeagueFootballNews
-International - http://www.football.co.uk/international/rss.xml
