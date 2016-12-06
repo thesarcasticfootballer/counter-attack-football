@@ -24,11 +24,11 @@ and open the template in the editor.
 		{% for item in data %}
 		<div>
 			<p>{{item.headline}}</p>
-			{{item.content | safe}}	
+			{{item.sideheadline | safe}}	
 		</div>
 		{% endfor %}
 
-		<button onclick="sendserver(1)">Next</button>
-		<button onclick="sendserver(-1)">Prev</button>
+		<button onclick="sendserver(1)">Prev</button>
+		<button onclick="sendserver(-1)">Next</button>
 	</body>
 </html>

@@ -374,9 +374,12 @@ class NewsArticleHandler(Handler):
 
 
 class DisplayallHandler(Handler):
+    data = list()
+    iterator = 0
+    width = 10
     def get(self):
-        data = list(article.gql("order by created desc limit 10"))
-        self.render("pagination.html",data=data)
+        self.data = list(article.gql('order by created desc limit 100'))
+        self.render("pagination.html",data=self.data[:self.width])
 
 
 
