@@ -24,7 +24,7 @@ Responsive navbar-brand image CSS
 
 
 .example6 .navbar-brand{ 
-  background: url("/images/logo.jpg") center / contain no-repeat;
+  background: url("/images/newlogored.jpg") center / contain no-repeat;
   width: 200px;
 }
 
@@ -77,7 +77,7 @@ Responsive navbar-brand image CSS
 {
     background-color: #D75C37;
 
-    border-color: #D75C37;
+    border-style: none;
 }
 
 .navbar-nav>li>.dropdown-menu {

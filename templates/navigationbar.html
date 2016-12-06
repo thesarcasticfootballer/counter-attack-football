@@ -12,15 +12,16 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand text-hide" href="www.sarcasticfootballer.com">Brand Text
+        <a class="navbar-brand text-hide" href="/home">Brand Text
         </a>
       </div>
       <div id="navbar6" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="/home" id= "home">Home</a></li>
-          <li><a href="/aboutus">About</a></li>
-          <li><a href="/news" id ="news" >News</a></li>
-            <li><a href="/teams">Teams</a></li>
+          <li ><a href="/" id= "home">Home</a></li>
+          <li><a href="/polls" id = "polls">Polls</a></li>
+          <li><a href="/totw" id ="totw" >TOTW</a></li>
+          <li><a href="/facts" id = "facts">Facts</a></li>
+            <!--<li><a href="/teams">Teams</a></li> -->
         <!--  <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -46,7 +47,7 @@ switch(uri[1])
 {
   case 'home': document.getElementById('home').className += 'active';
           break;
-  case 'popular': document.getElementById('popular').className += 'active';
+  case 'article': document.getElementById('news').className += 'active';
           break;    
   case 'news': document.getElementById('news').className += 'active';
           break;   
@@ -58,7 +59,7 @@ switch(uri[1])
           break; 
   case 'Internationalnews': document.getElementById('realnews').className += 'active';
           break;
-  case 'about': document.getElementById('about').className += 'active';
+  case 'aboutus': document.getElementById('aboutus').className += 'active';
           break; 
   case '': document.getElementById('home').className += 'active';
           break ;

@@ -14,18 +14,9 @@
        
                
               <div class = "container">
-          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
- <!-- <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="4"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="5"></li>
-  </ol> -->
+         <!-- <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
  
-  <!-- Wrapper for slides -->
+  
   <div class="carousel-inner">
       {% for article in data %}
     <div class="item active">
@@ -51,7 +42,7 @@
       {% endfor %}
   
               </div>
-  <!-- Controls -->
+  
   <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left"></span>
   </a>
@@ -59,9 +50,62 @@
     <span class="glyphicon glyphicon-chevron-right"></span>
               </a></div>
  <!-- Carousel -->
+ <div class ="row">
+     <div class = "col-md-8">
+         <div class = "bigbox">
+    
+     {% for article in data %}
+     <a href ="/news/{{article.key().id()}}">
+<img src = "{{article.picture}}">
+{{article.headline}}</a>
+{% endfor %}
+ </div>
+         </div>
+         <div class ="col-md-4">
+             {% for article in cdata %}
+ 
+      <div class = "smallbox">
+    
+    
+     <a href ="/news/{{article.key().id()}}">
+{{article.headline}}</a><br>
+{{article.sideheadline}}
+ </div>{% endfor %}
+             </div></div>
+ <div class="row">
+ <div class = "col-md-6">
+    <div class = "bigbox">
+    
+     {% for article in ddata %}
+     <a href ="/news/{{article.key().id()}}">
+<img src = "{{article.picture}}">
+{{article.headline}}</a>
+{% endfor %}
+ </div></div>
+ <div class = "col-md-3">
+  {% for article in adata %}
+ 
+      <div class = "smallbox">
+    
+    
+     <a href ="/news/{{article.key().id()}}">
+<img src = "{{article.picture}}">
+{{article.headline}}</a>
+
+ </div>{% endfor %}</div>
+ <div class = "col-md-3">
+  {% for article in bdata %}
+ 
+      <div class = "smallbox">
+    
+    
+     <a href ="/news/{{article.key().id()}}">
+<img src = "{{article.picture}}">
+{{article.headline}}</a>
+
+ </div>{% endfor %}</div></div>
         </div>
-        </div>
-    </div>
+       
   {% include 'footer.html' %} 
 <script>
 	$('.carousel').carousel({
