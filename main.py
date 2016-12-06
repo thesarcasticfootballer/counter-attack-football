@@ -89,7 +89,7 @@ class WriteFormHandler(Handler):
         a.put();
         memcache.delete('home')
         memcache.delete('popular')
-        self.redirect('/news')
+        self.redirect('/')
 
 
 class HomeHandler(Handler):
