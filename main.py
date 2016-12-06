@@ -379,6 +379,13 @@ class NewsArticleHandler(Handler):
 
 
 
+class DisplayallHandler(Handler):
+    def get(self):
+        data = list(article.gql("order by created desc limit 10"))
+        self.render("pagination.html",data=data)
+
+
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),('/teams',TeamsHandler),
     ('/about',AboutHandler),('/teamsheet',TeamsheetHandler),
@@ -388,4 +395,4 @@ app = webapp2.WSGIApplication([
     ('/livescores',LiveScoreHandler),('/popular',PopularNewsHandler),
     (r'/news/(\d+)',ArticleHandler),(r'/article/(\d+)',NewsArticleHandler),('/fb',fbHandler),
     ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
-    ('/move', MoveDBHandler)], debug=False)
+    ('/move', MoveDBHandler),('/all',DisplayallHandler)], debug=False)
