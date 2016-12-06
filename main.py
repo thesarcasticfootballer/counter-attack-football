@@ -102,7 +102,9 @@ class WriteFormHandler(Handler):
         sideheadline = self.request.get("sideheadline")
         featured = int(self.request.get("featured"))
         if self.request.get('picture'):
-            picture = self.request.get('picture')
+            piclink = self.request.get('picture')
+            tempvar="upload/c_scale,q_auto:good,w_1600"
+            picture =piclink.replace('upload',tempvar)
         else:
             picture = "/images/default.jpg"
        
@@ -215,14 +217,18 @@ class HomeHandler(Handler):
         if content:
                    data = content['data']
                    adata = content['adata']
-           
+                   bdata = content['bdata']
+                   cdata = content['cdata']
+                   ddata = content['ddata']
         else:
             data = list(article.gql('  order by created desc limit 1 '))
-            adata = list(article.gql(' order by created desc limit 5 offset 1'))
-           
-            content = {'data':data,'adata':adata}
+            adata = list(article.gql(' order by created desc limit 2 offset 8'))
+            bdata = list(article.gql(' order by created desc limit 2 offset 10'))
+            cdata = list(article.gql(' order by created desc limit 6 offset 1'))
+            ddata = list(article.gql('  order by created desc limit 1 offset 7'))
+            content = {'data':data,'adata':adata,'bdata':bdata,'cdata':cdata,'ddata':ddata}
             memcache.add(key='homepage',value=content,time=3600)
-        self.render("Homepage.html",adata = adata,data =data)
+        self.render("Homepage.html",adata = adata,data =data,bdata = bdata,cdata =cdata,ddata=ddata)
 
         
 class PopularNewsHandler(Handler):
@@ -339,7 +345,7 @@ class NewsArticleHandler(Handler):
         total = memcache.get(post_id+"total")
         up = memcache.get(post_id+"up")
         ans = "%s,%s" % (up,(total-up))
-        self.response.set_cookie('vote',"success",path=self.request.url,expires=d)
+        self.response.set_cookie('vote',"success",path='/article/'+ post_id,expires=d)
         self.response.out.write(ans)
 
     def get(self,post_id):
@@ -351,7 +357,7 @@ class NewsArticleHandler(Handler):
             data = article.get_by_id(int(post_id))
             #data.views = data.views + 1
             #data.put()
-            adata = list(article.gql("order by views desc limit 6"))
+            adata = list(article.gql("order by created desc limit 6"))
             content = {'data':data,'adata':adata}
             memcache.add(key=post_id, value=content, time=4000)
         views = self.cache(post_id+'views')
