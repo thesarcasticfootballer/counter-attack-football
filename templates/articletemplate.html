@@ -243,17 +243,18 @@ if (read_cookie("vote") && temp!=0)
     </div></div>
 
         
-        <div class ="col-lg-3">
+       <!-- <div class ="col-lg-3">
             
              <h2 class="title-header">RECOMMENDED</h2>
              <hr style= "border: 2px solid #D75C37;">
              {% for article in adata %}
-               <h3 class = "thumbnail-header"><a href ="/article/{{article.key().id()}}">{{article.headline}}</a><br><br>
-         <div class = "article-picture"><a href ="/article/{{article.key().id()}}"><img class= "medium-thumbnail" src="{{article.picture}}" alt= "Image not Found" style = "width: 100%;"></a></div>
+               <h3 class = "thumbnail-header"><a href ="/news/{{article.key().id()}}">{{article.headline}}</a><br><br>
+         <div class = "article-picture"><a href ="/news/{{article.key().id()}}"><img class= "medium-thumbnail" src="{{article.picture}}" alt= "Image not Found" style = "width: 100%;"></a></div>
                <br>
                <hr style= "border: 1px solid #D75C37;width: 95%;">
         {% endfor %}
-            </div></div>
+            </div>
+            --></div>
         </div></div>
     {% include 'footer.html' %}
 </body>

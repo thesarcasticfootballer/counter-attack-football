@@ -30,6 +30,7 @@ position: absolute;
     margin: -10px;
     margin-bottom: 20px;
     padding: 10px;
+    box-shadow: 2px 2px 5px #888888;
     
 }
 .bigbox a img
@@ -38,11 +39,13 @@ position: absolute;
 }
 .bigbox a
 {
-      font-family: Tahoma, Geneva, sans-serif;
+      font-family: "Open Sans script=all rev=1";
     font-size: 30px;
     text-decoration: none;
     color: black;
-    font-weight: 500;
+    font-weight: 400;
+    font-style: normal;
+    
 }
 .bigbox a:hover{
   font-family: Tahoma, Geneva, sans-serif;
@@ -55,11 +58,13 @@ position: absolute;
 
 .smallbox a
 {
-      font-family: Tahoma, Geneva, sans-serif;
-    font-size: 17px;
+      font-family: "Open Sans script=all rev=1";
+    font-size: 19px;
     text-decoration: none;
     color: black;
-    font-weight: 600;
+    font-weight: 500;
+    font-style: normal;
+  
 }
 .smallbox a:hover{
   font-family: Tahoma, Geneva, sans-serif;
@@ -67,4 +72,57 @@ position: absolute;
     text-decoration: none;
     color: #337ab7;
     font-weight: 600;
+}
+.big-box
+{
+    position: relative;
+    width: 100%;
+    color: white;
+}
+h2
+{
+    position: absolute;
+    top: 75%;
+    left: 0px;
+    width: 100%;
+    
+}
+h2 span { 
+   color: white; 
+   font: bold 30pxx/45px Helvetica, Sans-Serif; 
+   letter-spacing: -1px;  
+   background-color:  #033d3d;/* fallback color */
+  
+   padding-left: 10px;
+   padding-right: 10px;
+padding-top: 1px;
+padding-bottom: 1px;
+}
+.small-box
+{
+
+    position: relative;
+    width: 100%;
+    color: white;
+}
+h3
+{
+    position: absolute;
+    top: 55%;
+    left: 0px;
+    width: 100%;
+    
+}
+h3 span { 
+   color: white; 
+   font: bold 22px Helvetica, Sans-Serif; 
+   letter-spacing: -1px;  
+   background-color:  #033d3d;/* fallback color */
+  
+   padding-left: 10px;
+   padding-right: 10px;
+padding-top: 1px;
+padding-bottom: 1px;
+
+
 }
