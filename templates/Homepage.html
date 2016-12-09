@@ -2,10 +2,10 @@
 
 <head>
     <title>Home</title>
-    
+   
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   
-<link href="styles/css/homepage.css" rel="stylesheet">
+ <link href="styles/css/homepage.css" rel="stylesheet">
 
     </head> 
     <body>
@@ -13,98 +13,54 @@
 {% include 'navigationbar.html' %}
        
                
-              <div class = "container">
-         <!-- <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
- 
-  
-  <div class="carousel-inner">
-      {% for article in data %}
-    <div class="item active">
-        <a href="/article/{{article.key().id()}}">
-      <img src={{article.picture}} alt="Image not Found">
-          
-     </a>
-         <a href="/article/{{article.key().id()}}">
-             <span id="article-span">{{article.headline}}</span></a> 
-    </div>
-         
-      {% endfor %}
-      {% for article in adata %}
-       <div class="item ">
-                            <a href="/article/{{article.key().id()}}"><img src="{{article.picture}}" alt="Image not Found" >
-                            </a>
-            <a href="/article/{{article.key().id()}}">
-                <span id="article-span">{{article.headline}}</span> </a>
-                        </div>
+      <div class="container-fluid">
 
-  
-       
-      {% endfor %}
-  
-              </div>
-  
-  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-  </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-              </a></div>
- <!-- Carousel -->
- <div class ="row">
-     <div class = "col-md-8">
-         <div class = "bigbox">
-    
-     {% for article in data %}
-     <a href ="/news/{{article.key().id()}}">
-<img src = "{{article.picture}}">
-{{article.headline}}</a>
-{% endfor %}
- </div>
-         </div>
-         <div class ="col-md-4">
-             {% for article in cdata %}
+    <div class="row">
+        <div class = "col-lg-6">
+             {% for article in data1 %}
  
-      <div class = "smallbox">
+      <div class = "big-box">
     
     
      <a href ="/news/{{article.key().id()}}">
-{{article.headline}}</a><br>
-{{article.sideheadline}}
+
+<img src = "{{article.picture}}"></a><h2><span>{{article.headline}}</span></h2>
+
  </div>{% endfor %}
-             </div></div>
- <div class="row">
- <div class = "col-md-6">
-    <div class = "bigbox">
-    
-     {% for article in ddata %}
-     <a href ="/news/{{article.key().id()}}">
-<img src = "{{article.picture}}">
-{{article.headline}}</a>
-{% endfor %}
- </div></div>
- <div class = "col-md-3">
-  {% for article in adata %}
- 
-      <div class = "smallbox">
+            </div>
+            <div class = "col-lg-6">
+                <div class = "row">
+                    
+                 {% for article in data2 %}
+ <div class = "col-lg-6">
+      <div class = "small-box">
     
     
      <a href ="/news/{{article.key().id()}}">
-<img src = "{{article.picture}}">
-{{article.headline}}</a>
 
- </div>{% endfor %}</div>
- <div class = "col-md-3">
-  {% for article in bdata %}
- 
-      <div class = "smallbox">
+<img src = "{{article.picture}}"></a><h3><span>{{article.headline}}</span></h3>
+
+ </div></div>{% endfor %}
+            </div><br>
+             <div class = "row">
+                   
+                 {% for article in data3 %}
+  <div class = "col-lg-6">
+      <div class = "small-box">
     
     
      <a href ="/news/{{article.key().id()}}">
-<img src = "{{article.picture}}">
-{{article.headline}}</a>
 
- </div>{% endfor %}</div></div>
+<img src = "{{article.picture}}"></a><h3><span>{{article.headline}}</span></h3>
+
+ </div> </div>{% endfor %}
+           </div></div>
+
         </div>
+
+
+    </div>
+
        
   {% include 'footer.html' %} 
 <script>

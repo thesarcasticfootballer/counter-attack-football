@@ -65,6 +65,12 @@ class article(db.Model):
     total = db.IntegerProperty(default = 0)
     up = db.IntegerProperty(default = 0)
     
+class facts(db.Model):
+      picturelink = db.StringProperty()
+      facttext = db.StringProperty()
+      created = db.DateProperty(auto_now_add = True)
+      upvotes =  db.IntegerProperty(default = 0)
+     
     
     
     
@@ -79,7 +85,7 @@ class WriteFormHandler(Handler):
         featured = int(self.request.get("featured"))
         if self.request.get('picture'):
             piclink = self.request.get('picture')
-            tempvar="upload/c_scale,q_auto:good,w_1600"
+            tempvar="upload//c_scale,h_900,q_auto:good,w_1600"
             picture =piclink.replace('upload',tempvar)
         else:
             picture = "/images/default.jpg"
@@ -96,20 +102,20 @@ class HomeHandler(Handler):
   def get(self):
         content = self.cache('homepage')
         if content:
-                   data = content['data']
-                   adata = content['adata']
-                   bdata = content['bdata']
+                   data1 = content['data1']
+                   data2 = content['data2']
+                   data3 = content['data3']
                    cdata = content['cdata']
                    ddata = content['ddata']
         else:
-            data = list(article.gql('  order by created desc limit 1 '))
-            adata = list(article.gql(' order by created desc limit 2 offset 8'))
-            bdata = list(article.gql(' order by created desc limit 2 offset 10'))
+            data1 = list(article.gql('  order by created desc limit 1 '))
+            data2 = list(article.gql(' order by created desc limit 2 offset 1'))
+            data3 = list(article.gql(' order by created desc limit 2 offset 3'))
             cdata = list(article.gql(' order by created desc limit 6 offset 1'))
             ddata = list(article.gql('  order by created desc limit 1 offset 7'))
-            content = {'data':data,'adata':adata,'bdata':bdata,'cdata':cdata,'ddata':ddata}
+            content = {'data1':data1,'data2':data2,'data3':data3,'cdata':cdata,'ddata':ddata}
             memcache.add(key='homepage',value=content,time=3600)
-        self.render("Homepage.html",adata = adata,data =data,bdata = bdata,cdata =cdata,ddata=ddata)
+        self.render("Homepage.html",data1 = data1,data2 =data2,data3 = data3,cdata =cdata,ddata=ddata)
 
         
 
@@ -242,15 +248,26 @@ class NewsArticleHandler(Handler):
 
 
 class DisplayallHandler(Handler):
+
+
     def get(self):
         data = list(article.gql("order by created desc limit 10"))
         self.render("pagination.html",data=data)
 
+class FactsHandler(Handler):
+      def get(self):
+           self.render("facts.html");    
+class FactUploadHandler(Handler):
+      def get(self):
+           self.render("factsupload.html");    
+
+
+
 
 
 app = webapp2.WSGIApplication([
-        ('/article',WriteFormHandler),('/',HomeHandler),
+        ('/article',WriteFormHandler),('/factupload',FactUploadHandler),('/',HomeHandler),
   
     (r'/news/(\d+)',NewsArticleHandler),
     ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
-    ('/move', MoveDBHandler),('/all',DisplayallHandler)], debug=False)
+    ('/move', MoveDBHandler),('/all',DisplayallHandler),('/facts',FactsHandler)], debug=False)
