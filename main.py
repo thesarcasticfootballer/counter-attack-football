@@ -28,6 +28,7 @@ import time
 import json
 from google.appengine.api import memcache
 import cgi
+import math
 
 template_dir = os.path.join(os.path.dirname(__file__),'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
@@ -88,35 +89,51 @@ class WriteFormHandler(Handler):
             tempvar="upload//c_scale,h_900,q_auto:good,w_1600"
             picture =piclink.replace('upload',tempvar)
         else:
-            picture = "/images/default.jpg"
-       
-        a = article(headline = headline,content =content,author = author,picture = picture,sideheadline = sideheadline,featured = featured)
-         
-        a.put();
-        memcache.delete('home')
-        memcache.delete('popular')
+            picture = "/images/default.jpg"  
+        a = article(headline = headline,content =content,author = author,picture = picture,sideheadline = sideheadline,featured = featured)  
+        a.put()
+        memcache.delete(key='homepage')
+        #wait for a small duration so that memcache is cleared before it can be reused
+        time.sleep(0.1)
         self.redirect('/')
 
 
 class HomeHandler(Handler):
-  def get(self):
-        content = self.cache('homepage')
-        if content:
-                   data1 = content['data1']
-                   data2 = content['data2']
-                   data3 = content['data3']
-                   cdata = content['cdata']
-                   ddata = content['ddata']
+    def get(self):
+        try:
+            page = int(self.request.get('page'))
+        except ValueError:
+            page = 1
+        if page > 1:
+            data1,data2,data3 = self.goto_page(page)
         else:
-            data1 = list(article.gql('  order by created desc limit 1 '))
-            data2 = list(article.gql(' order by created desc limit 2 offset 1'))
-            data3 = list(article.gql(' order by created desc limit 2 offset 3'))
-            cdata = list(article.gql(' order by created desc limit 6 offset 1'))
-            ddata = list(article.gql('  order by created desc limit 1 offset 7'))
-            content = {'data1':data1,'data2':data2,'data3':data3,'cdata':cdata,'ddata':ddata}
-            memcache.add(key='homepage',value=content,time=3600)
-        self.render("Homepage.html",data1 = data1,data2 =data2,data3 = data3,cdata =cdata,ddata=ddata)
-
+            content = memcache.get(key='homepage')
+            if content is not None:
+                data1 = content['data1']
+                data2 = content['data2']
+                data3 = content['data3']
+            else:
+                all_data = list(article.gql(' order by created desc limit 5'))
+                data1 = all_data[0:1]
+                data2 = all_data[1:3]
+                data3 = all_data[3:]
+                content = {'data1': data1,'data2': data2,'data3': data3}
+                memcache.add(key='homepage',value=content,time=3600)
+        total_pages = article.all(keys_only=True).count(100)
+        total_pages = math.ceil(total_pages/5.0)
+        self.render("Homepage.html",data1 = data1,data2 = data2,data3 = data3, total_pages = int(total_pages), page = int(page))
+    def post(self):
+        pass
+    def goto_page(self,page):
+        # 5 elements per page
+        position = (page-1)*5
+        query = " order by created desc limit 5 offset %s" % position
+        all_data = list(article.gql(query))
+        data1 = all_data[0:1]
+        data2 = all_data[1:3]
+        data3 = all_data[3:]
+        #self.render("Homepage.html",data1 = data1,data2 = data2,data3 = data3)
+        return (data1,data2,data3)
         
 
 
@@ -267,7 +284,6 @@ class FactUploadHandler(Handler):
 
 app = webapp2.WSGIApplication([
         ('/article',WriteFormHandler),('/factupload',FactUploadHandler),('/',HomeHandler),
-  
     (r'/news/(\d+)',NewsArticleHandler),
     ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
     ('/move', MoveDBHandler),('/all',DisplayallHandler),('/facts',FactsHandler)], debug=False)
