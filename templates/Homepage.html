@@ -1,19 +1,52 @@
+<!DOCTYPE html>
 <html>
 
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Home</title>
 
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 	<link href="styles/css/homepage.css" rel="stylesheet">
+<script src="/jsfiles/js/jquery.js"></script>
+<script type="text/javascript">
+	var page = 2;
+	var flag = 0;
+	function load_page()
+	{
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+		    if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+		       var response = xhttp.responseText
+		    	if (!response){
+		       		flag = 1;
+				}
+		    	else{
+		       		document.getElementById("articles").innerHTML += xhttp.responseText;
+		       		var selector = $("li.active");
+					$('.pagination li').removeClass('active');
+					selector.next().addClass('active');
+		   		}
+		    }
+		};
+		if(flag==0){
+			var host = window.location.origin;
+			xhttp.open("POST", host, true);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.send("page="+page); 
+			page = page + 1;
+		}
+	};
 
+
+</script>
 </head> 
-<body>
+<body onload="load_page()">
 
 	{% include 'navigationbar.html' %}
 
 
-	<div class="container-fluid">
+	<div class="container-fluid" id="articles">
 
 		<div class="row">
 			<div class = "col-lg-6">
@@ -83,7 +116,12 @@
 								$('.carousel').carousel({
 									interval: 3000
 								})
-
+								$(document).scroll(function(){
+									if($(window).height() == ($(document).height() - $(window).scrollTop()))
+									{
+										load_page();
+									}
+								})
 							</script>
 
 

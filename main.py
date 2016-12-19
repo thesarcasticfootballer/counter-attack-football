@@ -123,7 +123,19 @@ class HomeHandler(Handler):
         total_pages = math.ceil(total_pages/5.0)
         self.render("Homepage.html",data1 = data1,data2 = data2,data3 = data3, total_pages = int(total_pages), page = int(page))
     def post(self):
-        pass
+    	data1 = []
+    	data2 = []
+    	data3 = []
+        try:
+            page = int(self.request.get('page'))
+        except ValueError:
+            page = 1
+        if page > 1:
+            data1,data2,data3 = self.goto_page(page)
+        if not data1:
+        	self.response.out.write("")
+        else:
+        	self.render("pagination.html", data1 = data1,data2 = data2,data3 = data3)
     def goto_page(self,page):
         # 5 elements per page
         position = (page-1)*5
