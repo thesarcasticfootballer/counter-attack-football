@@ -50,8 +50,7 @@ class Handler(webapp2.RequestHandler):
         self.write(self.render_str(template,**kw))
     def cache(self, key):
         return memcache.get(key)
-
-
+        
 
         
 class article(db.Model):
@@ -126,8 +125,10 @@ class HomeHandler(Handler):
                 content = {'data1': data1,'data2': data2,'data3': data3}
                 memcache.add(key='homepage',value=content,time=3600)
         #total_pages = article.all(keys_only=True).count(100)
-        total_pages = 100
-        total_pages = math.ceil(total_pages/5.0)
+        total_entries = memcache.get("total_entries")
+        if not total_entries:
+            total_entries = 100
+        total_pages = math.ceil(total_entries/5.0)
         self.render("Homepage.html",data1 = data1,data2 = data2,data3 = data3, total_pages = int(total_pages), page = int(page))
     def post(self):
     	data1 = []
@@ -207,6 +208,7 @@ class FBSigninHandler(Handler):
 class MoveDBHandler(Handler):
     def get(self):
         keys = article.all(keys_only =True)
+        total_entries = keys.count()
         for k in keys:
             #data = article.get_by_id(k.id())
             #url = data.picture
@@ -228,6 +230,8 @@ class MoveDBHandler(Handler):
                     #memcache.delete(str(k.id())+"views")
                 data.put()
         memcache.flush_all()
+        memcache.add(key="total_entries",value=total_entries,time=4000)
+        
                  
             
 class NewsArticleHandler(Handler):

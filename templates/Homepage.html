@@ -12,6 +12,13 @@
 <script type="text/javascript">
 	var page = 2;
 	var flag = 0;
+	function load_page_first(){
+		var temp = parseInt(window.location.search.split('=')[1]);
+		if (temp){
+			page = temp + 1;
+		}
+		load_page();
+	};
 	function load_page()
 	{
 		var xhttp = new XMLHttpRequest();
@@ -41,7 +48,7 @@
 
 </script>
 </head> 
-<body onload="load_page()">
+<body onload="load_page_first()">
 
 	{% include 'navigationbar.html' %}
 
