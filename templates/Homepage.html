@@ -64,7 +64,6 @@
 
 					<a href ="/news/{{article.key().id()}}">
 
-
 						<img src = "{{article.picture}}"></a><span><h2>{{article.headline}}</h2></span>
 
 					</div>
@@ -80,13 +79,12 @@
 
 								<a href ="/news/{{article.key().id()}}">
 
-
 									<img src = "{{article.picture}}"></a><span><h3>{{article.headline}}</h3></span>
 
 								</div>
 								</div>
 								{% endfor %}
-							</div><br>
+							</div>
 							<div class = "row">
 
 								{% for article in data3 %}
@@ -105,10 +103,10 @@
 									</div>
 
 								</div>
-							</div>
-							
-<hr>
 
+
+							
+ <hr style= "border: 4px solid #008080;">
 							<div class="text-center">
 								<ul class="pagination">
 								{% for i in range(1,total_pages+1) recursive %}
@@ -119,9 +117,7 @@
 								{% endif %}
 								{% endfor %}
 								</ul>
-
-							</div>
-
+							</div></div>
 							{% include 'footer.html' %} 
 							<script>
 								$('.carousel').carousel({
