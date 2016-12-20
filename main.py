@@ -91,7 +91,7 @@ class WriteFormHandler(Handler):
         featured = int(self.request.get("featured"))
         if self.request.get('picture'):
             piclink = self.request.get('picture')
-            tempvar="upload//c_scale,h_900,q_auto:good,w_1600"
+            tempvar="upload/c_scale,h_900,q_auto:good,w_1600"
             picture =piclink.replace('upload',tempvar)
         else:
             picture = "/images/default.jpg"  
