@@ -1,0 +1,25 @@
+<html>
+
+<head>
+    <title>Facts</title>
+    
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  
+<link href="styles/css/facts.css" rel="stylesheet">
+
+    </head> 
+    <body>
+   
+{% include 'navigationbar.html' %}
+<div class = "container-fluid">
+
+{% for poll in pdata1 %}
+<div class = "col-lg-6">
+
+<img src = "{{poll.picture}}">
+{{poll.question}}
+
+ </div> {% endfor %}</div>
+
+</body>
+</html>

@@ -72,9 +72,15 @@ class facts(db.Model):
       created = db.DateProperty(auto_now_add = True)
       upvotes =  db.IntegerProperty(default = 0)
      
-    
-    
-    
+
+class polls(db.Model):
+      picture = db.StringProperty()
+      question= db.StringProperty()
+      created = db.DateProperty(auto_now_add = True)
+      winner=  db.StringProperty()
+      
+     
+     
 class WriteFormHandler(Handler):                             
     def get(self):     
         self.render("WriteForm.html")
@@ -119,7 +125,8 @@ class HomeHandler(Handler):
                 data3 = all_data[3:]
                 content = {'data1': data1,'data2': data2,'data3': data3}
                 memcache.add(key='homepage',value=content,time=3600)
-        total_pages = article.all(keys_only=True).count(100)
+        #total_pages = article.all(keys_only=True).count(100)
+        total_pages = 100
         total_pages = math.ceil(total_pages/5.0)
         self.render("Homepage.html",data1 = data1,data2 = data2,data3 = data3, total_pages = int(total_pages), page = int(page))
     def post(self):
@@ -289,13 +296,44 @@ class FactsHandler(Handler):
 class FactUploadHandler(Handler):
       def get(self):
            self.render("factsupload.html");    
+class PollsHandler(Handler):
+      def get(self):
+          pollcontent = self.cache('pollpage')
+          if pollcontent:
+                         pdata1  = pollcontent['pdata1']
+          else:
+              pdata1 = list(polls.gql('  order by created desc limit 4 '))
+              pollcontent = {'pdata1':pdata1}
+              memcache.add(key='pollpage',value=pollcontent,time=3600)
+          self.render("polls.html",pdata1 =pdata1)
+   
+class PollUploadHandler(Handler):
+      def get(self):
+           self.render("pollsupload.html");    
+      def post(self):
+        question = self.request.get("question")
+        picture  = self.request.get("picture") 
+        winner   = self.request.get("winner")
+       
+        if self.request.get('picture'):
+            piclink = self.request.get('picture')
+            tempvar="upload/c_scale,h_900,q_auto:good,w_1600"
+            picture =piclink.replace('upload',tempvar)
+        else:
+            picture = "/images/default.jpg"
+       
+        a = polls(question = question,winner = winner,picture = picture)
+         
+        a.put();
+       
+        self.redirect('/')
 
 
 
 
 
 app = webapp2.WSGIApplication([
-        ('/article',WriteFormHandler),('/factupload',FactUploadHandler),('/',HomeHandler),
+        ('/article',WriteFormHandler),('/factupload',FactUploadHandler),('/',HomeHandler),('/pollupload',PollUploadHandler),('/polls',PollsHandler),
     (r'/news/(\d+)',NewsArticleHandler),
     ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
     ('/move', MoveDBHandler),('/all',DisplayallHandler),('/facts',FactsHandler)], debug=False)
