@@ -1,48 +1,13 @@
 <br><br>
 <div class="row">
-	<div class = "col-lg-6">
+	
 		{% for article in data1 %}
+<div class = "col-lg-4">
+	<div class = "small-box">
+        	<a href ="/news/{{article.key().id()}}">
 
-		<div class = "big-box">
+				<img src = "{{article.picture}}"></a><span><h3>{{article.headline}}</h3</span>
+</div></div>
+{% endfor %}
 
-
-			<a href ="/news/{{article.key().id()}}">
-
-				<img src = "{{article.picture}}"></a>><span><h2>{{article.headline}}</h2></span>
-
-			</div>
-			{% endfor %}
-		</div>
-		<div class = "col-lg-6">
-			<div class = "row">
-
-				{% for article in data2 %}
-				<div class = "col-lg-6">
-					<div class = "small-box">
-
-
-						<a href ="/news/{{article.key().id()}}">
-
-							<img src = "{{article.picture}}"></a><span><h3>{{article.headline}}</h3></span>
-
-						</div>
-					</div>
-					{% endfor %}
-				</div><br>
-				<div class = "row">
-
-					{% for article in data3 %}
-					<div class = "col-lg-6">
-						<div class = "small-box">
-
-
-							<a href ="/news/{{article.key().id()}}">
-
-								<img src = "{{article.picture}}"></a><span><h3>{{article.headline}}</h3></span>
-
-							</div> 
-						</div>
-						{% endfor %}
-					</div>
-				</div>
-</div>
+</div></div>

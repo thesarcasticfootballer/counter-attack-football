@@ -125,33 +125,31 @@ class HomeHandler(Handler):
                 data3 = all_data[3:]
                 content = {'data1': data1,'data2': data2,'data3': data3}
                 memcache.add(key='homepage',value=content,time=3600)
-        total_pages = article.all(keys_only=True).count(100)
-        total_pages = math.ceil(total_pages/5.0)
+        #total_pages = article.all(keys_only=True).count(100)
+        total_pages = 100;
+        total_pages = math.ceil(total_pages/6.0)
         self.render("Homepage.html",data1 = data1,data2 = data2,data3 = data3, total_pages = int(total_pages), page = int(page))
     def post(self):
     	data1 = []
-    	data2 = []
-    	data3 = []
+    	
         try:
             page = int(self.request.get('page'))
         except ValueError:
             page = 1
         if page > 1:
-            data1,data2,data3 = self.goto_page(page)
+            data1 = self.goto_page(page)
         if not data1:
         	self.response.out.write("")
         else:
-        	self.render("pagination.html", data1 = data1,data2 = data2,data3 = data3)
+        	self.render("pagination.html", data1 = data1)
     def goto_page(self,page):
         # 5 elements per page
-        position = (page-1)*5
-        query = " order by created desc limit 5 offset %s" % position
+        position = (page)*6 -5
+        query = " order by created desc limit 6 offset %s" % position
         all_data = list(article.gql(query))
-        data1 = all_data[0:1]
-        data2 = all_data[1:3]
-        data3 = all_data[3:]
+        data1 = all_data
         #self.render("Homepage.html",data1 = data1,data2 = data2,data3 = data3)
-        return (data1,data2,data3)
+        return (data1)
         
 
 
