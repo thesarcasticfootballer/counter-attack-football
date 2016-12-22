@@ -24,6 +24,7 @@ from google.appengine.api import users
 from google.appengine.api import images
 import datetime
 import urllib2
+import urllib
 import time
 import json
 from google.appengine.api import memcache
@@ -38,6 +39,8 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
 CLIENT_ID = "636222690890-s7qdqru8kkk7v349r333i74q2a01btk5.apps.googleusercontent.com"
 FB_ID = "945733035525846|e4017e80ce68c389ebcc98ba625b9b46"
 FB_APP = '945733035525846'
+ACCESS_TOKEN = "EAANcI6GihtYBAOylXScCHFJoRgcaIWJoAM4lAlX0CwmuZAISPzwd6J0ZChQUf3Oa7PccWOBuHIOAZCQuUt8KQ6HBCkrgljjQUGRvtHhAKFPkOZBUpeyScJaUZBjfTYrs0HTmH3hShm6fnNIz3cZCTZBA0ca0fA2Jx8ZD"
+PAGE_ID = "1029387337137487"
 
 
 class Handler(webapp2.RequestHandler):
@@ -96,12 +99,34 @@ class WriteFormHandler(Handler):
         else:
             picture = "/images/default.jpg"  
         a = article(headline = headline,content =content,author = author,picture = picture,sideheadline = sideheadline,featured = featured)  
-        a.put()
+        key = a.put()
+        article_id = key.id()
         memcache.delete(key='homepage')
         #wait for a small duration so that memcache is cleared before it can be reused
         time.sleep(0.1)
         self.redirect('/')
 
+class InstantArticleHandler(Handler):
+    def get(self):
+        self.render("instant.html")
+    def post(self):
+        flag = self.request.get("flag")
+        article_id = self.request.get("id")
+        if flag == '0':
+            data = article.get_by_id(int(article_id))
+            fb_article = self.render_str("instantarticle.html",data = data,article_id = article_id)
+            url = "https://graph.facebook.com/%s/instant_articles" % (PAGE_ID)
+            values = {"access_token":ACCESS_TOKEN,"html_source":fb_article,"published":"true","development_mode":"false"}
+            params = urllib.urlencode(values)
+            response = urllib2.urlopen(url,data=params)
+            msg_to_client = response.read()
+            response.close()
+        else:
+            status_url = "https://graph.facebook.com/%s?access_token=%s" % (article_id,ACCESS_TOKEN)
+            response = urllib2.urlopen(status_url)
+            msg_to_client = response.read()
+            response.close()
+        self.response.out.write(msg_to_client)
 
 class HomeHandler(Handler):
     def get(self):
@@ -337,4 +362,4 @@ app = webapp2.WSGIApplication([
         ('/article',WriteFormHandler),('/factupload',FactUploadHandler),('/',HomeHandler),('/pollupload',PollUploadHandler),('/polls',PollsHandler),
     (r'/news/(\d+)',NewsArticleHandler),
     ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
-    ('/move', MoveDBHandler),('/all',DisplayallHandler),('/facts',FactsHandler)], debug=False)
+    ('/move', MoveDBHandler),('/all',DisplayallHandler),('/facts',FactsHandler),('/instant',InstantArticleHandler)], debug=False)
