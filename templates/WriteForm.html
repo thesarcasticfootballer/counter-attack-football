@@ -1,9 +1,12 @@
 <html>
 <head>
 	<script src='https://cdn.tinymce.com/4/tinymce.min.js'></script>
+    <script src="/jsfiles/js/jquery.js"></script>
 	 <script>
                 tinymce.init({
     selector: '#mytextarea',
+    schema: 'html5-strict',
+    valid_children: '-p[img|figure]',
     theme: 'modern',
     height: 600,
     plugins: [
@@ -13,8 +16,8 @@
     ],
     toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
   });
-                           
-        </script>
+                       
+    </script>
 </head>
 <body style = "background-color: black;">
     <h2 style="color:green;"><center>NEWS ARTICLE FORM </center></h2>
