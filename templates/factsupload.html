@@ -1,15 +1,60 @@
 <html>
-
 <head>
-    <title>Facts</title>
-    
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  
-<link href="styles/css/facts.css" rel="stylesheet">
+	<script src='https://cdn.tinymce.com/4/tinymce.min.js'></script>
+	 <script>
+                tinymce.init({
+    selector: '#mytextarea',
+    theme: 'modern',
+    height: 600,
+    plugins: [
+      'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+      'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+      'save table contextmenu directionality emoticons template paste textcolor'
+    ],
+    toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
+  });
+                           
+        </script>
 
-    </head> 
-    <body>
-   
-{% include 'navigationbar.html' %}
+<style>
+        .button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+</style>
+
+</head>
+<body style = "background-color: FEA44F;">
+    <h2 style="color:954805;"><center>FACTS UPLOAD FORM </center></h2>
+<form  name = "facts" method = "post" style = "font-size:40px;color:954805;" novalidate>
+    FACT TEXT:<br>
+    <textarea style = "font-size:20px" rows= "10" cols = "50" id="mytextarea" name = "facttext" required></textarea></br>
+    Tags:
+    <input style = "font-size: 20px; "type = "text" name = "tags"> </br>
+Picture Link <input style = "font-size: 20px; type = "text" name = "picturelink" ></br>
+
+<br>
+
+<center><input type="submit" class="button"></center>
+</form>
 </body>
 </html>
