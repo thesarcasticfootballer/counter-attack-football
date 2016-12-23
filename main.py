@@ -344,15 +344,15 @@ class FactUploadHandler(Handler):
 
   
 class PollsHandler(Handler):
-      def get(self):
-          pollcontent = self.cache('pollpage')
-          if pollcontent:
-          	pdata1  = pollcontent['pdata1']
-          else:
-            pdata1 = list(polls.gql('  order by created desc limit 4 '))
-          	pollcontent = {'pdata1':pdata1}
-          	memcache.add(key='pollpage',value=pollcontent,time=3600)
-          self.render("polls.html",pdata1 =pdata1)
+  def get(self):
+      pollcontent = self.cache('pollpage')
+      if pollcontent:
+         pdata1  = pollcontent['pdata1']
+      else:
+        pdata1 = list(polls.gql('  order by created desc limit 4 '))
+        pollcontent = {'pdata1':pdata1}
+        memcache.add(key='pollpage',value=pollcontent,time=3600)
+      self.render("polls.html",pdata1 =pdata1)
    
 class PollUploadHandler(Handler):
       def get(self):
