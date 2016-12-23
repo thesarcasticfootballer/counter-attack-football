@@ -346,17 +346,12 @@ class FactUploadHandler(Handler):
 class PollsHandler(Handler):
   def get(self):
       pollcontent = self.cache('pollpage')
-      if pollcontent:
-         pdata1  = pollcontent['pdata1']
-      else:
-        pdata1 = list(polls.gql('  order by created desc limit 4 '))
-        pollcontent = {'pdata1':pdata1}
-        memcache.add(key='pollpage',value=pollcontent,time=3600)
-      self.render("polls.html",pdata1 =pdata1)
-   
+      pdata1 = list(polls.gql('  order by created desc limit 3 '))
+      self.render("polls.html",pdata1 = pdata1)
+
 class PollUploadHandler(Handler):
-      def get(self):
-           self.render("pollsupload.html");    
+      def get(self): 
+        self.render("pollsupload.html");    
       def post(self):
         question = self.request.get("question")
         picture  = self.request.get("picture") 
@@ -367,8 +362,9 @@ class PollUploadHandler(Handler):
             picture =piclink.replace('upload',tempvar)
         else:
             picture = "/images/default.jpg"  
-        votelist = {'Player1': 6, 'Player2': 7, 'Player3': 5}    
-        a=polls(question = question,winner = winner,picture = picture,votelist = json.dumps(votelist))
+        votelist = {'Player1': 6, 'Player2': 7, 'Player3': 5} 
+        tempvotelist = map(list,votelist.items())
+        a=polls(question = question,winner = winner,picture = picture,votelist = json.dumps(tempvotelist))
         a.put();     
         self.redirect('/')
 
