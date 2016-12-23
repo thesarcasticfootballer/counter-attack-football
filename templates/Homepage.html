@@ -1,119 +1,152 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-    <title>Home</title>
-    
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  
-<link href="styles/css/homepage.css" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Home</title>
 
-    </head> 
-    <body>
-   
-{% include 'navigationbar.html' %}
-       
-               
-              <div class = "container">
-         <!-- <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
- 
-  
-  <div class="carousel-inner">
-      {% for article in data %}
-    <div class="item active">
-        <a href="/article/{{article.key().id()}}">
-      <img src={{article.picture}} alt="Image not Found">
-          
-     </a>
-         <a href="/article/{{article.key().id()}}">
-             <span id="article-span">{{article.headline}}</span></a> 
-    </div>
-         
-      {% endfor %}
-      {% for article in adata %}
-       <div class="item ">
-                            <a href="/article/{{article.key().id()}}"><img src="{{article.picture}}" alt="Image not Found" >
-                            </a>
-            <a href="/article/{{article.key().id()}}">
-                <span id="article-span">{{article.headline}}</span> </a>
-                        </div>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-  
-       
-      {% endfor %}
-  
-              </div>
-  
-  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-  </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-              </a></div>
- <!-- Carousel -->
- <div class ="row">
-     <div class = "col-md-8">
-         <div class = "bigbox">
-    
-     {% for article in data %}
-     <a href ="/news/{{article.key().id()}}">
-<img src = "{{article.picture}}">
-{{article.headline}}</a>
-{% endfor %}
- </div>
-         </div>
-         <div class ="col-md-4">
-             {% for article in cdata %}
- 
-      <div class = "smallbox">
-    
-    
-     <a href ="/news/{{article.key().id()}}">
-{{article.headline}}</a><br>
-{{article.sideheadline}}
- </div>{% endfor %}
-             </div></div>
- <div class="row">
- <div class = "col-md-6">
-    <div class = "bigbox">
-    
-     {% for article in ddata %}
-     <a href ="/news/{{article.key().id()}}">
-<img src = "{{article.picture}}">
-{{article.headline}}</a>
-{% endfor %}
- </div></div>
- <div class = "col-md-3">
-  {% for article in adata %}
- 
-      <div class = "smallbox">
-    
-    
-     <a href ="/news/{{article.key().id()}}">
-<img src = "{{article.picture}}">
-{{article.headline}}</a>
+	<link href="styles/css/homepage.css" rel="stylesheet">
+<script src="/jsfiles/js/jquery.js"></script>
+<script type="text/javascript">
+	var page = 2;
+	var flag = 0;
+	function load_page_first(){
+		var temp = parseInt(window.location.search.split('=')[1]);
+		if (temp){
+			page = temp + 1;
+		}
+		load_page();
+	};
+	function load_page()
+	{ 
+		var xhttp = new XMLHttpRequest();
+		
+		xhttp.onreadystatechange = function() { //document.getElementById("ls").style.visibility = "hidden";
+			
+		    if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+		       var response = xhttp.responseText
+		    	if (!response){
+		       		flag = 1;
+				}
+		    	else{
+					
+		       		document.getElementById("articles").innerHTML += xhttp.responseText;
+		       		var selector = $("li.active");
+					$('.pagination li').removeClass('active');
+					selector.next().addClass('active');
 
- </div>{% endfor %}</div>
- <div class = "col-md-3">
-  {% for article in bdata %}
- 
-      <div class = "smallbox">
-    
-    
-     <a href ="/news/{{article.key().id()}}">
-<img src = "{{article.picture}}">
-{{article.headline}}</a>
+				}
+		    }
+		};
+		if(flag==0){
+			var host = window.location.origin;
+			
+			xhttp.open("POST", host, true);
+			//document.getElementById("ls").style.visibility = "visible";
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		
+			xhttp.send("page="+page); 
+        
+			page = page + 1;
 
- </div>{% endfor %}</div></div>
-        </div>
-       
-  {% include 'footer.html' %} 
-<script>
-	$('.carousel').carousel({
-		interval: 3000
-	})
-    
+			
+		
+		
+		}
+			
+		
+	};
+
+
 </script>
+</head> 
+<body onload="load_page_first()">
+
+	{% include 'navigationbar.html' %}
 
 
-  </body>
-</html>
+	<div class="container-fluid" id="articles">
+
+		<div class="row" id = "mainnews">
+			<div class = "col-lg-6">
+				{% for article in data1 %}
+
+				<div class = "big-box">
+
+
+					<a href ="/news/{{article.key().id()}}">
+
+						<img src = "{{article.picture}}"></a><span><h2>{{article.headline}}</h2></span>
+
+					</div>
+					{% endfor %}
+				</div>
+				<div class = "col-lg-6">
+					<div class = "row">
+
+						{% for article in data2 %}
+						<div class = "col-lg-6">
+							<div class = "small-box">
+
+
+								<a href ="/news/{{article.key().id()}}">
+
+									<img src = "{{article.picture}}"></a><span><h3>{{article.headline}}</h3></span>
+
+								</div>
+								</div>
+								{% endfor %}
+							</div>
+							<div class = "row">
+
+								{% for article in data3 %}
+								<div class = "col-lg-6">
+									<div class = "small-box">
+
+
+										<a href ="/news/{{article.key().id()}}">
+
+											<img src = "{{article.picture}}"></a><span><h3>{{article.headline}}</h3></span>
+
+										</div> 
+										</div>
+										{% endfor %}
+									</div>
+									</div>
+
+								</div>
+
+
+							
+ <hr style= "border: 4px solid #008080;">
+							<div class="text-center">
+								<ul class="pagination">
+								{% for i in range(1,total_pages+1) recursive %}
+								{% if i==page %}
+								<li class="active"><a href="/?page={{i}}">{{i}}</a></li>
+								{% else %}
+								<li><a href="/?page={{i}}">{{i}}</a></li>
+								{% endif %}
+								{% endfor %}
+								</ul>
+							</div></div>
+						
+
+							{% include 'footer.html' %} 
+							<script>
+								$('.carousel').carousel({
+									interval: 3000
+								})
+								$(document).scroll(function(){
+									if($(window).height() == ($(document).height() - $(window).scrollTop()))
+									{
+										load_page();
+									}
+								})
+							</script>
+
+
+						</body>
+						</html>

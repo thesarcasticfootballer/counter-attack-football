@@ -24,47 +24,65 @@ position: absolute;
     
    
 }
-.bigbox,.smallbox
+
+.big-box
 {
-    background-color:white;
-    margin: -10px;
-    margin-bottom: 20px;
-    padding: 10px;
+    position: relative;
+    width: 100%;
+    color: white;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+h2
+{
+    position: absolute;
+   bottom: 0%;
+   right: 0%;
+   left: 0%;
     
 }
-.bigbox a img
+span h2 { 
+   color: white; 
+   font:  30px/45px Arial, Sans-Serif; 
+   letter-spacing: -1px;  
+   background-color:  #033d3d;/* fallback color */
+margin : 0px;
+   padding-left: 10px;
+   padding-right: 10px;
+padding-top: 1px;
+padding-bottom: 1px;
+}
+.small-box
 {
-    ;
+
+    position: relative;
+    width: 100%;
+    color: white;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
-.bigbox a
+h3
 {
-      font-family: Tahoma, Geneva, sans-serif;
-    font-size: 30px;
-    text-decoration: none;
-    color: black;
-    font-weight: 500;
+  
+    position: absolute;
+   bottom: 0%;
+   right: 0%;
+   left: 0%;
 }
-.bigbox a:hover{
-  font-family: Tahoma, Geneva, sans-serif;
-    font-size: 30px;
-    text-decoration: none;
-    color: #337ab7;
-    font-weight: 500;
-}
+span h3 { 
+   color: white; 
+   font:  22px Arial, Sans-Serif; 
+   letter-spacing: -1px;  
+   background-color:  #033d3d;/* fallback color */
+  margin : 0px;
+   padding-left: 10px;
+   padding-right: 10px;
+padding-top: 1px;
+padding-bottom: 1px;
 
 
-.smallbox a
-{
-      font-family: Tahoma, Geneva, sans-serif;
-    font-size: 17px;
-    text-decoration: none;
-    color: black;
-    font-weight: 600;
 }
-.smallbox a:hover{
-  font-family: Tahoma, Geneva, sans-serif;
-    font-size: 17px;
-    text-decoration: none;
-    color: #337ab7;
-    font-weight: 600;
+.text-center
+{
+    visibility: hidden;
 }

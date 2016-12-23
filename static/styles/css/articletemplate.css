@@ -1,6 +1,13 @@
 .article-headline,.article-headline a,.article-headline a:hover
 {
 font-size: 50px;
+    font-family: "Open Sans script=all rev=1";
+
+    text-decoration: none;
+    color: black;
+    font-weight: 400;
+    font-style: normal;
+    
 }
 .article-author,.article-created
 {
@@ -12,15 +19,17 @@ font-weight: 600;
 {
 
 font-size: 20px;
-    font-family: 'Georgia',sans-serif;
+ color: #111111;
+   
+    font-style: normal;
 }
 .article-sideheadline,.title-header
 {
    
-font-size: 20px;
+font-size: 25px;
 font-weight: 500;
  margin-top: 0px;
-    color: #D75C37;
+    color: #008080;
 }
 .article-img
 {
@@ -35,19 +44,19 @@ font-weight: 500;
 	font-variant: small-caps;
 	font-weight: bold;
 	line-height: 47.5px;
-    color: #D75C37;  
+    color: #008080;  
     text-align: center; 
 }
 .btn-default:hover
 {
-    background-color: #BA1C1F;
+    background-color: #033d3d;
     color: white;
     
 }
 .article
 {
     
-    background-color:  #ebebeb;
+    background-color:  #ffffff;
     padding: 30px;
     padding-bottom: 0px;
 
@@ -68,7 +77,7 @@ font-size: 15px;
 .box
 {
     
-    background-color: #cccccc;
+    background-color: #ffffff;
     display: block;
     
    
