@@ -77,6 +77,8 @@ class polls(db.Model):
       question= db.StringProperty()
       created = db.DateProperty(auto_now_add = True)
       winner=  db.StringProperty()
+      players = db.StringListProperty()
+      votes = db.StringListProperty()
       
      
      
@@ -315,6 +317,8 @@ class PollUploadHandler(Handler):
         question = self.request.get("question")
         picture  = self.request.get("picture") 
         winner   = self.request.get("winner")
+        players = self.request.get("players")
+        votes = self.request.get("votes")
        
         if self.request.get('picture'):
             piclink = self.request.get('picture')
@@ -324,7 +328,8 @@ class PollUploadHandler(Handler):
             picture = "/images/default.jpg"
        
         a = polls(question = question,winner = winner,picture = picture)
-         
+        a.players = ["Messi","Ronaldo","Iniesta"]
+        a.votes = ["6","10","11"]
         a.put();
        
         self.redirect('/')

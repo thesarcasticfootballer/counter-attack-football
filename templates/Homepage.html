@@ -20,29 +20,43 @@
 		load_page();
 	};
 	function load_page()
-	{
+	{ 
 		var xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
+		
+		xhttp.onreadystatechange = function() { //document.getElementById("ls").style.visibility = "hidden";
+			
 		    if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
 		       var response = xhttp.responseText
 		    	if (!response){
 		       		flag = 1;
 				}
 		    	else{
+					
 		       		document.getElementById("articles").innerHTML += xhttp.responseText;
 		       		var selector = $("li.active");
 					$('.pagination li').removeClass('active');
 					selector.next().addClass('active');
-		   		}
+
+				}
 		    }
 		};
 		if(flag==0){
 			var host = window.location.origin;
+			
 			xhttp.open("POST", host, true);
+			//document.getElementById("ls").style.visibility = "visible";
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		
 			xhttp.send("page="+page); 
+        
 			page = page + 1;
+
+			
+		
+		
 		}
+			
+		
 	};
 
 
@@ -55,7 +69,7 @@
 
 	<div class="container-fluid" id="articles">
 
-		<div class="row">
+		<div class="row" id = "mainnews">
 			<div class = "col-lg-6">
 				{% for article in data1 %}
 
@@ -118,6 +132,8 @@
 								{% endfor %}
 								</ul>
 							</div></div>
+						
+
 							{% include 'footer.html' %} 
 							<script>
 								$('.carousel').carousel({
