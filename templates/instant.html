@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Instant articles uploader</title>
+        <script>
+            var article;
+            function sendtoserver(){
+                var params = "id=" + document.getElementById("id").value + "&flag=0";
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function(){
+                    if (this.readyState == XMLHttpRequest.DONE && this.status == 200){
+                        article = JSON.parse(xhttp.responseText);
+                        document.getElementById("result").value = article["id"];                       
+                    }
+                }
+                xhttp.open("POST",window.location.href,true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");                
+                xhttp.send(params);              
+            }
+            function checkstatus(){
+                var params = "id=" + article["id"] + "&flag=1";
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function(){
+                    if (this.readyState == XMLHttpRequest.DONE && this.status == 200){
+                        //var response = JSON.parse(xhttp.responseText);
+                        response = xhttp.responseText;
+                        document.getElementById("result").value = response;
+                    }  
+                }
+                xhttp.open("POST",window.location.href,true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");                
+                xhttp.send(params);   
+            }
+        </script>
+    </head>
+    <body>
+        <h2>Facebook Instant Articles uploader</h2>
+        <form id="formid">
+            Article ID<input type="text" name="id" id="id"><br>
+            <input type="button" onclick="sendtoserver()" value="Post to FB">
+            <input type="button" onclick="checkstatus()" value="Check Status">
+        </form>
+        <textarea id="result"></textarea>
+    </body>
+</html>

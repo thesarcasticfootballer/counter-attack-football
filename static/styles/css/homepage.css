@@ -24,75 +24,29 @@ position: absolute;
     
    
 }
-.bigbox,.smallbox
-{
-    background-color:white;
-    margin: -10px;
-    margin-bottom: 20px;
-    padding: 10px;
-    box-shadow: 2px 2px 5px #888888;
-    
-}
-.bigbox a img
-{
-    ;
-}
-.bigbox a
-{
-      font-family: "Open Sans script=all rev=1";
-    font-size: 30px;
-    text-decoration: none;
-    color: black;
-    font-weight: 400;
-    font-style: normal;
-    
-}
-.bigbox a:hover{
-  font-family: Tahoma, Geneva, sans-serif;
-    font-size: 30px;
-    text-decoration: none;
-    color: #337ab7;
-    font-weight: 500;
-}
 
-
-.smallbox a
-{
-      font-family: "Open Sans script=all rev=1";
-    font-size: 19px;
-    text-decoration: none;
-    color: black;
-    font-weight: 500;
-    font-style: normal;
-  
-}
-.smallbox a:hover{
-  font-family: Tahoma, Geneva, sans-serif;
-    font-size: 17px;
-    text-decoration: none;
-    color: #337ab7;
-    font-weight: 600;
-}
 .big-box
 {
     position: relative;
     width: 100%;
     color: white;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 h2
 {
     position: absolute;
-    top: 75%;
-    left: 0px;
-    width: 100%;
+   bottom: 0%;
+   right: 0%;
+   left: 0%;
     
 }
-h2 span { 
+span h2 { 
    color: white; 
-   font: bold 30pxx/45px Helvetica, Sans-Serif; 
+   font:  30px/45px Arial, Sans-Serif; 
    letter-spacing: -1px;  
    background-color:  #033d3d;/* fallback color */
-  
+margin : 0px;
    padding-left: 10px;
    padding-right: 10px;
 padding-top: 1px;
@@ -104,25 +58,31 @@ padding-bottom: 1px;
     position: relative;
     width: 100%;
     color: white;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 h3
 {
+  
     position: absolute;
-    top: 55%;
-    left: 0px;
-    width: 100%;
-    
+   bottom: 0%;
+   right: 0%;
+   left: 0%;
 }
-h3 span { 
+span h3 { 
    color: white; 
-   font: bold 22px Helvetica, Sans-Serif; 
+   font:  22px Arial, Sans-Serif; 
    letter-spacing: -1px;  
    background-color:  #033d3d;/* fallback color */
-  
+  margin : 0px;
    padding-left: 10px;
    padding-right: 10px;
 padding-top: 1px;
 padding-bottom: 1px;
 
 
+}
+.text-center
+{
+    visibility: hidden;
 }

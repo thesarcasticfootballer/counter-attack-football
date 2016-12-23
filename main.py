@@ -20,15 +20,18 @@ import jinja2
 import re
 import logging
 from google.appengine.ext import db
+from google.appengine.ext import ndb
 from google.appengine.api import users
 from google.appengine.api import images
 import datetime
 import urllib2
+import urllib
 import time
 import json
 from google.appengine.api import memcache
 import cgi
 from google.appengine.ext import ndb
+import math
 
 template_dir = os.path.join(os.path.dirname(__file__),'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
@@ -38,19 +41,23 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
 CLIENT_ID = "636222690890-s7qdqru8kkk7v349r333i74q2a01btk5.apps.googleusercontent.com"
 FB_ID = "945733035525846|e4017e80ce68c389ebcc98ba625b9b46"
 FB_APP = '945733035525846'
+ACCESS_TOKEN = "EAANcI6GihtYBAOylXScCHFJoRgcaIWJoAM4lAlX0CwmuZAISPzwd6J0ZChQUf3Oa7PccWOBuHIOAZCQuUt8KQ6HBCkrgljjQUGRvtHhAKFPkOZBUpeyScJaUZBjfTYrs0HTmH3hShm6fnNIz3cZCTZBA0ca0fA2Jx8ZD"
+PAGE_ID = "1029387337137487"
+
+
 
 
 class Handler(webapp2.RequestHandler):
-	def write(self,*a,**kw):
-		self.response.out.write(*a,**kw)
-	def render_str(self,template,**params):
-		t = jinja_env.get_template(template)
-		return t.render(params)
-	def render(self,template,**kw):
-		self.write(self.render_str(template,**kw))
-	def cache(self, key):
-		return memcache.get(key)
-
+    def write(self,*a,**kw):
+        self.response.out.write(*a,**kw)
+    def render_str(self,template,**params):
+        t = jinja_env.get_template(template)
+        return t.render(params)
+    def render(self,template,**kw):
+        self.write(self.render_str(template,**kw))
+    def cache(self, key):
+        return memcache.get(key)
+        
 
 
 		
@@ -73,55 +80,111 @@ class facts(ndb.Model):
 	  upvotes = ndb.IntegerProperty(default = 0)
 	  tags= ndb.StringProperty(repeated=True)
 	  
-	
-	
-	
-class WriteFormHandler(Handler):                             
-	def get(self):     
-		self.render("WriteForm.html")
-	def post(self):
-		headline = self.request.get("headline")
-		content  = self.request.get("content") 
-		author   = self.request.get("author")
-		sideheadline = self.request.get("sideheadline")
-		featured = int(self.request.get("featured"))
-		if self.request.get('picture'):
-			piclink = self.request.get('picture')
-			tempvar="upload//c_scale,h_900,q_auto:good,w_1600"
-			picture =piclink.replace('upload',tempvar)
-		else:
-			picture = "/images/default.jpg"
-	   
-		a = article(headline = headline,content =content,author = author,picture = picture,sideheadline = sideheadline,featured = featured)
-		 
-		a.put();
-		memcache.delete('home')
-		memcache.delete('popular')
-		self.redirect('/')
+     
 
+class polls(ndb.Model):
+      picture = ndb.StringProperty()
+      question= ndb.StringProperty()
+      created = ndb.DateProperty(auto_now_add = True)
+      winner=  ndb.StringProperty()
+      votelist = ndb.StringProperty()
+      
+     
+     
+class WriteFormHandler(Handler):                             
+    def get(self):     
+        self.render("WriteForm.html")
+    def post(self):
+        headline = self.request.get("headline")
+        content  = self.request.get("content") 
+        author   = self.request.get("author")
+        sideheadline = self.request.get("sideheadline")
+        featured = int(self.request.get("featured"))
+        if self.request.get('picture'):
+            piclink = self.request.get('picture')
+            tempvar="upload/c_scale,h_900,q_auto:good,w_1600"
+            picture =piclink.replace('upload',tempvar)
+        else:
+            picture = "/images/default.jpg"  
+        a = article(headline = headline,content =content,author = author,picture = picture,sideheadline = sideheadline,featured = featured)  
+        key = a.put()
+        article_id = key.id()
+        memcache.delete(key='homepage')
+        #wait for a small duration so that memcache is cleared before it can be reused
+        time.sleep(0.1)
+        self.redirect('/')
+
+class InstantArticleHandler(Handler):
+    def get(self):
+        self.render("instant.html")
+    def post(self):
+        flag = self.request.get("flag")
+        article_id = self.request.get("id")
+        if flag == '0':
+            data = article.get_by_id(int(article_id))
+            fb_article = self.render_str("instantarticle.html",data = data,article_id = article_id)
+            url = "https://graph.facebook.com/%s/instant_articles" % (PAGE_ID)
+            values = {"access_token":ACCESS_TOKEN,"html_source":fb_article,"published":"true","development_mode":"false"}
+            params = urllib.urlencode(values)
+            response = urllib2.urlopen(url,data=params)
+            msg_to_client = response.read()
+            response.close()
+        else:
+            status_url = "https://graph.facebook.com/%s?access_token=%s" % (article_id,ACCESS_TOKEN)
+            response = urllib2.urlopen(status_url)
+            msg_to_client = response.read()
+            response.close()
+        self.response.out.write(msg_to_client)
 
 class HomeHandler(Handler):
-  def get(self):
-		content = self.cache('homepage')
-		if content:
-				   data1 = content['data1']
-				   data2 = content['data2']
-				   data3 = content['data3']
-				   cdata = content['cdata']
-				   ddata = content['ddata']
-		else:
-			data1 = list(article.gql('  order by created desc limit 1 '))
-			data2 = list(article.gql(' order by created desc limit 2 offset 1'))
-			data3 = list(article.gql(' order by created desc limit 2 offset 3'))
-			cdata = list(article.gql(' order by created desc limit 6 offset 1'))
-			ddata = list(article.gql('  order by created desc limit 1 offset 7'))
-			content = {'data1':data1,'data2':data2,'data3':data3,'cdata':cdata,'ddata':ddata}
-			memcache.add(key='homepage',value=content,time=3600)
-		self.render("Homepage.html",data1 = data1,data2 =data2,data3 = data3,cdata =cdata,ddata=ddata)
-
-		
-
-
+    def get(self):
+        try:
+            page = int(self.request.get('page'))
+        except ValueError:
+            page = 1
+        if page > 1:
+            data1,data2,data3 = self.goto_page(page)
+        else:
+            content = memcache.get(key='homepage')
+            if content is not None:
+                data1 = content['data1']
+                data2 = content['data2']
+                data3 = content['data3']
+            else:
+                all_data = list(article.gql(' order by created desc limit 5'))
+                data1 = all_data[0:1]
+                data2 = all_data[1:3]
+                data3 = all_data[3:]
+                content = {'data1': data1,'data2': data2,'data3': data3}
+                memcache.add(key='homepage',value=content,time=3600)
+        #total_pages = article.all(keys_only=True).count(100)
+        total_entries = memcache.get("total_entries")
+        if not total_entries:
+            total_entries = 100
+        total_pages = math.ceil(total_entries/6.0)
+        self.render("Homepage.html",data1 = data1,data2 = data2,data3 = data3, total_pages = int(total_pages), page = int(page))
+    def post(self):
+    	data1 = []
+    	
+        try:
+            page = int(self.request.get('page'))
+        except ValueError:
+            page = 1
+        if page > 1:
+            data1 = self.goto_page(page)
+        if not data1:
+        	self.response.out.write("")
+        else:
+        	self.render("pagination.html", data1 = data1)
+    def goto_page(self,page):
+        # 5 elements per page
+        position = (page)*6 -5
+        query = " order by created desc limit 6 offset %s" % position
+        all_data = list(article.gql(query))
+        data1 = all_data
+        #self.render("Homepage.html",data1 = data1,data2 = data2,data3 = data3)
+        return (data1)
+        
 
 class GSigninHandler(Handler):
 	def get(self):
@@ -171,31 +234,33 @@ class FBSigninHandler(Handler):
 
 
 class MoveDBHandler(Handler):
-	def get(self):
-		keys = article.all(keys_only =True)
-		for k in keys:
-			#data = article.get_by_id(k.id())
-			#url = data.picture
-			#url = url.replace('/q_auto','',1)
-			#url = url.replace('upload/','upload/q_auto/',1)
-			#data.picture = url
-			#data.put()
-			total = memcache.get(str(k.id())+"total")
-			views = memcache.get(str(k.id())+"views")
-			if total or views:
-				data = article.get_by_id(k.id())
-				if (total > data.total):
-					data.total = total
-					data.up = memcache.get(str(k.id())+"up")
-					#memcache.delete(str(k.id())+"total")
-					#memcache.delete(str(k.id())+"up")
-				if (views > data.views):
-					data.views = views
-					#memcache.delete(str(k.id())+"views")
-				data.put()
-		memcache.flush_all()
-				 
-			
+    def get(self):
+        keys = article.all(keys_only =True)
+        total_entries = keys.count()
+        for k in keys:
+            #data = article.get_by_id(k.id())
+            #url = data.picture
+            #url = url.replace('/q_auto','',1)
+            #url = url.replace('upload/','upload/q_auto/',1)
+            #data.picture = url
+            #data.put()
+            total = memcache.get(str(k.id())+"total")
+            views = memcache.get(str(k.id())+"views")
+            if total or views:
+                data = article.get_by_id(k.id())
+                if (total > data.total):
+                    data.total = total
+                    data.up = memcache.get(str(k.id())+"up")
+                    #memcache.delete(str(k.id())+"total")
+                    #memcache.delete(str(k.id())+"up")
+                if (views > data.views):
+                    data.views = views
+                    #memcache.delete(str(k.id())+"views")
+                data.put()
+        memcache.flush_all()
+        memcache.add(key="total_entries",value=total_entries,time=4000)
+        
+
 class NewsArticleHandler(Handler):
 	def post(self, post_id):
 		data = article.get_by_id(int(post_id))
@@ -217,7 +282,6 @@ class NewsArticleHandler(Handler):
 		ans = "%s,%s" % (up,(total-up))
 		self.response.set_cookie('vote',"success",path='/article/'+ post_id,expires=d)
 		self.response.out.write(ans)
-
 	def get(self,post_id):
 		content = self.cache(post_id)
 		if content:
@@ -250,8 +314,6 @@ class NewsArticleHandler(Handler):
 
 
 class DisplayallHandler(Handler):
-
-
 	def get(self):
 		data = list(article.gql("order by created desc limit 10"))
 		self.render("pagination.html",data=data)
@@ -261,8 +323,7 @@ class FactsHandler(Handler):
 		   self.render("facts.html");    
 class FactUploadHandler(Handler):
 	  def get(self):
-		   self.render("factsupload.html");    
-	   
+		   self.render("factsupload.html");    	   
 	  def post(self):
 		  facttext = self.request.get("facttext")
 		  tags   = self.request.get("tags")
@@ -271,27 +332,52 @@ class FactUploadHandler(Handler):
 		  for i in var:
 			if i=='':
 				var.remove('')
-
 		  if self.request.get('picturelink'):
 			 piclink = self.request.get('picturelink')
 			 tempvar="upload//c_scale,h_900,q_auto:good,w_1600"
 			 picturelink =piclink.replace('upload',tempvar)
 		  else:
 			 picturelink = "/images/default.jpg"
-		  
-
-		  b = facts(facttext =facttext,tags = var,picturelink = picturelink)
-		 
+		  b = facts(facttext =facttext,tags = var,picturelink = picturelink)	 
 		  b.put();
 		  self.redirect('/')
+
+  
+class PollsHandler(Handler):
+      def get(self):
+          pollcontent = self.cache('pollpage')
+          if pollcontent:
+          	pdata1  = pollcontent['pdata1']
+          else:
+            pdata1 = list(polls.gql('  order by created desc limit 4 '))
+          	pollcontent = {'pdata1':pdata1}
+          	memcache.add(key='pollpage',value=pollcontent,time=3600)
+          self.render("polls.html",pdata1 =pdata1)
+   
+class PollUploadHandler(Handler):
+      def get(self):
+           self.render("pollsupload.html");    
+      def post(self):
+        question = self.request.get("question")
+        picture  = self.request.get("picture") 
+        winner   = self.request.get("winner")    
+        if self.request.get('picture'):
+            piclink = self.request.get('picture')
+            tempvar="upload/c_scale,h_900,q_auto:good,w_1600"
+            picture =piclink.replace('upload',tempvar)
+        else:
+            picture = "/images/default.jpg"  
+        votelist = {'Player1': 6, 'Player2': 7, 'Player3': 5}    
+        a=polls(question = question,winner = winner,picture = picture,votelist = json.dumps(votelist))
+        a.put();     
+        self.redirect('/')
 
 
 
 
 
 app = webapp2.WSGIApplication([
-		('/article',WriteFormHandler),('/factupload',FactUploadHandler),('/',HomeHandler),
-  
-	(r'/news/(\d+)',NewsArticleHandler),
-	('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
-	('/move', MoveDBHandler),('/all',DisplayallHandler),('/facts',FactsHandler)], debug=False)
+        ('/article',WriteFormHandler),('/factupload',FactUploadHandler),('/',HomeHandler),('/pollupload',PollUploadHandler),('/polls',PollsHandler),
+    (r'/news/(\d+)',NewsArticleHandler),
+    ('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
+    ('/move', MoveDBHandler),('/all',DisplayallHandler),('/facts',FactsHandler),('/instant',InstantArticleHandler)], debug=False)

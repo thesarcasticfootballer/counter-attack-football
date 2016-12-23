@@ -1,34 +1,13 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-	<head>
-		<title>All posts</title>
-		<script>
-			
-			var offset = 0;
-			function sendserver(val)
-			{
+<br><br>
+<div class="row">
+	
+		{% for article in data1 %}
+<div class = "col-lg-4">
+	<div class = "small-box">
+        	<a href ="/news/{{article.key().id()}}">
 
-			}
-				
+				<img src = "{{article.picture}}"></a><span><h3>{{article.headline}}</h3</span>
+</div></div>
+{% endfor %}
 
-		</script>
-	</head>
-
-	<body>
-		{#% include 'navbar.html' %#}
-		{% for item in data %}
-		<div>
-			<p>{{item.headline}}</p>
-			{{item.content | safe}}	
-		</div>
-		{% endfor %}
-
-		<button onclick="sendserver(1)">Next</button>
-		<button onclick="sendserver(-1)">Prev</button>
-	</body>
-</html>
+</div></div>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" prefix="op: http://media.facebook.com/op#">
+  <head>
+    <meta charset="utf-8">
+    <link rel="canonical" href="http://sarcasticfootballer.com/news/{{article_id}}">
+    <meta property="op:markup_version" content="v1.0">
+    <meta property="fb:article_style" content="default">
+  </head>
+  <body>
+<article>
+      <header>
+        <!-- The title and subtitle shown in your Instant Article -->
+        <h1>{{data.headline}}</h1>
+        <h2>{{data.sideheadline}}</h2>
+
+        <!-- The date and time when your article was originally published -->
+        <time class="op-published" datetime="{{data.created}}"></time>
+
+
+        <!-- The authors of your article -->
+        <address>
+          <a rel="facebook" href="">{{data.author}}</a>
+          
+        </address>
+     
+        <!-- The cover image shown inside your article --> 
+        <figure>
+          <img src="{{data.picture}}" />
+        </figure>   
+
+        <!-- A kicker for your article --> 
+        <h3 class="op-kicker">
+          Sarcastic Footballer
+        </h3>
+
+      </header>
+
+      <!-- Article body goes here -->
+
+      <!-- Body text for your article -->
+      {{data.content | safe}}
+
+
+      <!-- Analytics code for your article -->
+      <figure class="op-tracker">
+          <iframe src="http://sarcasticfootballer.com/news/{{article_id}}" hidden></iframe>
+      </figure>
+
+      <footer>
+        <!-- Credits for your article -->
+   
+
+        <!-- Copyright details for your article -->
+        
+      </footer>
+    </article>
+  </body>
+</html>

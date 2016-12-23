@@ -19,18 +19,17 @@ font-weight: 600;
 {
 
 font-size: 20px;
-font-family: "Roboto script=all rev=1";
- color: black;
-    font-weight: 400;
+ color: #111111;
+   
     font-style: normal;
 }
 .article-sideheadline,.title-header
 {
    
-font-size: 20px;
+font-size: 25px;
 font-weight: 500;
  margin-top: 0px;
-    color: #D75C37;
+    color: #008080;
 }
 .article-img
 {
@@ -45,12 +44,12 @@ font-weight: 500;
 	font-variant: small-caps;
 	font-weight: bold;
 	line-height: 47.5px;
-    color: #D75C37;  
+    color: #008080;  
     text-align: center; 
 }
 .btn-default:hover
 {
-    background-color: #BA1C1F;
+    background-color: #033d3d;
     color: white;
     
 }
