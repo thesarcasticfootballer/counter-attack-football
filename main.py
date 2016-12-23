@@ -20,6 +20,7 @@ import jinja2
 import re
 import logging
 from google.appengine.ext import db
+from google.appengine.ext import ndb
 from google.appengine.api import users
 from google.appengine.api import images
 import datetime
@@ -41,6 +42,8 @@ FB_ID = "945733035525846|e4017e80ce68c389ebcc98ba625b9b46"
 FB_APP = '945733035525846'
 ACCESS_TOKEN = "EAANcI6GihtYBAOylXScCHFJoRgcaIWJoAM4lAlX0CwmuZAISPzwd6J0ZChQUf3Oa7PccWOBuHIOAZCQuUt8KQ6HBCkrgljjQUGRvtHhAKFPkOZBUpeyScJaUZBjfTYrs0HTmH3hShm6fnNIz3cZCTZBA0ca0fA2Jx8ZD"
 PAGE_ID = "1029387337137487"
+
+
 
 
 class Handler(webapp2.RequestHandler):
@@ -75,13 +78,12 @@ class facts(db.Model):
       upvotes =  db.IntegerProperty(default = 0)
      
 
-class polls(db.Model):
-      picture = db.StringProperty()
-      question= db.StringProperty()
-      created = db.DateProperty(auto_now_add = True)
-      winner=  db.StringProperty()
-      players = db.StringListProperty()
-      votes = db.StringListProperty()
+class polls(ndb.Model):
+      picture = ndb.StringProperty()
+      question= ndb.StringProperty()
+      created = ndb.DateProperty(auto_now_add = True)
+      winner=  ndb.StringProperty()
+      votelist = ndb.StringProperty()
       
      
      
@@ -342,8 +344,7 @@ class PollUploadHandler(Handler):
         question = self.request.get("question")
         picture  = self.request.get("picture") 
         winner   = self.request.get("winner")
-        players = self.request.get("players")
-        votes = self.request.get("votes")
+
        
         if self.request.get('picture'):
             piclink = self.request.get('picture')
@@ -352,9 +353,10 @@ class PollUploadHandler(Handler):
         else:
             picture = "/images/default.jpg"
        
-        a = polls(question = question,winner = winner,picture = picture)
-        a.players = ["Messi","Ronaldo","Iniesta"]
-        a.votes = ["6","10","11"]
+       
+        votelist = {'Player1': 6, 'Player2': 7, 'Player3': 5}
+        
+        a=polls(question = question,winner = winner,picture = picture,votelist = json.dumps(votelist))
         a.put();
        
         self.redirect('/')

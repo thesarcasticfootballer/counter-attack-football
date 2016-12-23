@@ -33,9 +33,9 @@
         ]);
 
         // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night',
-                       'width':400,
-                       'height':300};
+        var options = {'title':,
+                       'width':700,
+                       'height':500};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
@@ -51,12 +51,13 @@
 {% for poll in pdata1 %}
 <div class = "col-lg-12">
 <h2>{{poll.question}}</h2><br>
-{{poll.players}}
+{{poll.votelist}}
 <div class = "col-lg-6">
 <img src = "{{poll.picture}}">
+
 </div>
 <div class = "col-lg-6">
-  <div id="chart_div"></div></div>
+  <div id="{{poll.key.id()}}"></div></div>
  </div> {% endfor %}</div>
 
 </body>
