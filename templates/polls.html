@@ -5,7 +5,7 @@
     
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   
-<link href="styles/css/facts.css" rel="stylesheet">
+<link href="styles/css/polls.css" rel="stylesheet">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
 
@@ -31,8 +31,8 @@
 
         // Set chart options
         var options = {'title': '{{poll.question}}',
-                       'width':700,
-                       'height':300,pieHole: 0.4,colors: ['#008080','#d56100']};
+                       'width':500,
+                       'height':400,pieHole: 0.4,colors: ['#008080','#d56100']};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById({{poll.key.id()}}));
@@ -45,17 +45,20 @@
 {% include 'navigationbar.html' %}
 <div class = "container-fluid">
 {%for poll in pdata1%}
-
+<div class = "row">
 <div class = "col-lg-12">
-<h2>{{poll.question}}</h2><br>
+<h1 class = "question">{{poll.question}}</h2><br>
 
-<div class = "col-lg-6">
-<img src = "{{poll.picture}}">
+<div class = "pollpicture col-lg-7">
+  
+<img src = "{{poll.picture}}" style = "width:100%"><br>
 
 </div>
-<div class = "col-lg-6">
-  <div id="{{poll.key.id()}}"></div></div>
- </div> {% endfor %}</div>
+<div class = "pollright col-lg-5">
+  <div class = "pollwinner" ><h1 class = "winner">{{poll.winner}}</div>
+  <div id="{{poll.key.id()}}"></div>
+  
+ </div> </div></div>{% endfor %}</div>
 
 </body>
 </html>

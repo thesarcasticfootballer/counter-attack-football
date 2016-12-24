@@ -1,0 +1,44 @@
+.question
+{
+    font-size: 45px;
+    font-family: "Open Sans script=all rev=1";
+
+    text-decoration: none;
+    color: black;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+    vertical-align: middle;
+
+}
+.pollpicture
+{
+    border-right: solid 4px #008080;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin-bottom: 10px;
+}
+.pollwinner
+{
+   border-bottom : solid 4px #008080; 
+  
+   text-align: center;
+   vertical-align: middle;
+ 
+   margin-left: -15px;
+   margin-top: -20px;
+   background-color: #008080;
+
+}
+.winner
+{
+      font-size: 45px;
+    font-family: 'Impact, Charcoal, sans-serif';
+
+    color: white;
+     text-align: center;
+     padding-top: 10px;
+     font-weight: 700;
+   
+  
+}

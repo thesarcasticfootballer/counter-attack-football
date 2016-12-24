@@ -355,14 +355,25 @@ class PollUploadHandler(Handler):
       def post(self):
         question = self.request.get("question")
         picture  = self.request.get("picture") 
-        winner   = self.request.get("winner")    
+        winner   = self.request.get("winner")
+        players = self.request.get("players")  
+        votes = self.request.get("votes")  
+        p = players.split(',')
+        v = votes.split(',')
+        total = len(p)
+        votelist = {}
+        for i in range(0,total):
+            k=p[i]
+            val = v[i]
+            votelist[k]=int(val)
+          
         if self.request.get('picture'):
             piclink = self.request.get('picture')
             tempvar="upload/c_scale,h_900,q_auto:good,w_1600"
             picture =piclink.replace('upload',tempvar)
         else:
             picture = "/images/default.jpg"  
-        votelist = {'Player1': 6, 'Player2': 7, 'Player3': 5} 
+        #votelist = {'Player1': 6, 'Player2': 7, 'Player3': 5} 
         tempvotelist = map(list,votelist.items())
         a=polls(question = question,winner = winner,picture = picture,votelist = json.dumps(tempvotelist))
         a.put();     
