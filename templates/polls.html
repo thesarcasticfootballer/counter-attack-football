@@ -13,45 +13,42 @@
       google.charts.load('current', {'packages':['corechart']});
 
       // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
+   
 
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
       // draws it.
-      function drawChart() {
-
+      {% for poll in pdata1 %}
+         google.charts.setOnLoadCallback(a{{poll.key.id()}});
+      function a{{poll.key.id()}}()
+      {
+        
         // Create the data table.
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Player');
         data.addColumn('number', 'Votes');
-        data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
-        ]);
+        data.addRows({{poll.votelist|safe}});
 
         // Set chart options
-        var options = {'title':,
+        var options = {'title': '{{poll.question}}',
                        'width':700,
-                       'height':500};
+                       'height':300,pieHole: 0.4,colors: ['#008080','#d56100']};
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.PieChart(document.getElementById({{poll.key.id()}}));
         chart.draw(data, options);
-      }
+      }{% endfor %}
     </script>
     </head> 
     <body>
    
 {% include 'navigationbar.html' %}
 <div class = "container-fluid">
+{%for poll in pdata1%}
 
-{% for poll in pdata1 %}
 <div class = "col-lg-12">
 <h2>{{poll.question}}</h2><br>
-{{poll.votelist}}
+
 <div class = "col-lg-6">
 <img src = "{{poll.picture}}">
 
