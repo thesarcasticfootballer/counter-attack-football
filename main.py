@@ -41,7 +41,7 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
 CLIENT_ID = "636222690890-s7qdqru8kkk7v349r333i74q2a01btk5.apps.googleusercontent.com"
 FB_ID = "945733035525846|e4017e80ce68c389ebcc98ba625b9b46"
 FB_APP = '945733035525846'
-ACCESS_TOKEN = "EAANcI6GihtYBAOylXScCHFJoRgcaIWJoAM4lAlX0CwmuZAISPzwd6J0ZChQUf3Oa7PccWOBuHIOAZCQuUt8KQ6HBCkrgljjQUGRvtHhAKFPkOZBUpeyScJaUZBjfTYrs0HTmH3hShm6fnNIz3cZCTZBA0ca0fA2Jx8ZD"
+ACCESS_TOKEN = u"EAANcI6GihtYBAOylXScCHFJoRgcaIWJoAM4lAlX0CwmuZAISPzwd6J0ZChQUf3Oa7PccWOBuHIOAZCQuUt8KQ6HBCkrgljjQUGRvtHhAKFPkOZBUpeyScJaUZBjfTYrs0HTmH3hShm6fnNIz3cZCTZBA0ca0fA2Jx8ZD"
 PAGE_ID = "1029387337137487"
 
 
@@ -124,7 +124,7 @@ class InstantArticleHandler(Handler):
             data = article.get_by_id(int(article_id))
             fb_article = self.render_str("instantarticle.html",data = data,article_id = article_id)
             url = "https://graph.facebook.com/%s/instant_articles" % (PAGE_ID)
-            values = {"access_token":ACCESS_TOKEN,"html_source":fb_article,"published":"true","development_mode":"false"}
+            values = {u"access_token":ACCESS_TOKEN,u"html_source":fb_article.encode('utf-8'),u"published":u"true",u"development_mode":u"false"}
             params = urllib.urlencode(values)
             response = urllib2.urlopen(url,data=params)
             msg_to_client = response.read()
@@ -132,7 +132,7 @@ class InstantArticleHandler(Handler):
         else:
             status_url = "https://graph.facebook.com/%s?access_token=%s" % (article_id,ACCESS_TOKEN)
             response = urllib2.urlopen(status_url)
-            msg_to_client = response.read()
+            msg_to_client = json.loads(response.read())
             response.close()
         self.response.out.write(msg_to_client)
 
