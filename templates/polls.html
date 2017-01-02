@@ -32,6 +32,7 @@
         // Set chart options
         var options = {'title': '{{poll.question}}',
                        'width':700,
+                       'legend': 'right',
                        'height':400,pieHole: 0.4,colors: ['#008080','#d56100']};
 
         // Instantiate and draw our chart, passing in some options.
@@ -44,6 +45,9 @@
    
 {% include 'navigationbar.html' %}
 <div class = "container-fluid">
+  <div class = "col-lg-10"></div>
+		<div class = "col-lg-2">
+<div class="addthis_inline_follow_toolbox_56y1"></div></div>
 {%for poll in pdata1%}
 <div class = "row">
 <div class = "col-lg-12">
@@ -56,9 +60,9 @@
 </div>
 <div class = "pollright col-lg-5">
   <div class = "pollwinner" ><h1 class = "winner">{{poll.winner}}</div>
-  <div id="{{poll.key.id()}}"></div>
+  <div id="{{poll.key.id()}}" width="90%"></div>
   
  </div> </div></div>{% endfor %}</div>
-
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5762625c02c749c4"></script> 
 </body>
 </html>

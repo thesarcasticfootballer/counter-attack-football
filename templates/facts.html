@@ -9,7 +9,15 @@
 
     </head> 
     <body>
-   
 {% include 'navigationbar.html' %}
+    <div class = "container-fluid">
+<div class = "row">
+   {% for fact in factdata %}
+
+    <div class = "col-md-6">
+   {{fact.facttext|safe}}
+   <img src = "{{fact.picturelink}}" width = "100%"></div>
+   {% endfor %}</div>
+</div>
 </body>
 </html>
