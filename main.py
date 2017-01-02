@@ -115,7 +115,6 @@ class WriteFormHandler(Handler):
 		self.redirect('/')
 
 class InstantArticleHandler(Handler):
-<<<<<<< HEAD
     def get(self):
         self.render("instant.html")
     def post(self):
