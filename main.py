@@ -346,7 +346,7 @@ class FactUploadHandler(Handler):
 class PollsHandler(Handler):
   def get(self):
       pollcontent = self.cache('pollpage')
-      pdata1 = list(polls.gql('  order by created desc limit 3 '))
+      pdata1 = list(polls.gql('  order by created desc limit 20 '))
       self.render("polls.html",pdata1 = pdata1)
 
 class PollUploadHandler(Handler):
