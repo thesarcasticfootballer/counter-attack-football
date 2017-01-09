@@ -166,7 +166,6 @@ class HomeHandler(Handler):
 		self.render("Homepage.html",data1 = data1,data2 = data2,data3 = data3, total_pages = int(total_pages), page = int(page))
 	def post(self):
 		data1 = []
-		
 		try:
 			page = int(self.request.get('page'))
 		except ValueError:
