@@ -379,6 +379,9 @@ class PollUploadHandler(Handler):
 		a=polls(question = question,winner = winner,picture = picture,votelist = json.dumps(tempvotelist))
 		a.put();     
 		self.redirect('/')
+class AboutusHandler(Handler):
+  def get(self):
+	  self.render("aboutus.html")
 
 
 
@@ -388,4 +391,4 @@ app = webapp2.WSGIApplication([
 		('/article',WriteFormHandler),('/factupload',FactUploadHandler),('/',HomeHandler),('/pollupload',PollUploadHandler),('/polls',PollsHandler),
 	(r'/news/(\d+)',NewsArticleHandler),
 	('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
-	('/move', MoveDBHandler),('/all',DisplayallHandler),('/facts',FactsHandler),('/instant',InstantArticleHandler)], debug=False)
+	('/move', MoveDBHandler),('/all',DisplayallHandler),('/facts',FactsHandler),('/aboutus',AboutusHandler),('/instant',InstantArticleHandler)], debug=False)
