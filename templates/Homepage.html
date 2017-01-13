@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Home</title>
 
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -72,16 +72,17 @@
 		<div class = "col-lg-10"></div>
 		<div class = "col-lg-2">
 <div class="addthis_inline_follow_toolbox_56y1"></div></div>
-		<div class="row" id = "mainnews">
+		<div class="row" id = "mainnews" itemscope itemtype="http://schema.org/ItemList">
 			<div class = "col-lg-6">
 				{% for article in data1 %}
 
-				<div class = "big-box">
+				<div class = "big-box" itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope>
+				<meta itemprop="position" content="{{loop.index}}" />
+				
 
+					<a itemprop="url" href ="/news/{{article.key().id()}}">
 
-					<a href ="/news/{{article.key().id()}}">
-
-						<img src = "{{article.picture}}"></a><span><h2>{{article.headline}}</h2></span>
+						<img itemprop="image" src = "{{article.picture}}"></a><span itemprop="name"><h2>{{article.headline}}</h2></span>
 
 					</div>
 					{% endfor %}
@@ -91,12 +92,13 @@
 
 						{% for article in data2 %}
 						<div class = "col-lg-6">
-							<div class = "small-box">
+							<div class = "small-box" itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope>
+							<meta itemprop="position" content="{{loop.index + 1}}" />
 
 
-								<a href ="/news/{{article.key().id()}}">
+								<a itemprop="url" href ="/news/{{article.key().id()}}">
 
-									<img src = "{{article.picture}}"></a><span><h3>{{article.headline}}</h3></span>
+									<img itemprop="image" src = "{{article.picture}}"></a><span itemprop="name"><h3>{{article.headline}}</h3></span>
 
 								</div>
 								</div>
@@ -106,12 +108,12 @@
 
 								{% for article in data3 %}
 								<div class = "col-lg-6">
-									<div class = "small-box">
+									<div class = "small-box" itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope>
+									<meta itemprop="position" content="{{loop.index + 3}}" />
 
+										<a itemprop="url" href ="/news/{{article.key().id()}}">
 
-										<a href ="/news/{{article.key().id()}}">
-
-											<img src = "{{article.picture}}"></a><span><h3>{{article.headline}}</h3></span>
+											<img itemprop="image" src = "{{article.picture}}"></a><span itemprop="name"><h3>{{article.headline}}</h3></span>
 
 										</div> 
 										</div>
@@ -126,12 +128,16 @@
  <hr style= "border: 4px solid #008080;">
  <div id="SC_TBlock_249465" class="SC_TBlock"></div> 
 							<div class="text-center">
-								<ul class="pagination">
+								<ul class="pagination" itemscope itemtype="http://schema.org/BreadcrumbList">
 								{% for i in range(1,total_pages+1) recursive %}
 								{% if i==page %}
-								<li class="active"><a href="/?page={{i}}">{{i}}</a></li>
+								<li class="active" itemprop="itemListElement" itemscope
+	  itemtype="http://schema.org/ListItem"><a itemprop="item url" href="/?page={{i}}"><span itemprop="name">{{i}}</span></a>
+	  <meta itemprop="position" content="{{loop.index}}" /></li>
 								{% else %}
-								<li><a href="/?page={{i}}">{{i}}</a></li>
+								<li itemprop="itemListElement" itemscope
+	  itemtype="http://schema.org/ListItem"><a itemprop="item url" href="/?page={{i}}"><span itemprop="name">{{i}}</span></a>
+	  <meta itemprop="position" content="{{loop.index}}" /></li>
 								{% endif %}
 								{% endfor %}
 								</ul>

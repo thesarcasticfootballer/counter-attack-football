@@ -144,7 +144,8 @@ class HomeHandler(Handler):
 		except ValueError:
 			page = 1
 		if page > 1:
-			data1,data2,data3 = self.goto_page(page)
+			data1 = self.goto_page(page)
+			data2 = data3 = []
 		else:
 			content = memcache.get(key='homepage')
 			if content is not None:
