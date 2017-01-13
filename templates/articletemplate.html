@@ -169,6 +169,7 @@ if (read_cookie("vote") && temp!=0)
 }(document, 'script', 'facebook-jssdk'));</script>
     <div class="container">
   <div class ="article" itemscope itemtype="http://schema.org/Article">
+  <meta itemprop="mainEntityOfPage" content="www.sarcasticfootballer.com">
             <div class="row">
                 <h1 class="article-headline" itemprop="headline">{{data.headline}}</h1>
                 
@@ -201,16 +202,18 @@ if (read_cookie("vote") && temp!=0)
          
             <div class="row">
                 <div class="fb-like" data-href="https://www.facebook.com/thesarcasticfootballer/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
-               <br> <div itemprop="image" itemscope itemtype="http://schema.org/ImageObject"><img itemprop="image url" class="article-img" src="{{data.picture}}" alt="Image not Found"></div>
-              <meta itemprop="height" content="900">
-              <meta itemprop="width" content="1600">
+               <br> <div itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+                      <img itemprop="image url" class="article-img" src="{{data.picture}}" alt="Image not Found">
+                      <meta itemprop="height" content="900">
+                      <meta itemprop="width" content="1600">
+                    </div>
             </div><br>
             <div class="row">
                 <h2 class="article-sideheadline" itemprop="alternativeHeadline">{{data.sideheadline}}</h2>
             </div>
             <br>
             <div class="row">
-                <h3 itemprop="articleContent" class="article-content">{{data.content | safe}}</h3>
+                <h3 itemprop="articleBody" class="article-content">{{data.content | safe}}</h3>
             </div><br>
 
             <div class="votingbox" id="voteform">
