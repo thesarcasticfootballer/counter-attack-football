@@ -179,7 +179,7 @@ if (read_cookie("vote") && temp!=0)
           
             <div class="row box">
                 <h4>
-                <span itemprop="datePublished">{{data.created}}</span>
+                <span itemprop="datePublished dateModified">{{data.created}}</span>
             
           |
                 BY  <span itemprop="author">{{data.author}}</span> |
@@ -201,14 +201,16 @@ if (read_cookie("vote") && temp!=0)
          
             <div class="row">
                 <div class="fb-like" data-href="https://www.facebook.com/thesarcasticfootballer/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
-               <br> <div><img class="article-img" src="{{data.picture}}" alt="Image not Found"></div>
+               <br> <div itemprop="image" itemscope itemtype="http://schema.org/ImageObject"><img itemprop="image url" class="article-img" src="{{data.picture}}" alt="Image not Found"></div>
+              <meta itemprop="height" content="900">
+              <meta itemprop="width" content="1600">
             </div><br>
             <div class="row">
-                <h2 class="article-sideheadline">{{data.sideheadline}}</h2>
+                <h2 class="article-sideheadline" itemprop="alternativeHeadline">{{data.sideheadline}}</h2>
             </div>
             <br>
             <div class="row">
-                <h3 class="article-content">{{data.content | safe}}</h3>
+                <h3 itemprop="articleContent" class="article-content">{{data.content | safe}}</h3>
             </div><br>
 
             <div class="votingbox" id="voteform">
