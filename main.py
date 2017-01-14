@@ -236,8 +236,8 @@ class FBSigninHandler(Handler):
 
 class MoveDBHandler(Handler):
 	def get(self):
-		keys = article.all(keys_only =True)
-		total_entries = keys.count()
+		keys = list(article.all(keys_only =True))
+		total_entries = len(keys)
 		for k in keys:
 			#data = article.get_by_id(k.id())
 			#url = data.picture
@@ -254,10 +254,11 @@ class MoveDBHandler(Handler):
 					data.up = memcache.get(str(k.id())+"up")
 					#memcache.delete(str(k.id())+"total")
 					#memcache.delete(str(k.id())+"up")
+					data.put()
 				if (views > data.views):
 					data.views = views
 					#memcache.delete(str(k.id())+"views")
-				data.put()
+					data.put()
 		memcache.flush_all()
 		memcache.add(key="total_entries",value=total_entries,time=4000)
 		

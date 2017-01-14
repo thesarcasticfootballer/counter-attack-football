@@ -67,7 +67,9 @@
 
 	{% include 'navigationbar.html' %}
 
-
+	<div itemscope itemtype="http://schema.org/WebSite">
+    	<meta itemprop="url" content="http://www.sarcasticfootballer.com/"/>
+    </div>
 	<div class="container-fluid" id="articles">
 		<div class = "col-lg-10"></div>
 		<div class = "col-lg-2">
@@ -128,16 +130,14 @@
  <hr style= "border: 4px solid #008080;">
  <div id="SC_TBlock_249465" class="SC_TBlock"></div> 
 							<div class="text-center">
-								<ul class="pagination" itemscope itemtype="http://schema.org/BreadcrumbList">
+								<ul class="pagination">
 								{% for i in range(1,total_pages+1) recursive %}
 								{% if i==page %}
-								<li class="active" itemprop="itemListElement" itemscope
-	  itemtype="http://schema.org/ListItem"><a itemprop="item url" href="/?page={{i}}"><span itemprop="name">{{i}}</span></a>
-	  <meta itemprop="position" content="{{loop.index}}" /></li>
+								<li class="active"><a href="/?page={{i}}"><span>{{i}}</span></a>
+	  <meta itemprop="position" /></li>
 								{% else %}
-								<li itemprop="itemListElement" itemscope
-	  itemtype="http://schema.org/ListItem"><a itemprop="item url" href="/?page={{i}}"><span itemprop="name">{{i}}</span></a>
-	  <meta itemprop="position" content="{{loop.index}}" /></li>
+								<li><a href="/?page={{i}}"><span>{{i}}</span></a>
+	  <meta itemprop="position" /></li>
 								{% endif %}
 								{% endfor %}
 								</ul>

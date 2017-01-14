@@ -170,7 +170,13 @@ if (read_cookie("vote") && temp!=0)
 }(document, 'script', 'facebook-jssdk'));</script>
     <div class="container">
   <div class ="article" itemscope itemtype="http://schema.org/Article">
-  <meta itemprop="mainEntityOfPage" content="www.sarcasticfootballer.com">
+  <div itemscope itemtype="http://schema.org/Organization" itemprop="publisher">
+  <meta itemprop="name" content="Sarcastic Footballer">
+  <div itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+  <meta itemprop="url" content="http://sarcasticfootballer.com/favicon.ico">
+  </div>
+  </div>
+  <meta itemprop="mainEntityOfPage" content="{{url}}">
             <div class="row">
                 <h1 class="article-headline" itemprop="headline">{{data.headline}}</h1>
                 
@@ -181,7 +187,7 @@ if (read_cookie("vote") && temp!=0)
           
             <div class="row box">
                 <h4>
-                <span itemprop="datePublished dateModified">{{data.created}}</span>
+                <span itemprop="datePublished dateModified"><time datetime="{{data.created}}">{{data.created}}</time></span>
             
           |
                 BY  <span itemprop="author">{{data.author}}</span> |
@@ -210,7 +216,7 @@ if (read_cookie("vote") && temp!=0)
                     </div>
             </div><br>
             <div class="row">
-                <h2 class="article-sideheadline" itemprop="alternativeHeadline">{{data.sideheadline}}</h2>
+                <h2 class="article-sideheadline" itemprop="description">{{data.sideheadline}}</h2>
             </div>
             <br>
             <div class="row">
