@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -14,6 +15,7 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="/styles/css/bootstrap.min.css" rel="stylesheet">
     <link href="/styles/css/articletemplate.css" rel="stylesheet">
+    
     <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
@@ -21,58 +23,7 @@
     <title>{{data.headline}}</title>
 
 
-<style type="text/css">
-@media only screen and (max-width: 500px)
-{
-img
-{
-  max-width: 100%;
-  width: auto;
-  height: auto;
-}
-}
-.button {
-  border-radius: 4px;
-  /*background-color: #f4511e;*/
-  border: none;
-  /*color: #FFFFFF;*/
-  text-align: center;
-  font-size: 28px;
-  padding: 20px;
-  width: 200px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
-}
 
-.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-.icon{
-  /*content: '»';*/
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.button:hover span {
-  padding-right: 25px;
-}
-
-.button:hover .icon {
-  opacity: 1;
-  right: 0;
-}
-.share-buttons{
- 
-}
-</style>
 
 <script type="text/javascript">
 
@@ -169,6 +120,13 @@ if (read_cookie("vote") && temp!=0)
 }(document, 'script', 'facebook-jssdk'));</script>
     <div class="container">
   <div class ="article" itemscope itemtype="http://schema.org/Article">
+  <div itemscope itemtype="http://schema.org/Organization" itemprop="publisher">
+  <meta itemprop="name" content="Sarcastic Footballer">
+  <div itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+  <meta itemprop="url" content="http://sarcasticfootballer.com/favicon.ico">
+  </div>
+  </div>
+  <meta itemprop="mainEntityOfPage" content="{{url}}">
             <div class="row">
                 <h1 class="article-headline" itemprop="headline">{{data.headline}}</h1>
                 
@@ -179,10 +137,10 @@ if (read_cookie("vote") && temp!=0)
           
             <div class="row box">
                 <h4>
-                <span itemprop="datePublished">{{data.created}}</span>
+                <span itemprop="datePublished dateModified"><time datetime="{{data.created}}">{{data.created}}</time></span>
             
           |
-                BY  <span itemprop="author">{{data.author}}</span> |
+                by  <span itemprop="author">{{data.author}}</span> |
  <span class="share-buttons">
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.sarcasticfootballer.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="/images/Facebook.png"></a>
  <a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fwww.sarcasticfootballer.com&text=:%20http%3A%2F%2Fwww.sarcasticfootballer.com&via=sarcasticfutbal" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="/images/Twitter.png"></a>
@@ -201,14 +159,18 @@ if (read_cookie("vote") && temp!=0)
          
             <div class="row">
                 <div class="fb-like" data-href="https://www.facebook.com/thesarcasticfootballer/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
-               <br> <div><img class="article-img" src="{{data.picture}}" alt="Image not Found"></div>
+               <br> <div itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+                      <img itemprop="image url" class="article-img" src="{{data.picture}}" alt="Image not Found">
+                      <meta itemprop="height" content="900">
+                      <meta itemprop="width" content="1600">
+                    </div>
             </div><br>
             <div class="row">
-                <h2 class="article-sideheadline">{{data.sideheadline}}</h2>
+                <h2 class="article-sideheadline" itemprop="description">{{data.sideheadline}}</h2>
             </div>
             <br>
             <div class="row">
-                <h3 class="article-content">{{data.content | safe}}</h3>
+                <h3 itemprop="articleBody" class="article-content">{{data.content | safe}}</h3>
             </div><br>
 
             <div class="votingbox" id="voteform">
@@ -255,8 +217,12 @@ if (read_cookie("vote") && temp!=0)
         {% endfor %}
             </div>
             --></div>
-        </div></div>
-    {% include 'footer.html' %}
+        </div> 
+        </div>
+       
 </body>
+ {% include 'footer2.html' %}
+ 
 
 </html>
+

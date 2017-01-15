@@ -2,13 +2,14 @@
 <html>
 
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Home</title>
 
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 	<link href="styles/css/homepage.css" rel="stylesheet">
 <script src="/jsfiles/js/jquery.js"></script>
+
 <script type="text/javascript">
 	var page = 2;
 	var flag = 0;
@@ -66,19 +67,24 @@
 
 	{% include 'navigationbar.html' %}
 
-
+	<div itemscope itemtype="http://schema.org/WebSite">
+    	<meta itemprop="url" content="http://www.sarcasticfootballer.com/"/>
+    </div>
 	<div class="container-fluid" id="articles">
-
-		<div class="row" id = "mainnews">
+		<div class = "col-lg-10"></div>
+		<div class = "col-lg-2">
+<div class="addthis_inline_follow_toolbox_56y1"></div></div>
+		<div class="row" id = "mainnews" itemscope itemtype="http://schema.org/ItemList">
 			<div class = "col-lg-6">
 				{% for article in data1 %}
 
-				<div class = "big-box">
+				<div class = "big-box" itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope>
+				<meta itemprop="position" content="{{loop.index}}" />
+				
 
+					<a itemprop="url" href ="/news/{{article.key().id()}}">
 
-					<a href ="/news/{{article.key().id()}}">
-
-						<img src = "{{article.picture}}"></a><span><h2>{{article.headline}}</h2></span>
+						<img itemprop="image" src = "{{article.picture}}"></a><span itemprop="name"><h2>{{article.headline}}</h2></span>
 
 					</div>
 					{% endfor %}
@@ -88,12 +94,13 @@
 
 						{% for article in data2 %}
 						<div class = "col-lg-6">
-							<div class = "small-box">
+							<div class = "small-box" itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope>
+							<meta itemprop="position" content="{{loop.index + 1}}" />
 
 
-								<a href ="/news/{{article.key().id()}}">
+								<a itemprop="url" href ="/news/{{article.key().id()}}">
 
-									<img src = "{{article.picture}}"></a><span><h3>{{article.headline}}</h3></span>
+									<img itemprop="image" src = "{{article.picture}}"></a><span itemprop="name"><h3>{{article.headline}}</h3></span>
 
 								</div>
 								</div>
@@ -103,12 +110,12 @@
 
 								{% for article in data3 %}
 								<div class = "col-lg-6">
-									<div class = "small-box">
+									<div class = "small-box" itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope>
+									<meta itemprop="position" content="{{loop.index + 3}}" />
 
+										<a itemprop="url" href ="/news/{{article.key().id()}}">
 
-										<a href ="/news/{{article.key().id()}}">
-
-											<img src = "{{article.picture}}"></a><span><h3>{{article.headline}}</h3></span>
+											<img itemprop="image" src = "{{article.picture}}"></a><span itemprop="name"><h3>{{article.headline}}</h3></span>
 
 										</div> 
 										</div>
@@ -121,13 +128,16 @@
 
 							
  <hr style= "border: 4px solid #008080;">
+ <div id="SC_TBlock_249465" class="SC_TBlock"></div> 
 							<div class="text-center">
 								<ul class="pagination">
 								{% for i in range(1,total_pages+1) recursive %}
 								{% if i==page %}
-								<li class="active"><a href="/?page={{i}}">{{i}}</a></li>
+								<li class="active"><a href="/?page={{i}}"><span>{{i}}</span></a>
+	  <meta itemprop="position" /></li>
 								{% else %}
-								<li><a href="/?page={{i}}">{{i}}</a></li>
+								<li><a href="/?page={{i}}"><span>{{i}}</span></a>
+	  <meta itemprop="position" /></li>
 								{% endif %}
 								{% endfor %}
 								</ul>
@@ -146,7 +156,14 @@
 									}
 								})
 							</script>
-
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5762625c02c749c4"></script> 
 
 						</body>
+						<!--<script type="text/javascript">
+  (sc_adv_out = window.sc_adv_out || []).push({
+    id : "249465",
+    domain : "n.ads1-.com"
+  });
+</script>
+<script type="text/javascript" src="//st-n.ads1-.com/js/adv_out.js"></script>-->
 						</html>

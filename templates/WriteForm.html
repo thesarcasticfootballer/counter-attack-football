@@ -16,12 +16,27 @@
     ],
     toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
   });
-                       
+
+function convertImgTags(){
+    var a = tinyMCE.activeEditor.getContent();
+    a = $.parseHTML(a);
+    var blkstr = [];
+    $.each(a, function(idx2,val2) {
+        var str = ''; 
+        if($(val2).children('img').length == 1)
+            str = "<figure>" + val2.innerHTML + "</figure>";
+        else             
+            str = val2.outerHTML ;
+        blkstr.push(str);
+    });
+    tinyMCE.activeEditor.setContent(blkstr.join(''));
+    tinyMCE.activeEditor.save();
+}
     </script>
 </head>
 <body style = "background-color: black;">
     <h2 style="color:green;"><center>NEWS ARTICLE FORM </center></h2>
-<form  name = "article" method = "post" style = "font-size:40px;color:green;" novalidate>
+<form  name = "article" method = "post" style = "font-size:40px;color:green;"  onsubmit="return convertImgTags()" novalidate>
 HEADLINE: <input style = "font-size: 30px;" type = "text" name = "headline"></br>
     CONTENT:<br>
     <textarea style = "font-size:20px" rows= "10" cols = "50" id="mytextarea" name = "content" required></textarea></br>
