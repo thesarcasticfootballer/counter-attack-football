@@ -72,6 +72,7 @@ class article(db.Model):
 	featured = db.IntegerProperty(default = 0)
 	total = db.IntegerProperty(default = 0)
 	up = db.IntegerProperty(default = 0)
+	tags = db.StringListProperty()
 	
 class facts(ndb.Model):
 	  picturelink = ndb.StringProperty()
@@ -100,13 +101,14 @@ class WriteFormHandler(Handler):
 		author   = self.request.get("author")
 		sideheadline = self.request.get("sideheadline")
 		featured = int(self.request.get("featured"))
+		tags   = (self.request.get("tags")).split(',')
 		if self.request.get('picture'):
 			piclink = self.request.get('picture')
 			tempvar="upload/c_scale,h_900,q_auto:good,w_1600"
 			picture =piclink.replace('upload',tempvar)
 		else:
 			picture = "/images/default.jpg"  
-		a = article(headline = headline,content =content,author = author,picture = picture,sideheadline = sideheadline,featured = featured)  
+		a = article(headline = headline,tags = tags,content =content,author = author,picture = picture,sideheadline = sideheadline,featured = featured)  
 		key = a.put()
 		article_id = key.id()
 		memcache.delete(key='homepage')

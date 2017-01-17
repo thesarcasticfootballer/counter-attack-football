@@ -169,8 +169,8 @@ if (read_cookie("vote") && temp!=0)
                 <h2 class="article-sideheadline" itemprop="description">{{data.sideheadline}}</h2>
             </div>
             <br>
-            <div class="row">
-                <h3 itemprop="articleBody" class="article-content">{{data.content | safe}}</h3>
+            <div class="row" itemprop="articleBody">
+                <h3  class="article-content">{{data.content | safe}}</h3>
             </div><br>
 
             <div class="votingbox" id="voteform">
@@ -203,7 +203,9 @@ if (read_cookie("vote") && temp!=0)
                             </div>
 
     </div></div>
-
+{% for tag in data.tags %}
+<br>{{tag}}<br>
+{% endfor %}
         
        <!-- <div class ="col-lg-3">
             
