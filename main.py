@@ -154,19 +154,23 @@ class HomeHandler(Handler):
 				data1 = content['data1']
 				data2 = content['data2']
 				data3 = content['data3']
+				popular = content['popular']
 			else:
 				all_data = list(article.gql(' order by created desc limit 5'))
 				data1 = all_data[0:1]
 				data2 = all_data[1:3]
 				data3 = all_data[3:]
-				content = {'data1': data1,'data2': data2,'data3': data3}
+				now = datetime.datetime.now()
+				
+				popular = list(article.gql('order by views desc limit 4'))
+				content = {'data1': data1,'data2': data2,'data3': data3,'popular' : popular}
 				memcache.add(key='homepage',value=content,time=3600)
 		#total_pages = article.all(keys_only=True).count(100)
 		total_entries = memcache.get("total_entries")
 		if not total_entries:
 			total_entries = 100
 		total_pages = math.ceil(total_entries/6.0)
-		self.render("Homepage.html",data1 = data1,data2 = data2,data3 = data3, total_pages = int(total_pages), page = int(page))
+		self.render("Homepage.html",data1 = data1,data2 = data2,data3 = data3,popular = popular, total_pages = int(total_pages), page = int(page))
 	def post(self):
 		data1 = []
 		try:
