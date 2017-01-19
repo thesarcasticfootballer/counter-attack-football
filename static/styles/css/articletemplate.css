@@ -1,7 +1,7 @@
 .article-headline,.article-headline a,.article-headline a:hover
 {
 font-size: 50px;
-    font-family: "Open Sans script=all rev=1";
+font-family: helvetica, sans-serif;
 
     text-decoration: none;
     color: black;
@@ -15,13 +15,13 @@ font-size: 50px;
 font-size: 25px;  
 font-weight: 600;
 }
-.article-content
+.article-content p,.article-content
 {
 
 font-size: 20px;
- color: #111111;
-   
-    font-style: normal;
+color: #111111;
+font-family: helvetica, sans-serif;
+font-style: normal;
 }
 .article-sideheadline,.title-header
 {
@@ -63,6 +63,19 @@ font-weight: 500;
 
     margin: 10px;
 }
+#divtag
+{
+    background-color: #033d3d;
+    width: 100%;
+    font-family: 'Roboto',sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+    
+    padding: 10px;
+    
+}
 .thumbnail-header,.thumbnail-header a,.thumbnail-header a:hover
 {
   
@@ -85,10 +98,37 @@ font-size: 20px;
   font-weight: 400;
   padding: 5px;
 }
+.small-box a img
+{
+    width: 100%;
+}
+.small-box
+{
+
+    position: relative;
+    width: 100%;
+    color: white;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+span h3 { 
+   color: white; 
+  font-family: 'Roboto',sans-serif;
+  font-size: 20px;
+  text-decoration: none;
+   letter-spacing: -1px;  
+   background-color:  #033d3d;/* fallback color */
+  margin : 0px;
+   padding-left: 10px;
+   padding-right: 10px;
+padding-top: 1px;
+padding-bottom: 1px;
 
 
+}
 
-.article-content img,.article-content p img
+
+.article-content img,.article-content p figure img,.article-content img,.article-content p img
 {
     padding: 35px;
     padding-left: 15%;
@@ -100,12 +140,11 @@ font-size: 20px;
 
  
 }
-@media only screen and (max-width: 500px)
+@media only screen and (max-width: 480px)
 {
-img
+.article-content img,.article-content p figure img,.article-content img,.article-content p img
 {
-  max-width: 100%;
-  width: auto;
+  width: 100%;
   height: auto;
 }
 }

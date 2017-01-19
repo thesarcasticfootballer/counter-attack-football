@@ -16,6 +16,7 @@
     <link href="/styles/css/bootstrap.min.css" rel="stylesheet">
     <link href="/styles/css/articletemplate.css" rel="stylesheet">
     
+    
     <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
@@ -118,7 +119,8 @@ if (read_cookie("vote") && temp!=0)
   js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.7&appId=945733035525846";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-    <div class="container">
+<br>
+    <div class="container-fluid">
   <div class ="article" itemscope itemtype="http://schema.org/Article">
   <div itemscope itemtype="http://schema.org/Organization" itemprop="publisher">
   <meta itemprop="name" content="Sarcastic Footballer">
@@ -169,8 +171,8 @@ if (read_cookie("vote") && temp!=0)
                 <h2 class="article-sideheadline" itemprop="description">{{data.sideheadline}}</h2>
             </div>
             <br>
-            <div class="row" itemprop="articleBody">
-                <h3  class="article-content">{{data.content | safe}}</h3>
+            <div class="row article-content"" itemprop="articleBody">
+                {{data.content | safe}}
             </div><br>
 
             <div class="votingbox" id="voteform">
@@ -207,18 +209,24 @@ if (read_cookie("vote") && temp!=0)
 <br>{{tag}}<br>
 {% endfor %}-->
         
-       <!-- <div class ="col-lg-3">
+      <div class ="col-lg-3">
             
-             <h2 class="title-header">RECOMMENDED</h2>
-             <hr style= "border: 2px solid #D75C37;">
-             {% for article in adata %}
-               <h3 class = "thumbnail-header"><a href ="/news/{{article.key().id()}}">{{article.headline}}</a><br><br>
-         <div class = "article-picture"><a href ="/news/{{article.key().id()}}"><img class= "medium-thumbnail" src="{{article.picture}}" alt= "Image not Found" style = "width: 100%;"></a></div>
-               <br>
-               <hr style= "border: 1px solid #D75C37;width: 95%;">
+            
+           <span id = "divtag">Trending</span>								
+<hr style= "border: 2px solid #033d3d;margin-top:5px;">
+             {% for article in popular %}
+              	<div class = "small-box" itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope>
+									<meta itemprop="position" content="{{loop.index + 3}}" />
+
+										<a itemprop="url" href ="/news/{{article.key().id()}}">
+
+											<img itemprop="image" src = "{{article.picture}}"></a><span itemprop="name"><h3>{{article.headline}}</h3></span>
+
+										</div> 
+                                        <hr style= "border: 2px solid #033d3d;margin-top:5px;">
         {% endfor %}
             </div>
-            --></div>
+            </div>
         </div> 
         </div>
        

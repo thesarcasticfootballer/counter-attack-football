@@ -294,13 +294,14 @@ class NewsArticleHandler(Handler):
 		content = self.cache(post_id)
 		if content:
 			data = content['data']
-			adata = content['adata']
+			popular = content['popular']
+			
 		else:
 			data = article.get_by_id(int(post_id))
 			#data.views = data.views + 1
 			#data.put()
-			adata = list(article.gql("order by created desc limit 6"))
-			content = {'data':data,'adata':adata}
+			popular = list(article.gql("order by created desc limit 6"))
+			content = {'data':data,'popular':popular}
 			memcache.add(key=post_id, value=content, time=4000)
 		views = self.cache(post_id+'views')
 		if not views:
@@ -317,7 +318,7 @@ class NewsArticleHandler(Handler):
 				up = 0
 			else:
 				up = data.up
-		self.render("articletemplate.html",adata = adata,data = data,url = url, host = host, yes=up, no=(total-up))
+		self.render("articletemplate.html",popular = popular,data = data,url = url, host = host, yes=up, no=(total-up))
 
 
 
