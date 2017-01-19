@@ -230,10 +230,12 @@ footer { background-color:#005353; min-height:250px; font-family: 'Open Sans', s
  .bottom_ul li a { color:#FFF;  font-size:12px;}
 
  @media only screen and (max-device-width: 480px) {
-     .container-fluid
-     {
-         padding: 0px;
-     }
+    .container-fluid, .row ,body{
+   margin-left:  -24px;
+    margin-right: -24px;
+    padding-left:  -24px;
+    padding-right:  -24px;
+  }
  .article-headline,.article-headline a,.article-headline a:hover
 {
 font-size: 25px;
