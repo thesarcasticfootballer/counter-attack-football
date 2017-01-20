@@ -6,7 +6,7 @@
                 tinymce.init({
     selector: '#mytextarea',
     schema: 'html5-strict',
-    valid_children: '-p[img|figure]',
+    valid_children: '-p[img|figure],-em[img],-p,-strong[img]',
     theme: 'modern',
     height: 600,
     plugins: [

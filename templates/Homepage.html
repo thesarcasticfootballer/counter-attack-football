@@ -78,6 +78,7 @@
 <span id = "divtag">Latest</span>								
 <hr style= "border: 2px solid #033d3d;margin-top:5px;">
 		<div class="row" id = "mainnews" itemscope itemtype="http://schema.org/ItemList">
+		<meta itemprop="name" content="Latest">
 			<div class = "col-lg-6">
 				{% for article in data1 %}
 
@@ -130,11 +131,12 @@
 								<br>
 <span id = "divtag">Popular</span>								
 <hr style= "border: 2px solid #033d3d;margin-top:5px;">
-<div class = "row" id = "popular">
+<div class = "row" id = "popular" itemscope itemtype="http://schema.org/ItemList">
+<meta itemprop="name" content="Popular">
 	{% for article in popular %}
 	<div class = "col-lg-3">
 									<div class = "small-box" itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope>
-									<meta itemprop="position" content="{{loop.index + 3}}" />
+									<meta itemprop="position" content="{{loop.index}}" />
 
 										<a itemprop="url" href ="/news/{{article.key().id()}}">
 
@@ -149,19 +151,21 @@
 <span id = "divtag">All news</span>								
 <hr style= "border: 2px solid #033d3d;margin-top:5px;">
  <div id="SC_TBlock_249465" class="SC_TBlock"></div> 
-							<div class="text-center">
+</div>
+<div class="text-center" id="pages" itemscope itemtype="http://schema.org/ItemList">
+<meta itemprop="name" content="Page Numbers" />
 								<ul class="pagination">
 								{% for i in range(1,total_pages+1) recursive %}
 								{% if i==page %}
-								<li class="active"><a href="/?page={{i}}"><span>{{i}}</span></a>
-	  <meta itemprop="position" /></li>
+								<li class="active" itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope><a itemprop="url" href="/?page={{i}}"><span itemprop="name">Page {{i}}</span></a>
+	  <meta itemprop="position" content="{{i}}" /></li>
 								{% else %}
-								<li><a href="/?page={{i}}"><span>{{i}}</span></a>
-	  <meta itemprop="position" /></li>
+								<li itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope><a itemprop="url" href="/?page={{i}}"><span itemprop="name">{{i}}</span></a>
+	  <meta itemprop="position" content="{{i}}" /></li>
 								{% endif %}
 								{% endfor %}
 								</ul>
-							</div></div>
+</div>
 						
 
 							{% include 'footer.html' %} 
