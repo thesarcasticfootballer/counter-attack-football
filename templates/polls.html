@@ -3,13 +3,11 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Polls</title>
-<<<<<<< HEAD
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-=======
->>>>>>> 975d2102e12879e2d9104f19e23c64f99d35203f
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Oswald" />
 <link href="styles/css/polls.css" rel="stylesheet">
+<script src="/jsfiles/js/jquery.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
 
@@ -34,10 +32,9 @@
         data.addRows({{poll.votelist|safe}});
 
         // Set chart options
-        var options = {'title': '{{poll.question}}',
-                       'width':700,
+        var options = {'title': '{{poll.question}}',                  
                        'legend': 'right',
-                       'height':400,pieHole: 0.4,colors: ['#008080','#d56100']};
+                       pieHole: 0.4,colors: ['#008080','#d56100']};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById({{poll.key.id()}}));
@@ -55,7 +52,7 @@
 {%for poll in pdata1%}
 <div class = "row">
 <div class = "col-lg-12">
-<h1 class = "question">{{poll.question}}</h2><br>
+<h2 class = "question">{{poll.question}}</h2><br>
 
 <div class = "pollpicture col-lg-7">
   
@@ -63,11 +60,12 @@
 
 </div>
 <div class = "pollright col-lg-5">
-  <div class = "pollwinner" ><h1 class = "winner">{{poll.winner}}</div>
-  <div id="{{poll.key.id()}}" width="90%"></div>
+  <div class = "pollwinner" ><h2 class = "winner">{{poll.winner}}</h2></div>
+  <div id="{{poll.key.id()}}" style="width:100%;"></div>
   
  </div> </div></div>{% endfor %}</div>
  {% include 'footer2.html' %}
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5762625c02c749c4"></script> 
+{% include 'footer.html' %} 
 </body>
 </html>
