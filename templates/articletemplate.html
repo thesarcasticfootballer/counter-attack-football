@@ -168,6 +168,7 @@ if (read_cookie("vote") && temp!=0)
             </div><br>
             
                 <ul class ="tag">
+                <meta itemprop="keywords" content="{{','.join(data.tags)}}">
                 {% for tag in data.tags %}
 <li>{{tag}}</li>
 {% endfor %}</ul>

@@ -136,7 +136,8 @@ padding-bottom: 1px;
 }
 .tag{
    
-    margin-left: -70px;
+    margin-left: -50px;
+    transform: skew(-15deg);
 }
 .tag li
 {
@@ -245,7 +246,6 @@ footer { background-color:#005353; min-height:250px; font-family: 'Open Sans', s
  @media only screen and (max-device-width: 480px) {
      
     .container-fluid, .row ,body{
-   padding-left: 3px;
    margin: 0;
   }
  .article-headline,.article-headline a,.article-headline a:hover
