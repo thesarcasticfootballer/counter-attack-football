@@ -147,7 +147,7 @@ class HomeHandler(Handler):
 			page = 1
 		if page > 1:
 			data1 = self.goto_page(page)
-			data2 = data3 = []
+			data2 = data3 = popular =[]
 		else:
 			content = memcache.get(key='homepage')
 			if content is not None:
