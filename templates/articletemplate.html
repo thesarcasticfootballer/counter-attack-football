@@ -3,6 +3,7 @@
 
 <head>
    <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="theme-color" content="#008080" />
     <meta property="og:image" content="{{data.picture}}">
     <meta property="og:url" content="{{url}}">
     <meta property="og:type" content="article">
@@ -109,6 +110,9 @@ if (read_cookie("vote") && temp!=0)
 </head>
 
 <body onload="check()">
+<!--Ad space -->
+
+<!-- Ad space ends -->
 
     {% include 'navigationbar.html' %}
     <div id="fb-root"></div>
@@ -236,6 +240,7 @@ if (read_cookie("vote") && temp!=0)
         </div>
        
 </body>
+{% include 'footer.html' %}
  {% include 'footer2.html' %}
  
 

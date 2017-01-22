@@ -2,6 +2,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#008080" />
     <title>Polls</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -61,7 +62,7 @@
 </div>
 <div class = "pollright col-lg-5">
   <div class = "pollwinner" ><h2 class = "winner">{{poll.winner}}</h2></div>
-  <div id="{{poll.key.id()}}" style="width:100%;"></div>
+  <div id="{{poll.key.id()}}" class="pollgraph"></div>
   
  </div> </div></div>{% endfor %}</div>
  {% include 'footer2.html' %}
