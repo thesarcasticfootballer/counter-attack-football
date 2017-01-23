@@ -201,8 +201,9 @@ if (read_cookie("vote") && temp!=0)
                     <!--input type="button" class = "btn btn-default" value="VOTE NOW" onclick="sendserver()"-->
                 <!--/form-->
             </div>
-
-
+            <!-- infolinks ads -->
+            <input type="hidden" name="IL_IN_TAG" value="2"/>
+            <!-- end ads -->
             <div class="resultsbox row" id="resultsbox" style="visibility:hidden">
                 <h3>
                 WAS THIS NEWS SARCASTIC?</h3>
@@ -238,10 +239,18 @@ if (read_cookie("vote") && temp!=0)
             </div>
         </div> 
         </div>
-       
-</body>
 {% include 'footer.html' %}
  {% include 'footer2.html' %}
+
+<script type="text/javascript">
+var infolinks_pid = 2940772;
+var infolinks_wsid = 0;
+</script>
+<script type="text/javascript" src="http://resources.infolinks.com/js/infolinks_main.js"></script>
+
+
+</body>
+
  
 
 </html>

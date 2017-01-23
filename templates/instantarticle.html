@@ -1,14 +1,25 @@
 <!doctype html>
 <html lang="en" prefix="op: http://media.facebook.com/op#">
   <head>
-    <meta charset="utf-8">
-    <link rel="canonical" href="http://sarcasticfootballer.com/news/{{article_id}}">
-    <meta property="op:markup_version" content="v1.0">
-    <meta property="fb:article_style" content="default">
+    <meta property="fb:use_automatic_ad_placement" content="true" />
+    <meta charset="utf-8" />
+    <link rel="canonical" href="http://sarcasticfootballer.com/news/{{article_id}}" />
+    <meta property="op:markup_version" content="v1.0" />
+    <meta property="fb:article_style" content="default" />
   </head>
   <body>
 <article>
       <header>
+         <section class="op-ad-template">
+        <!-- Ads to be automatically placed throughout the article -->
+        <figure class="op-ad">
+          <iframe width="320" height="50" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=448801158843842_448804502176841&adtype=banner320x50"></iframe>
+        </figure>
+
+        <figure class="op-ad">
+          <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=448801158843842_448801225510502&adtype=banner300x250"></iframe>
+        </figure>
+         </section>
         <!-- The title and subtitle shown in your Instant Article -->
         <h1>{{data.headline}}</h1>
         <h2>{{data.sideheadline}}</h2>
@@ -34,6 +45,7 @@
         </h3>
 
       </header>
+      
 
       <!-- Article body goes here -->
 
@@ -42,6 +54,7 @@
 
 
       <!-- Analytics code for your article -->
+
       <figure class="op-tracker">
           <iframe src="http://sarcasticfootballer.com/news/{{article_id}}" hidden></iframe>
       </figure>

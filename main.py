@@ -23,6 +23,7 @@ from google.appengine.ext import db
 from google.appengine.ext import ndb
 from google.appengine.api import users
 from google.appengine.api import images
+from google.appengine.api import search
 import datetime
 import urllib2
 import urllib
@@ -111,10 +112,21 @@ class WriteFormHandler(Handler):
 		a = article(headline = headline,tags = tags,content =content,author = author,picture = picture,sideheadline = sideheadline,featured = featured)  
 		key = a.put()
 		article_id = key.id()
+		fields = [search.TextField(name = "headline", value = headline),
+				  search.TextField(name = "sideheadline", value = sideheadline),
+				  search.TextField(name = "tags", value = ",".join(tags)),
+				  search.HtmlField(name = "content", value = content),				  
+				  search.TextField(name = "author", value = author),
+				  search.DateField(name = "dateCreated", value = datetime.datetime.now().date())]
+		doc = search.Document(doc_id = str(article_id), fields = fields)
 		memcache.delete(key='homepage')
-		#wait for a small duration so that memcache is cleared before it can be reused
-		time.sleep(0.1)
-		self.redirect('/')
+		try:
+			add_result = search.Index(name="Articles").put(doc)
+			#wait for a small duration so that memcache is cleared before it can be reused
+			time.sleep(0.1)
+			self.redirect('/')
+		except search.Error:
+			self.request.out.write("adding to index failed")
 
 class InstantArticleHandler(Handler):
     def get(self):
@@ -161,7 +173,6 @@ class HomeHandler(Handler):
 				data2 = all_data[1:3]
 				data3 = all_data[3:]
 				now = datetime.datetime.now()
-				
 				popular = list(article.gql('order by views desc limit 4'))
 				content = {'data1': data1,'data2': data2,'data3': data3,'popular' : popular}
 				memcache.add(key='homepage',value=content,time=3600)
@@ -399,5 +410,5 @@ class AboutusHandler(Handler):
 app = webapp2.WSGIApplication([
 		('/article',WriteFormHandler),('/factupload',FactUploadHandler),('/',HomeHandler),('/pollupload',PollUploadHandler),('/polls',PollsHandler),
 	(r'/news/(\d+)',NewsArticleHandler),
-	('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
+	#('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
 	('/move', MoveDBHandler),('/all',DisplayallHandler),('/facts',FactsHandler),('/aboutus',AboutusHandler),('/instant',InstantArticleHandler)], debug=False)
