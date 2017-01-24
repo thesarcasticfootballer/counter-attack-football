@@ -1,0 +1,104 @@
+<html>
+
+<head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#008080" />
+        <link href="styles/css/bootstrap.min.css" rel="stylesheet">
+        <link href = "styles/css/aboutus.css" rel="stylesheet">
+        
+<title>News</title>
+
+<script type="text/javascript">
+	var page = 2;
+	var flag = 0;
+	function load_page_first(){
+		var temp = parseInt(window.location.search.split('=')[1]);
+		if (temp){
+			page = temp + 1;
+		}
+		load_page();
+	};
+	function load_page()
+	{ 
+		var xhttp = new XMLHttpRequest();
+		
+		xhttp.onreadystatechange = function() { //document.getElementById("ls").style.visibility = "hidden";
+			
+		    if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+		       var response = xhttp.responseText
+		    	if (!response){
+		       		flag = 1;
+				}
+		    	else{
+					
+		       		document.getElementById("articles").innerHTML += xhttp.responseText;
+		       		var selector = $("li.active");
+					$('.pagination li').removeClass('active');
+					selector.next().addClass('active');
+
+				}
+		    }
+		};
+		if(flag==0){
+			var host = window.location.origin;
+			
+			xhttp.open("POST", host, true);
+			//document.getElementById("ls").style.visibility = "visible";
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		
+			xhttp.send("page="+page); 
+        
+			page = page + 1;
+
+			
+		
+		
+		}
+			
+		
+	};
+
+
+</script>
+    </head> 
+   <body onload="load_page_first()">
+    
+{% include 'navigationbar.html' %}
+        
+  <div class="container">
+
+
+    <span id = "divtag">All news</span>								
+<hr style= "border: 2px solid #033d3d;margin-top:5px;">
+ <div id="SC_TBlock_249465" class="SC_TBlock"></div> 
+</div>
+<div class="text-center" id="pages" itemscope itemtype="http://schema.org/ItemList">
+<meta itemprop="name" content="Page Numbers" />
+								<ul class="pagination">
+								{% for i in range(1,total_pages+1) recursive %}
+								{% if i==page %}
+								<li class="active" itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope><a itemprop="url" href="/?page={{i}}"><span itemprop="name">Page {{i}}</span></a>
+	  <meta itemprop="position" content="{{i}}" /></li>
+								{% else %}
+								<li itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope><a itemprop="url" href="/?page={{i}}"><span itemprop="name">Page {{i}}</span></a>
+	  <meta itemprop="position" content="{{i}}" /></li>
+								{% endif %}
+								{% endfor %}
+								</ul>
+</div>
+       </div>
+    {% include 'footer2.html' %}  
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>    </div>
+      </div> 
+          
+  {% include 'footer.html' %}    
+ 
+  </body>
+</html>

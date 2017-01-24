@@ -402,6 +402,59 @@ class PollUploadHandler(Handler):
 class AboutusHandler(Handler):
   def get(self):
 	  self.render("aboutus.html")
+class NewsHandler(Handler):
+	def get(self):
+		try:
+			page = int(self.request.get('page'))
+		except ValueError:
+			page = 1
+		if page > 1:
+			data1 = self.goto_page(page)
+			data2 = data3 = popular =[]
+		else:
+			content = memcache.get(key='newspage')
+			if content is not None:
+				data1 = content['data1']
+				data2 = content['data2']
+				data3 = content['data3']
+				popular = content['popular']
+			else:
+				all_data = list(article.gql(' order by created desc limit 5'))
+				data1 = all_data[0:1]
+				data2 = all_data[1:3]
+				data3 = all_data[3:]
+				now = datetime.datetime.now()
+				popular = list(article.gql('order by views desc limit 4'))
+				content = {'data1': data1,'data2': data2,'data3': data3,'popular' : popular}
+				memcache.add(key='newspage',value=content,time=3600)
+		#total_pages = article.all(keys_only=True).count(100)
+		total_entries = memcache.get("total_entries")
+		if not total_entries:
+			total_entries = 100
+		total_pages = math.ceil(total_entries/6.0)
+		self.render("news.html",data1 = data1,data2 = data2,data3 = data3,popular = popular, total_pages = int(total_pages), page = int(page))
+	def post(self):
+		data1 = []
+		try:
+			page = int(self.request.get('page'))
+		except ValueError:
+			page = 1
+		if page > 1:
+			data1 = self.goto_page(page)
+		if not data1:
+			self.response.out.write("")
+		else:
+			self.render("pagination.html", data1 = data1)
+	def goto_page(self,page):
+		# 5 elements per page
+		position = (page)*6 -5
+		query = " order by created desc limit 6 offset %s" % position
+		all_data = list(article.gql(query))
+		data1 = all_data
+		#self.render("Homepage.html",data1 = data1,data2 = data2,data3 = data3)
+		return (data1)
+
+	
 
 
 
@@ -409,6 +462,6 @@ class AboutusHandler(Handler):
 
 app = webapp2.WSGIApplication([
 		('/article',WriteFormHandler),('/factupload',FactUploadHandler),('/',HomeHandler),('/pollupload',PollUploadHandler),('/polls',PollsHandler),
-	(r'/news/(\d+)',NewsArticleHandler),
+	(r'/news/(\d+)',NewsArticleHandler),('/news',NewsHandler),
 	#('/signin/google',GSigninHandler),('/signin/fb',FBSigninHandler),
 	('/move', MoveDBHandler),('/all',DisplayallHandler),('/facts',FactsHandler),('/aboutus',AboutusHandler),('/instant',InstantArticleHandler)], debug=False)
