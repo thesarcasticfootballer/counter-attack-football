@@ -1,11 +1,13 @@
+<!DOCTYPE html>
 <html>
-
 <head>
     
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#008080" />
         <link href="styles/css/bootstrap.min.css" rel="stylesheet">
         <link href = "styles/css/aboutus.css" rel="stylesheet">
+		<link href="styles/css/homepage.css" rel="stylesheet">
+
         
 <title>News</title>
 
@@ -41,7 +43,7 @@
 		    }
 		};
 		if(flag==0){
-			var host = window.location.origin;
+			var host = window.location.href;
 			
 			xhttp.open("POST", host, true);
 			//document.getElementById("ls").style.visibility = "visible";
@@ -62,32 +64,49 @@
 
 </script>
     </head> 
-   <body onload="load_page_first()">
+
+<body onload="load_page_first()">
     
 {% include 'navigationbar.html' %}
         
-  <div class="container">
+  <div class="container" id="articles">
 
 
     <span id = "divtag">All news</span>								
 <hr style= "border: 2px solid #033d3d;margin-top:5px;">
  <div id="SC_TBlock_249465" class="SC_TBlock"></div> 
+
+<div class="row" itemscope itemtype="http://schema.org/ItemList">
+	
+		{% for article in data1 %}
+<div class = "col-lg-4">
+	<div class = "small-box" itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope>
+	<meta itemprop="position" content="{{loop.index}}" />
+        	<a itemprop="url" href ="/news/{{article.key().id()}}">
+
+				<img itemprop="image" src = "{{article.picture}}"></a><span itemprop="name"><h3>{{article.headline}}</h3</span>
+</div></div>
+{% endfor %}
+
+</div>
+
+
 </div>
 <div class="text-center" id="pages" itemscope itemtype="http://schema.org/ItemList">
 <meta itemprop="name" content="Page Numbers" />
 								<ul class="pagination">
 								{% for i in range(1,total_pages+1) recursive %}
 								{% if i==page %}
-								<li class="active" itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope><a itemprop="url" href="/?page={{i}}"><span itemprop="name">Page {{i}}</span></a>
+								<li class="active" itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope><a itemprop="url" href="/news?page={{i}}"><span itemprop="name">Page {{i}}</span></a>
 	  <meta itemprop="position" content="{{i}}" /></li>
 								{% else %}
-								<li itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope><a itemprop="url" href="/?page={{i}}"><span itemprop="name">Page {{i}}</span></a>
+								<li itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope><a itemprop="url" href="/news?page={{i}}"><span itemprop="name">Page {{i}}</span></a>
 	  <meta itemprop="position" content="{{i}}" /></li>
 								{% endif %}
 								{% endfor %}
 								</ul>
 </div>
-       </div>
+       
     {% include 'footer2.html' %}  
     <!-- /.container -->
 
@@ -95,10 +114,20 @@
     <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>    </div>
-      </div> 
+    <script src="js/bootstrap.min.js"></script>   
+      
           
   {% include 'footer.html' %}    
- 
+ <script>
+								$('.carousel').carousel({
+									interval: 3000
+								})
+								$(document).scroll(function(){
+									if($(window).height() == ($(document).height() - $(window).scrollTop()))
+									{
+										load_page();
+									}
+								})
+ </script>
   </body>
 </html>
